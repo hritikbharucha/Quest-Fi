@@ -51,19 +51,31 @@ class ShopViewController: UIViewController {
     
     @IBOutlet weak var point3View: UIView!
     
+    @IBOutlet weak var commonLabel: UILabel!
+    
+    @IBOutlet weak var commonPriceLabel: UILabel!
+    
+    @IBOutlet weak var rareLabel: UILabel!
+    
+    @IBOutlet weak var rarePriceLabel: UILabel!
+    
+    @IBOutlet weak var magicalLabel: UILabel!
+    
+    @IBOutlet weak var magicalPriceLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let stringAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 30),
-            NSAttributedString.Key.strokeWidth: -3.0,
-            NSAttributedString.Key.strokeColor: UIColor.black,
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ] as [NSAttributedString.Key : Any]
         
-        dealsLabel.attributedText = NSAttributedString(string: "Special Offers", attributes: stringAttributes)
-        chestsLabel.attributedText = NSAttributedString(string: "Chest Offers", attributes: stringAttributes)
-        pointsLabel.attributedText = NSAttributedString(string: "Point Offers", attributes: stringAttributes)
+        makeLabelGood(dealsLabel, "Special Offers")
+        makeLabelGood(chestsLabel, "Chest Offers")
+        makeLabelGood(pointsLabel, "Point Offers")
+        
+        makeDescLabelGood(commonLabel, "Common Chest")
+        makePriceLabelGood(commonPriceLabel, "50")
+        makeDescLabelGood(rareLabel, "Rare Chest")
+        makePriceLabelGood(rarePriceLabel, "250")
+        makeDescLabelGood(magicalLabel, "Magical Chest")
+        makePriceLabelGood(magicalPriceLabel, "1000")
         
         makeButtonGood(special1, special1View)
         makeButtonGood(special2, special2View)
@@ -77,6 +89,39 @@ class ShopViewController: UIViewController {
         makeButtonGood(point2, point2View)
         makeButtonGood(point3, point3View)
         
+    }
+    
+    func makePriceLabelGood(_ label: UILabel,_ string: String) {
+        let stringAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 20),
+            NSAttributedString.Key.strokeWidth: -3.0,
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ] as [NSAttributedString.Key : Any]
+        
+        label.attributedText = NSAttributedString(string: string, attributes: stringAttributes)
+    }
+    
+    func makeDescLabelGood(_ label: UILabel,_ string: String) {
+        let stringAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 20),
+            NSAttributedString.Key.strokeWidth: -3.0,
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ] as [NSAttributedString.Key : Any]
+        
+        label.attributedText = NSAttributedString(string: string, attributes: stringAttributes)
+    }
+    
+    func makeLabelGood(_ label: UILabel,_ string: String) {
+        let stringAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 30),
+            NSAttributedString.Key.strokeWidth: -3.0,
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ] as [NSAttributedString.Key : Any]
+        
+        label.attributedText = NSAttributedString(string: string, attributes: stringAttributes)
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {

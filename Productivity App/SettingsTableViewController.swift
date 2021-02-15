@@ -33,7 +33,7 @@ class SettingsTableViewController: UITableViewController {
         
         cell.textLabel?.text = settings[indexPath.row]
         cell.accessoryType = .disclosureIndicator
-        cell.backgroundColor = UIColor(red: 0xB9, green: 0xEA, blue: 0xFD, alpha: 1) 
+//        cell.backgroundColor = UIColor(red: 0xB9, green: 0xEA, blue: 0xFD, alpha: 1) 
 
         return cell
     }
