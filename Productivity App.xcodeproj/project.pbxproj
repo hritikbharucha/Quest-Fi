@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1265653E23A827BE064EB6C4 /* Pods_Productivity_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A611C2CB80F4AB2AB64147 /* Pods_Productivity_App.framework */; };
 		6321281225D89B8C001B48BF /* ForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321281125D89B8C001B48BF /* ForYouViewController.swift */; };
 		6321283125D9F436001B48BF /* ChestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321283025D9F436001B48BF /* ChestsViewController.swift */; };
 		6321283425DAC863001B48BF /* GuidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321283325DAC863001B48BF /* GuidesViewController.swift */; };
@@ -28,7 +29,7 @@
 		63B678B825CE38E500721571 /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B678B725CE38E500721571 /* GoalsViewController.swift */; };
 		63B678BB25CE38F100721571 /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B678BA25CE38F100721571 /* RewardsViewController.swift */; };
 		63B678FC25CE463200721571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63B678FB25CE463200721571 /* GoogleService-Info.plist */; };
-		DF4FC48C38992BF63783DA17 /* Pods_Productivity_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4405EE3D6A6437E8105CB46 /* Pods_Productivity_App.framework */; };
+		63B8EA6F25E027CB00943325 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8EA6E25E027CB00943325 /* CalendarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,9 +56,10 @@
 		63B678B725CE38E500721571 /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		63B678BA25CE38F100721571 /* RewardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
 		63B678FB25CE463200721571 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		7C7FC629EAEA12AAF71F40AC /* Pods-Productivity App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productivity App.release.xcconfig"; path = "Target Support Files/Pods-Productivity App/Pods-Productivity App.release.xcconfig"; sourceTree = "<group>"; };
-		7F08AD951BCACFDFA2D91248 /* Pods-Productivity App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productivity App.debug.xcconfig"; path = "Target Support Files/Pods-Productivity App/Pods-Productivity App.debug.xcconfig"; sourceTree = "<group>"; };
-		E4405EE3D6A6437E8105CB46 /* Pods_Productivity_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Productivity_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63B8EA6E25E027CB00943325 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		6D30A855DE750A85CEEB27FC /* Pods-Productivity App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productivity App.release.xcconfig"; path = "Target Support Files/Pods-Productivity App/Pods-Productivity App.release.xcconfig"; sourceTree = "<group>"; };
+		A5A611C2CB80F4AB2AB64147 /* Pods_Productivity_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Productivity_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7C55BD6DA6F43D530904873 /* Pods-Productivity App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productivity App.debug.xcconfig"; path = "Target Support Files/Pods-Productivity App/Pods-Productivity App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,17 +67,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF4FC48C38992BF63783DA17 /* Pods_Productivity_App.framework in Frameworks */,
+				1265653E23A827BE064EB6C4 /* Pods_Productivity_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F855EEA021508755545A0A7 /* Frameworks */ = {
+		3FAEAA0308127C36DBAE702F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E4405EE3D6A6437E8105CB46 /* Pods_Productivity_App.framework */,
+				A5A611C2CB80F4AB2AB64147 /* Pods_Productivity_App.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -86,7 +88,7 @@
 				634693FF25CC5B4E00C4107A /* Productivity App */,
 				634693FE25CC5B4E00C4107A /* Products */,
 				ED931C57789A28C0D8FFDDF4 /* Pods */,
-				2F855EEA021508755545A0A7 /* Frameworks */,
+				3FAEAA0308127C36DBAE702F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +119,7 @@
 				6321281125D89B8C001B48BF /* ForYouViewController.swift */,
 				6321283025D9F436001B48BF /* ChestsViewController.swift */,
 				6321283325DAC863001B48BF /* GuidesViewController.swift */,
+				63B8EA6E25E027CB00943325 /* CalendarViewController.swift */,
 				6346940625CC5B4E00C4107A /* Main.storyboard */,
 				6346940C25CC5B5100C4107A /* Assets.xcassets */,
 				6346940E25CC5B5100C4107A /* LaunchScreen.storyboard */,
@@ -130,8 +133,8 @@
 		ED931C57789A28C0D8FFDDF4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7F08AD951BCACFDFA2D91248 /* Pods-Productivity App.debug.xcconfig */,
-				7C7FC629EAEA12AAF71F40AC /* Pods-Productivity App.release.xcconfig */,
+				F7C55BD6DA6F43D530904873 /* Pods-Productivity App.debug.xcconfig */,
+				6D30A855DE750A85CEEB27FC /* Pods-Productivity App.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -143,12 +146,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6346941425CC5B5100C4107A /* Build configuration list for PBXNativeTarget "Productivity App" */;
 			buildPhases = (
-				F1507A2ABEE7A7D3721E62AB /* [CP] Check Pods Manifest.lock */,
+				5B300E80B28A5733F88E1DE4 /* [CP] Check Pods Manifest.lock */,
 				634693F925CC5B4E00C4107A /* Sources */,
 				634693FA25CC5B4E00C4107A /* Frameworks */,
 				634693FB25CC5B4E00C4107A /* Resources */,
-				9E158F8B08D8B3E14227F2D4 /* [CP] Embed Pods Frameworks */,
-				F4A2710C4DED3591671BE042 /* [CP] Copy Pods Resources */,
+				53BE9B787E8CBEFE91FF3A94 /* [CP] Embed Pods Frameworks */,
+				F1FEEDCCB05CD40860E21DC6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,7 +209,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9E158F8B08D8B3E14227F2D4 /* [CP] Embed Pods Frameworks */ = {
+		53BE9B787E8CBEFE91FF3A94 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -223,7 +226,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Productivity App/Pods-Productivity App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F1507A2ABEE7A7D3721E62AB /* [CP] Check Pods Manifest.lock */ = {
+		5B300E80B28A5733F88E1DE4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,7 +248,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F4A2710C4DED3591671BE042 /* [CP] Copy Pods Resources */ = {
+		F1FEEDCCB05CD40860E21DC6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -275,6 +278,7 @@
 				63B678A625CE386400721571 /* SettingsTableViewController.swift in Sources */,
 				63B678AF25CE38C000721571 /* InboxViewController.swift in Sources */,
 				6394AF5725D73EF600975194 /* PremiumViewController.swift in Sources */,
+				63B8EA6F25E027CB00943325 /* CalendarViewController.swift in Sources */,
 				63B678A925CE389100721571 /* LogInViewController.swift in Sources */,
 				63B678B225CE38CD00721571 /* HomeViewController.swift in Sources */,
 				63B678B525CE38D800721571 /* TipsViewController.swift in Sources */,
@@ -429,13 +433,14 @@
 		};
 		6346941525CC5B5100C4107A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F08AD951BCACFDFA2D91248 /* Pods-Productivity App.debug.xcconfig */;
+			baseConfigurationReference = F7C55BD6DA6F43D530904873 /* Pods-Productivity App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34B2SRNAMQ;
 				INFOPLIST_FILE = "Productivity App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -449,13 +454,14 @@
 		};
 		6346941625CC5B5100C4107A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C7FC629EAEA12AAF71F40AC /* Pods-Productivity App.release.xcconfig */;
+			baseConfigurationReference = 6D30A855DE750A85CEEB27FC /* Pods-Productivity App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34B2SRNAMQ;
 				INFOPLIST_FILE = "Productivity App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

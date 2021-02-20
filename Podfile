@@ -9,5 +9,6 @@ target 'Productivity App' do
   pod 'Firebase/Firestore'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
+  pod 'Calendar-iOS'
 
 end
