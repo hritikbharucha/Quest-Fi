@@ -9,6 +9,10 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var logButton: UIButton!
+    
+    @IBOutlet weak var logView: UIView!
+    
     @IBOutlet weak var leaderboardsButton: UIButton!
     
     @IBOutlet weak var leaderBoardsView: UIView!
@@ -22,6 +26,7 @@ class HomeViewController: UIViewController {
 
         makeButtonGood(leaderboardsButton, leaderBoardsView)
         makeButtonGood(userButton, userView)
+        makeButtonGood(logButton, logView)
         
         userButton.layer.cornerRadius = 30
         userView.layer.cornerRadius = 30
@@ -40,6 +45,10 @@ class HomeViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
         
+    }
+    
+    @IBAction func logPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "homeToCalendar", sender: self)
     }
     
 }
