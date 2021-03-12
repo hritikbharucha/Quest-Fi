@@ -1,13 +1,13 @@
 //
-//  GoalsViewController.swift
+//  AlgebraViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/5/21.
+//  Created by Hritik Bharucha on 2/19/21.
 //
 
 import UIKit
 
-class GoalsViewController: UIViewController {
+class AlgebraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

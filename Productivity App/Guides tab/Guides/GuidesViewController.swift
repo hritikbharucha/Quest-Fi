@@ -36,16 +36,16 @@ class GuidesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        makeViewnGood(mathFrontView, mathBackView)
-        makeViewnGood(englishFrontView, englishBackView)
-        makeViewnGood(spanishFrontView, spanishBackView)
-        makeViewnGood(historyFrontView, historyBackView)
-        makeViewnGood(scienceFrontView, scienceBackView)
-        makeViewnGood(csFrontView, csBackView)
+        makeViewGood(mathFrontView, mathBackView)
+        makeViewGood(englishFrontView, englishBackView)
+        makeViewGood(spanishFrontView, spanishBackView)
+        makeViewGood(historyFrontView, historyBackView)
+        makeViewGood(scienceFrontView, scienceBackView)
+        makeViewGood(csFrontView, csBackView)
         
     }
     
-    func makeViewnGood(_ view: UIView, _ containerView: UIView) {
+    func makeViewGood(_ view: UIView, _ containerView: UIView) {
         
         containerView.clipsToBounds = false
         containerView.layer.shadowColor = UIColor.black.cgColor
@@ -58,5 +58,30 @@ class GuidesViewController: UIViewController {
         view.layer.cornerRadius = 20
         
     }
+    
+    @IBAction func mathPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "guidesToMath", sender: self)
+    }
+    
+    @IBAction func englishPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "guidesToEnglish", sender: self)
+    }
+    
+    @IBAction func spanishPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "guidesToSpanish", sender: self)
+    }
+    
+    @IBAction func historyPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "guidesToHistory", sender: self)
+    }
+    
+    @IBAction func sciencePressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "guidesToScience", sender: self)
+    }
+    
+    @IBAction func csPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "guidesToCS", sender: self)
+    }
+    
 
 }

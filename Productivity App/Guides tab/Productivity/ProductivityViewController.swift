@@ -1,34 +1,27 @@
 //
-//  TipsViewController.swift
+//  ProductivityViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/5/21.
+//  Created by Hritik Bharucha on 2/19/21.
 //
 
 import UIKit
 
-class TipsViewController: UIViewController {
+class ProductivityViewController: UIViewController {
+
+    @IBOutlet weak var timerView: UIView!
     
-    @IBOutlet weak var labelWithWords: UILabel!
+    @IBOutlet weak var timerButton: UIButton!
     
-    @IBOutlet weak var forYouButton: UIButton!
+    @IBOutlet weak var tipsView: UIView!
     
-    @IBOutlet weak var guidesButton: UIButton!
-    
-    @IBOutlet weak var productivityButton: UIButton!
-    
-    @IBOutlet weak var guidesView: UIView!
-    
-    @IBOutlet weak var productivityView: UIView!
-    
-    @IBOutlet weak var forYouView: UIView!
+    @IBOutlet weak var tipsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        makeButtonGood(forYouButton, forYouView)
-        makeButtonGood(guidesButton, guidesView)
-        makeButtonGood(productivityButton, productivityView)
+
+        makeButtonGood(timerButton, timerView)
+        makeButtonGood(tipsButton, tipsView)
         
     }
     
@@ -43,9 +36,14 @@ class TipsViewController: UIViewController {
         containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
-        
+    }
+
+    @IBAction func tipsPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "productivityToGeneral", sender: self)
     }
     
-    
+    @IBAction func timerPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "prodSelectionToTimer", sender: self)
+    }
     
 }
