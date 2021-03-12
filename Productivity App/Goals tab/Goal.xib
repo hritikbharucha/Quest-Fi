@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="80" id="oxH-tD-LJP" customClass="Goal" customModule="Productivity_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oxH-tD-LJP" id="TNo-hV-cRT">
+                <rect key="frame" x="0.0" y="0.0" width="365" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QE6-if-4Hh">
+                        <rect key="frame" x="0.0" y="10" width="365" height="80"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yR-b7-RcM">
+                                <rect key="frame" x="307" y="22.5" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="EZ3-Pg-SaZ"/>
+                                    <constraint firstAttribute="height" constant="35" id="J5f-Pj-VD3"/>
+                                </constraints>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLh-MU-Qqk">
+                                <rect key="frame" x="8" y="15" width="280" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="UXd-ga-d9B"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3C-xi-frv">
+                                <rect key="frame" x="296" y="19" width="60" height="39"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="25"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4yR-b7-RcM" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="22.670000000000002" id="ECh-2i-ydD"/>
+                            <constraint firstItem="W3C-xi-frv" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="296" id="Eyg-3p-Efh"/>
+                            <constraint firstItem="DLh-MU-Qqk" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="15" id="Hgb-e9-FYc"/>
+                            <constraint firstItem="W3C-xi-frv" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="19" id="KbN-5P-YJy"/>
+                            <constraint firstItem="4yR-b7-RcM" firstAttribute="leading" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="19" id="Kws-vq-WVD"/>
+                            <constraint firstAttribute="bottom" secondItem="W3C-xi-frv" secondAttribute="bottom" constant="22" id="O6u-Ks-Qhm"/>
+                            <constraint firstItem="W3C-xi-frv" firstAttribute="leading" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="8" symbolic="YES" id="Tgi-Pn-Tde"/>
+                            <constraint firstAttribute="bottom" secondItem="4yR-b7-RcM" secondAttribute="bottom" constant="22.329999999999998" id="b06-8V-Uwa"/>
+                            <constraint firstAttribute="bottom" secondItem="DLh-MU-Qqk" secondAttribute="bottom" constant="15" id="ebN-wf-VYc"/>
+                            <constraint firstItem="DLh-MU-Qqk" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="8" id="fNI-BY-AH9"/>
+                            <constraint firstAttribute="trailing" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="77" id="pm3-ZJ-cOH"/>
+                            <constraint firstItem="4yR-b7-RcM" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="307" id="rlV-Iy-YTA"/>
+                            <constraint firstAttribute="trailing" secondItem="4yR-b7-RcM" secondAttribute="trailing" constant="23" id="trh-fX-3em"/>
+                            <constraint firstAttribute="trailing" secondItem="W3C-xi-frv" secondAttribute="trailing" constant="9" id="uEb-zP-87s"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="QE6-if-4Hh" secondAttribute="trailing" id="5G7-h0-cap"/>
+                    <constraint firstItem="QE6-if-4Hh" firstAttribute="top" secondItem="TNo-hV-cRT" secondAttribute="top" constant="10" id="Cmn-rn-aj2"/>
+                    <constraint firstAttribute="bottom" secondItem="QE6-if-4Hh" secondAttribute="bottom" constant="10" id="boD-pE-Y5y"/>
+                    <constraint firstItem="QE6-if-4Hh" firstAttribute="leading" secondItem="TNo-hV-cRT" secondAttribute="leading" id="vVO-p5-UrW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="completeButton" destination="4yR-b7-RcM" id="38E-Z9-bsc"/>
+                <outlet property="goalContainerView" destination="QE6-if-4Hh" id="Ger-Ts-R3a"/>
+                <outlet property="progressButton" destination="W3C-xi-frv" id="29E-CS-rtt"/>
+                <outlet property="taskLabel" destination="DLh-MU-Qqk" id="veN-qh-Rqb"/>
+            </connections>
+            <point key="canvasLocation" x="71.739130434782609" y="22.098214285714285"/>
+        </tableViewCell>
+    </objects>
+</document>
