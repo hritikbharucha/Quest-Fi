@@ -16,6 +16,9 @@
 		6326CD8B25E5F87E00D33888 /* AddGoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6326CD8A25E5F87D00D33888 /* AddGoalsViewController.swift */; };
 		6326CD8E25E5F89200D33888 /* Goal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6326CD8D25E5F89200D33888 /* Goal.xib */; };
 		6326CD9125E5F89C00D33888 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6326CD9025E5F89C00D33888 /* Goal.swift */; };
+		6326CDFB25FFBD9600D33888 /* UnitCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6326CDFA25FFBD9600D33888 /* UnitCircleViewController.swift */; };
+		6326CDFE25FFC14C00D33888 /* TrigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6326CDFD25FFC14C00D33888 /* TrigViewController.swift */; };
+		6326CE0525FFC74100D33888 /* IdentitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6326CE0425FFC74000D33888 /* IdentitiesViewController.swift */; };
 		6346940125CC5B4E00C4107A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346940025CC5B4E00C4107A /* AppDelegate.swift */; };
 		6346940325CC5B4E00C4107A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346940225CC5B4E00C4107A /* SceneDelegate.swift */; };
 		6346940525CC5B4E00C4107A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346940425CC5B4E00C4107A /* ViewController.swift */; };
@@ -23,6 +26,14 @@
 		6346940B25CC5B4E00C4107A /* Productivity_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6346940925CC5B4E00C4107A /* Productivity_App.xcdatamodeld */; };
 		6346940D25CC5B5100C4107A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6346940C25CC5B5100C4107A /* Assets.xcassets */; };
 		6346941025CC5B5100C4107A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6346940E25CC5B5100C4107A /* LaunchScreen.storyboard */; };
+		634B31E526025EDA00B3183D /* FunctionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31E426025EDA00B3183D /* FunctionsViewController.swift */; };
+		634B31E826025EEC00B3183D /* LinearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31E726025EEC00B3183D /* LinearViewController.swift */; };
+		634B31EB26025EF800B3183D /* QuadraticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31EA26025EF800B3183D /* QuadraticViewController.swift */; };
+		634B31EE26025F0500B3183D /* ExponentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31ED26025F0500B3183D /* ExponentialViewController.swift */; };
+		634B31F126025F1300B3183D /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31F026025F1300B3183D /* SystemsViewController.swift */; };
+		634B31F62605017600B3183D /* LimitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31F52605017600B3183D /* LimitsViewController.swift */; };
+		634B31F9260501CA00B3183D /* DerivativesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31F8260501CA00B3183D /* DerivativesViewController.swift */; };
+		634B31FC260501DB00B3183D /* IntegralsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B31FB260501DB00B3183D /* IntegralsViewController.swift */; };
 		636B2B2E25E0BEFD00AEC336 /* ProductivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B2B2D25E0BEFD00AEC336 /* ProductivityViewController.swift */; };
 		636B2B3425E0BF4900AEC336 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B2B3325E0BF4900AEC336 /* TimerViewController.swift */; };
 		636B2B3725E0BF5C00AEC336 /* GeneralTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B2B3625E0BF5C00AEC336 /* GeneralTipsViewController.swift */; };
@@ -72,6 +83,9 @@
 		6326CD8A25E5F87D00D33888 /* AddGoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalsViewController.swift; sourceTree = "<group>"; };
 		6326CD8D25E5F89200D33888 /* Goal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Goal.xib; sourceTree = "<group>"; };
 		6326CD9025E5F89C00D33888 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		6326CDFA25FFBD9600D33888 /* UnitCircleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitCircleViewController.swift; sourceTree = "<group>"; };
+		6326CDFD25FFC14C00D33888 /* TrigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigViewController.swift; sourceTree = "<group>"; };
+		6326CE0425FFC74000D33888 /* IdentitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitiesViewController.swift; sourceTree = "<group>"; };
 		634693FD25CC5B4E00C4107A /* Productivity App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Productivity App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346940025CC5B4E00C4107A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6346940225CC5B4E00C4107A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +95,14 @@
 		6346940C25CC5B5100C4107A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6346940F25CC5B5100C4107A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6346941125CC5B5100C4107A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		634B31E426025EDA00B3183D /* FunctionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionsViewController.swift; sourceTree = "<group>"; };
+		634B31E726025EEC00B3183D /* LinearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearViewController.swift; sourceTree = "<group>"; };
+		634B31EA26025EF800B3183D /* QuadraticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadraticViewController.swift; sourceTree = "<group>"; };
+		634B31ED26025F0500B3183D /* ExponentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExponentialViewController.swift; sourceTree = "<group>"; };
+		634B31F026025F1300B3183D /* SystemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
+		634B31F52605017600B3183D /* LimitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsViewController.swift; sourceTree = "<group>"; };
+		634B31F8260501CA00B3183D /* DerivativesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivativesViewController.swift; sourceTree = "<group>"; };
+		634B31FB260501DB00B3183D /* IntegralsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralsViewController.swift; sourceTree = "<group>"; };
 		636B2B2D25E0BEFD00AEC336 /* ProductivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductivityViewController.swift; sourceTree = "<group>"; };
 		636B2B3325E0BF4900AEC336 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		636B2B3625E0BF5C00AEC336 /* GeneralTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTipsViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +176,17 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
+		6326CE0025FFC15800D33888 /* Pre calc */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B5225E0C44800AEC336 /* PreCalcViewController.swift */,
+				6326CDFA25FFBD9600D33888 /* UnitCircleViewController.swift */,
+				6326CDFD25FFC14C00D33888 /* TrigViewController.swift */,
+				6326CE0425FFC74000D33888 /* IdentitiesViewController.swift */,
+			);
+			path = "Pre calc";
+			sourceTree = "<group>";
+		};
 		634693F425CC5B4E00C4107A = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +228,30 @@
 				6346940925CC5B4E00C4107A /* Productivity_App.xcdatamodeld */,
 			);
 			path = "Productivity App";
+			sourceTree = "<group>";
+		};
+		634B31F326025F1B00B3183D /* Algebra */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B4F25E0C43900AEC336 /* AlgebraViewController.swift */,
+				634B31E426025EDA00B3183D /* FunctionsViewController.swift */,
+				634B31E726025EEC00B3183D /* LinearViewController.swift */,
+				634B31EA26025EF800B3183D /* QuadraticViewController.swift */,
+				634B31ED26025F0500B3183D /* ExponentialViewController.swift */,
+				634B31F026025F1300B3183D /* SystemsViewController.swift */,
+			);
+			path = Algebra;
+			sourceTree = "<group>";
+		};
+		634B31FE2605020000B3183D /* Calc */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B5525E0C45100AEC336 /* CalcViewController.swift */,
+				634B31F52605017600B3183D /* LimitsViewController.swift */,
+				634B31F8260501CA00B3183D /* DerivativesViewController.swift */,
+				634B31FB260501DB00B3183D /* IntegralsViewController.swift */,
+			);
+			path = Calc;
 			sourceTree = "<group>";
 		};
 		636B2B2A25E0BE9600AEC336 /* Home tab */ = {
@@ -244,9 +301,9 @@
 			isa = PBXGroup;
 			children = (
 				636B2B3B25E0C35400AEC336 /* MathViewController.swift */,
-				636B2B4F25E0C43900AEC336 /* AlgebraViewController.swift */,
-				636B2B5225E0C44800AEC336 /* PreCalcViewController.swift */,
-				636B2B5525E0C45100AEC336 /* CalcViewController.swift */,
+				634B31F326025F1B00B3183D /* Algebra */,
+				6326CE0025FFC15800D33888 /* Pre calc */,
+				634B31FE2605020000B3183D /* Calc */,
 			);
 			path = Math;
 			sourceTree = "<group>";
@@ -471,8 +528,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6321283425DAC863001B48BF /* GuidesViewController.swift in Sources */,
+				6326CE0525FFC74100D33888 /* IdentitiesViewController.swift in Sources */,
 				6326CD8225E41EF700D33888 /* TimerSettingsViewController.swift in Sources */,
 				636B2B3725E0BF5C00AEC336 /* GeneralTipsViewController.swift in Sources */,
+				634B31E526025EDA00B3183D /* FunctionsViewController.swift in Sources */,
 				6346940525CC5B4E00C4107A /* ViewController.swift in Sources */,
 				63B678AC25CE38A000721571 /* SignUpViewController.swift in Sources */,
 				636B2B7425E0C4DB00AEC336 /* USGovtViewController.swift in Sources */,
@@ -481,13 +540,16 @@
 				63B678A625CE386400721571 /* SettingsTableViewController.swift in Sources */,
 				63B678AF25CE38C000721571 /* InboxViewController.swift in Sources */,
 				636B2B4825E0C3F400AEC336 /* ScienceViewController.swift in Sources */,
+				634B31EB26025EF800B3183D /* QuadraticViewController.swift in Sources */,
 				6394AF5725D73EF600975194 /* PremiumViewController.swift in Sources */,
+				6326CDFB25FFBD9600D33888 /* UnitCircleViewController.swift in Sources */,
 				636B2B5025E0C43900AEC336 /* AlgebraViewController.swift in Sources */,
 				636B2B7C25E0C51100AEC336 /* BiologyViewController.swift in Sources */,
 				636B2B6E25E0C4BD00AEC336 /* USHistoryViewController.swift in Sources */,
 				636B2B7F25E0C51C00AEC336 /* ChemistryViewController.swift in Sources */,
 				636B2B8325E0C53200AEC336 /* JavaViewController.swift in Sources */,
 				636B2B6225E0C48A00AEC336 /* Span12ViewController.swift in Sources */,
+				634B31E826025EEC00B3183D /* LinearViewController.swift in Sources */,
 				63B8EA6F25E027CB00943325 /* CalendarViewController.swift in Sources */,
 				63B678A925CE389100721571 /* LogInViewController.swift in Sources */,
 				63B678B225CE38CD00721571 /* HomeViewController.swift in Sources */,
@@ -500,14 +562,20 @@
 				6321281225D89B8C001B48BF /* ForYouViewController.swift in Sources */,
 				636B2B4225E0C36E00AEC336 /* SpanishViewController.swift in Sources */,
 				636B2B7925E0C4F300AEC336 /* PhysicsViewController.swift in Sources */,
+				634B31FC260501DB00B3183D /* IntegralsViewController.swift in Sources */,
 				636B2B3C25E0C35400AEC336 /* MathViewController.swift in Sources */,
 				636B2B5B25E0C46700AEC336 /* LangViewController.swift in Sources */,
+				634B31F126025F1300B3183D /* SystemsViewController.swift in Sources */,
 				636B2B3F25E0C36400AEC336 /* EnglishViewController.swift in Sources */,
+				6326CDFE25FFC14C00D33888 /* TrigViewController.swift in Sources */,
+				634B31EE26025F0500B3183D /* ExponentialViewController.swift in Sources */,
 				636B2B4525E0C3DF00AEC336 /* HistoryViewController.swift in Sources */,
 				6346940125CC5B4E00C4107A /* AppDelegate.swift in Sources */,
 				6346940325CC5B4E00C4107A /* SceneDelegate.swift in Sources */,
+				634B31F62605017600B3183D /* LimitsViewController.swift in Sources */,
 				63B678BB25CE38F100721571 /* RewardsViewController.swift in Sources */,
 				636B2B8A25E0C55D00AEC336 /* HTMLCSSViewController.swift in Sources */,
+				634B31F9260501CA00B3183D /* DerivativesViewController.swift in Sources */,
 				6326CD8B25E5F87E00D33888 /* AddGoalsViewController.swift in Sources */,
 				636B2B4B25E0C3FE00AEC336 /* CSViewController.swift in Sources */,
 				6326CD9125E5F89C00D33888 /* Goal.swift in Sources */,

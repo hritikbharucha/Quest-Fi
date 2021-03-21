@@ -1,13 +1,13 @@
 //
-//  AlgebraViewController.swift
+//  UnitCircleViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/19/21.
+//  Created by Hritik Bharucha on 3/15/21.
 //
 
 import UIKit
 
-class AlgebraViewController: UIViewController {
+class UnitCircleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

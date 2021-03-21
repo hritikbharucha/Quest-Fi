@@ -1,13 +1,13 @@
 //
-//  PreCalcViewController.swift
+//  LimitsViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/19/21.
+//  Created by Hritik Bharucha on 3/19/21.
 //
 
 import UIKit
 
-class PreCalcViewController: UIViewController {
+class LimitsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
