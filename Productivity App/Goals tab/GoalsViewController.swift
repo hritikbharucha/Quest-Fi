@@ -58,6 +58,8 @@ class GoalsViewController: UIViewController {
         completedTableView.tag = 2
         
         toDoTableView.estimatedRowHeight = 85.0
+        toDoTableView.rowHeight = UITableView.automaticDimension
+        
         toDoTableView.allowsSelection = false
         
         toDoTableView.register(UINib(nibName: "Goal", bundle: nil), forCellReuseIdentifier: "ReusableCell")
@@ -172,19 +174,25 @@ class GoalsViewController: UIViewController {
     }
     
     func adjustHeight(_ label: UILabel) {
+        
+        let startHeight = label.frame.size.height
         let calcHeight = label.sizeThatFits(label.frame.size).height  //iOS 8+ only
         
+        print("Start height: \(startHeight)")
         print("Calc height: \(calcHeight)")
-        
-        label.frame.size.height = calcHeight
-        UIView.setAnimationsEnabled(false)  // Disable animations
-        self.toDoTableView.beginUpdates()
-        self.toDoTableView.endUpdates()
-        
-        let scrollTo = self.toDoTableView.contentSize.height - self.toDoTableView.frame.size.height
-        self.toDoTableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
-        
-        UIView.setAnimationsEnabled(true)  // Re-enable animations.
+
+        if startHeight <= calcHeight {
+
+            label.frame.size.height = calcHeight
+//            UIView.setAnimationsEnabled(false)  // Disable animations
+//            self.toDoTableView.beginUpdates()
+//            self.toDoTableView.endUpdates()
+//
+//            let scrollTo = self.toDoTableView.contentSize.height - self.toDoTableView.frame.size.height
+//            self.toDoTableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
+//
+//            UIView.setAnimationsEnabled(true)  // Re-enable animations.
+        }
         
     }
     
@@ -251,6 +259,8 @@ class GoalsViewController: UIViewController {
     }
     
     @objc func progressPressed(_ button: UIButton) {
+        let db = Firestore.firestore()
+        
         print("PROGRESS HAS BEEN PRESSED ON GOAL \(button.tag)")
         
         let numArr = button.titleLabel?.text?.split(separator: "/")
@@ -263,6 +273,16 @@ class GoalsViewController: UIViewController {
         if start < end - 1 {
             start += 1
             button.setTitle("\(start)/\(end)", for: .normal)
+            
+            db.collection("Goals").document("Goal\(button.tag)").updateData([
+                "progress": start
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
         } else {
             start += 1
             button.setTitle("\(start)/\(end)", for: .normal)
@@ -404,8 +424,8 @@ class GoalsViewController: UIViewController {
                     if let document = document, document.exists {
                         let dataDescription = document.data() ?? ["error" : "error"]
                         
-                        if (dataDescription["color"] as! String == "gray") {
-                            cell.goalContainerView.backgroundColor = UIColor.lightGray
+                        if (dataDescription["color"] as! String == "purple") {
+                            cell.goalContainerView.backgroundColor = UIColor(red: 178.0/255.0, green: 93.0/255.0, blue: 255.0/255.0, alpha: 0.85)
                         } else if (dataDescription["color"] as! String == "teal") {
                             cell.goalContainerView.backgroundColor = UIColor.systemTeal
                         } else if (dataDescription["color"] as! String == "red") {
@@ -419,6 +439,7 @@ class GoalsViewController: UIViewController {
                         cell.textLabel?.text = (dataDescription["task"] as! String)
                         cell.textLabel?.font = UIFont(name: "DIN Alternate", size: 30)
                         cell.textLabel?.numberOfLines = 0
+                        cell.textLabel?.translatesAutoresizingMaskIntoConstraints = true
                         
                         self.saveCompletedNames()
                         
@@ -440,8 +461,8 @@ class GoalsViewController: UIViewController {
                     
                     self.textDict[indexPath.row] = (dataDescription["task"] as! String)
                     
-                    if (dataDescription["color"] as! String == "gray") {
-                        cell.goalContainerView.backgroundColor = UIColor.lightGray
+                    if (dataDescription["color"] as! String == "purple") {
+                        cell.goalContainerView.backgroundColor = UIColor(red: 178.0/255.0, green: 93.0/255.0, blue: 255.0/255.0, alpha: 0.85)
                     } else if (dataDescription["color"] as! String == "teal") {
                         cell.goalContainerView.backgroundColor = UIColor.systemTeal
                     } else if (dataDescription["color"] as! String == "red") {
@@ -455,7 +476,25 @@ class GoalsViewController: UIViewController {
                     cell.textLabel?.text = (dataDescription["task"] as! String)
                     cell.textLabel?.font = UIFont(name: "DIN Alternate", size: 30)
                     cell.textLabel?.numberOfLines = 0
-//                    cell.textLabel?.frame.size.width = 250
+                    cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
+                    cell.textLabel?.lineBreakMode = .byWordWrapping
+//                    cell.textLabel?.sizeToFit()
+                    
+                    print("DELAYED RETURN OF LABEL WIDTH IS \(cell.textLabel?.frame.width)")
+//                    cell.textLabel?.adjustsFontSizeToFitWidth = true
+//                    cell.textLabel?.minimumScaleFactor = 0.5
+                    
+//                    cell.textLabel?.adjustsFontForContentSizeCategory = true
+                    
+                    cell.textLabel?.leadingAnchor.constraint(equalTo: cell.goalContainerView.leadingAnchor, constant: 5).isActive = true
+                    cell.textLabel?.trailingAnchor.constraint(equalTo: cell.goalContainerView.trailingAnchor, constant: -60).isActive = true
+                    cell.textLabel?.topAnchor.constraint(equalTo: cell.goalContainerView.topAnchor, constant: 5).isActive = true
+//                    cell.textLabel?.bottomAnchor.constraint(greaterThanOrEqualTo: cell.goalContainerView.bottomAnchor, constant: -5).isActive = true
+                    cell.textLabel?.widthAnchor.constraint(equalToConstant: 306).isActive = true
+                    
+                    cell.textLabel?.bottomAnchor.constraint(equalTo: cell.goalContainerView.bottomAnchor, constant: -5).isActive = true
+//                    cell.textLabel?.heightAnchor.constraint(greaterThanOrEqualTo: cell.goalContainerView.heightAnchor, constant: 0).isActive = true
+                    
 //                    cell.textLabel?.adjustsFontSizeToFitWidth = true
 
                     cell.completeButton.addTarget(self, action: #selector(self.completePressed), for: .touchUpInside)
@@ -467,9 +506,13 @@ class GoalsViewController: UIViewController {
                         print("\(String(describing: dataDescription["type"])) is a progressive cell")
                         cell.progressButton.isHidden = false
                         cell.completeButton.isHidden = true
-                        cell.progressButton.setTitle("0/\( dataDescription["total"] ?? "1")", for: .normal)
+                        cell.progressButton.setTitle("\(dataDescription["progress"] ?? "0")/\( dataDescription["total"] ?? "1")", for: .normal)
                         print("0/\( dataDescription["total"] ?? "1")")
                         cell.progressButton.tag = indexPath.row
+                        
+                        cell.progressButton.titleLabel?.adjustsFontSizeToFitWidth = true
+                        cell.progressButton.titleLabel?.minimumScaleFactor = 0.5
+                        cell.progressButton.titleLabel?.translatesAutoresizingMaskIntoConstraints = true
                     } else if (dataDescription["type"] as! String == "One Time") {
                         print("\(String(describing: dataDescription["type"])) is a one time cell")
                         cell.progressButton.isHidden = true
@@ -478,7 +521,30 @@ class GoalsViewController: UIViewController {
                     }
                     
 //                    self.delayNoReturn(3) {
-//                        self.adjustHeight(cell.textLabel!)
+//                        print("DELAYED RETURN OF LABEL WIDTH IS \(cell.textLabel?.frame.width)")
+//                        cell.textLabel?.adjustsFontSizeToFitWidth = true
+//
+//                        print("ADJUSTING HEIGHT OF GOAL \(indexPath.row)")
+////                        self.adjustHeight(cell.textLabel!)
+////                        cell.textLabel?.sizeToFit()
+//                        cell.goalContainerView.frame.size.height = (cell.textLabel?.frame.height)!
+//                        cell.goalContainerView.layoutIfNeeded()
+//
+//                        self.delayNoReturn(3) {
+//                            cell.contentView.frame.size.height = cell.goalContainerView.frame.size.height
+//                            cell.contentView.layoutIfNeeded()
+//
+//                            UIView.setAnimationsEnabled(false)  // Disable animations
+//                            tableView.beginUpdates()
+//                            tableView.endUpdates()
+//
+//
+//                            let scrollTo = tableView.contentSize.height - tableView.frame.size.height
+//                            tableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
+//
+//                            UIView.setAnimationsEnabled(true)
+//                        }
+//
 //                    }
                     
                 } else {

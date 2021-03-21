@@ -113,7 +113,7 @@ class AddGoalsViewController: UIViewController {
     }
     
     @IBAction func grayPressed(_ sender: UIButton) {
-        color = "gray"
+        color = "purple"
         grayButton.backgroundColor = UIColor.blue
         blueButton.backgroundColor = nil
         redButton.backgroundColor = nil
@@ -199,7 +199,8 @@ class AddGoalsViewController: UIViewController {
                     "color" : self.color,
                     "type" : self.type,
                     "total" : self.totalTextField.text ?? "",
-                    "index" : goalIndex
+                    "index" : goalIndex,
+                    "progress" : 0
                 ])
                 
                 GoalsViewController.taskNameArray.append(self.taskTextView.text)

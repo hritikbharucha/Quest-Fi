@@ -42,4 +42,16 @@ class MathViewController: UIViewController {
         button.layer.cornerRadius = 20
     }
 
+    @IBAction func algebraPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "mathToAlgebra", sender: self)
+    }
+    
+    @IBAction func precalcPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "mathToPrecalc", sender: self)
+    }
+    
+    @IBAction func calcPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "mathToCalc", sender: self)
+    }
+    
 }

@@ -21,21 +21,21 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yR-b7-RcM">
                                 <rect key="frame" x="307" y="22.5" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="EZ3-Pg-SaZ"/>
                                     <constraint firstAttribute="height" constant="35" id="J5f-Pj-VD3"/>
                                 </constraints>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLh-MU-Qqk">
-                                <rect key="frame" x="8" y="15" width="280" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="UXd-ga-d9B"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLh-MU-Qqk">
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="80"/>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3C-xi-frv">
-                                <rect key="frame" x="296" y="19" width="60" height="39"/>
+                                <rect key="frame" x="296" y="19" width="60" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="EkC-lq-mWW"/>
+                                    <constraint firstAttribute="height" constant="42" id="LO5-nn-2Cw"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="25"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,20 +43,20 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="4yR-b7-RcM" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="22.670000000000002" id="ECh-2i-ydD"/>
-                            <constraint firstItem="W3C-xi-frv" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="296" id="Eyg-3p-Efh"/>
-                            <constraint firstItem="DLh-MU-Qqk" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="15" id="Hgb-e9-FYc"/>
-                            <constraint firstItem="W3C-xi-frv" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="19" id="KbN-5P-YJy"/>
+                            <constraint firstAttribute="bottom" secondItem="W3C-xi-frv" secondAttribute="bottom" constant="19" id="1EQ-w1-qit"/>
+                            <constraint firstAttribute="bottom" secondItem="4yR-b7-RcM" secondAttribute="bottom" constant="22.5" id="2q3-Mb-F1N"/>
+                            <constraint firstItem="DLh-MU-Qqk" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" id="Hgb-e9-FYc"/>
+                            <constraint firstItem="W3C-xi-frv" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="296" id="I77-MC-e2t"/>
                             <constraint firstItem="4yR-b7-RcM" firstAttribute="leading" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="19" id="Kws-vq-WVD"/>
-                            <constraint firstAttribute="bottom" secondItem="W3C-xi-frv" secondAttribute="bottom" constant="22" id="O6u-Ks-Qhm"/>
+                            <constraint firstAttribute="trailing" secondItem="4yR-b7-RcM" secondAttribute="trailing" constant="23" id="SeM-dI-XhN"/>
                             <constraint firstItem="W3C-xi-frv" firstAttribute="leading" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="8" symbolic="YES" id="Tgi-Pn-Tde"/>
-                            <constraint firstAttribute="bottom" secondItem="4yR-b7-RcM" secondAttribute="bottom" constant="22.329999999999998" id="b06-8V-Uwa"/>
-                            <constraint firstAttribute="bottom" secondItem="DLh-MU-Qqk" secondAttribute="bottom" constant="15" id="ebN-wf-VYc"/>
-                            <constraint firstItem="DLh-MU-Qqk" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="8" id="fNI-BY-AH9"/>
+                            <constraint firstItem="4yR-b7-RcM" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="22.5" id="dfx-MN-13s"/>
+                            <constraint firstAttribute="bottom" secondItem="DLh-MU-Qqk" secondAttribute="bottom" id="ebN-wf-VYc"/>
+                            <constraint firstItem="DLh-MU-Qqk" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" id="fNI-BY-AH9"/>
+                            <constraint firstItem="W3C-xi-frv" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="19" id="nCV-Jr-nRv"/>
+                            <constraint firstItem="4yR-b7-RcM" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="307" id="o6p-BN-Rer"/>
                             <constraint firstAttribute="trailing" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="77" id="pm3-ZJ-cOH"/>
-                            <constraint firstItem="4yR-b7-RcM" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="307" id="rlV-Iy-YTA"/>
-                            <constraint firstAttribute="trailing" secondItem="4yR-b7-RcM" secondAttribute="trailing" constant="23" id="trh-fX-3em"/>
-                            <constraint firstAttribute="trailing" secondItem="W3C-xi-frv" secondAttribute="trailing" constant="9" id="uEb-zP-87s"/>
+                            <constraint firstAttribute="trailing" secondItem="W3C-xi-frv" secondAttribute="trailing" constant="9" id="qih-lT-M4b"/>
                         </constraints>
                     </view>
                 </subviews>

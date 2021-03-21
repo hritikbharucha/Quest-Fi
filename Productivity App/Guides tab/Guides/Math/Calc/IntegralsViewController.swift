@@ -1,13 +1,13 @@
 //
-//  CalcViewController.swift
+//  IntegralsViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/19/21.
+//  Created by Hritik Bharucha on 3/19/21.
 //
 
 import UIKit
 
-class CalcViewController: UIViewController {
+class IntegralsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
