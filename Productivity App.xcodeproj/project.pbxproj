@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1265653E23A827BE064EB6C4 /* Pods_Productivity_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A611C2CB80F4AB2AB64147 /* Pods_Productivity_App.framework */; };
+		630E7FB7261285AF00523826 /* Span12VerbsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E7FB6261285AF00523826 /* Span12VerbsViewController.swift */; };
+		630E7FBB2613C8F600523826 /* PorParaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E7FBA2613C8F600523826 /* PorParaViewController.swift */; };
+		630E7FBE2613C90300523826 /* PretViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E7FBD2613C90300523826 /* PretViewController.swift */; };
+		630E7FFD261519F200523826 /* PerfectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E7FFC261519F200523826 /* PerfectViewController.swift */; };
 		6321281225D89B8C001B48BF /* ForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321281125D89B8C001B48BF /* ForYouViewController.swift */; };
 		6321283125D9F436001B48BF /* ChestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321283025D9F436001B48BF /* ChestsViewController.swift */; };
 		6321283425DAC863001B48BF /* GuidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321283325DAC863001B48BF /* GuidesViewController.swift */; };
@@ -62,6 +66,11 @@
 		636B2B8A25E0C55D00AEC336 /* HTMLCSSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B2B8925E0C55D00AEC336 /* HTMLCSSViewController.swift */; };
 		6394AF5725D73EF600975194 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6394AF5625D73EF600975194 /* PremiumViewController.swift */; };
 		6394AF5A25D752C000975194 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6394AF5925D752BF00975194 /* ShopViewController.swift */; };
+		63B1B250260C177D00DE466A /* RAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B24F260C177D00DE466A /* RAViewController.swift */; };
+		63B1B253260C178F00DE466A /* SynthesisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B252260C178F00DE466A /* SynthesisViewController.swift */; };
+		63B1B256260C17AF00DE466A /* ArgumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B255260C17AF00DE466A /* ArgumentViewController.swift */; };
+		63B1B25B2610151B00DE466A /* MCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B25A2610151B00DE466A /* MCViewController.swift */; };
+		63B1B25E2610152700DE466A /* FRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B25D2610152700DE466A /* FRViewController.swift */; };
 		63B678A625CE386400721571 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B678A525CE386400721571 /* SettingsTableViewController.swift */; };
 		63B678A925CE389100721571 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B678A825CE389100721571 /* LogInViewController.swift */; };
 		63B678AC25CE38A000721571 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B678AB25CE38A000721571 /* SignUpViewController.swift */; };
@@ -75,6 +84,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		630E7FB6261285AF00523826 /* Span12VerbsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Span12VerbsViewController.swift; sourceTree = "<group>"; };
+		630E7FBA2613C8F600523826 /* PorParaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PorParaViewController.swift; sourceTree = "<group>"; };
+		630E7FBD2613C90300523826 /* PretViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PretViewController.swift; sourceTree = "<group>"; };
+		630E7FFC261519F200523826 /* PerfectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectViewController.swift; sourceTree = "<group>"; };
 		6321281125D89B8C001B48BF /* ForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewController.swift; sourceTree = "<group>"; };
 		6321283025D9F436001B48BF /* ChestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChestsViewController.swift; sourceTree = "<group>"; };
 		6321283325DAC863001B48BF /* GuidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidesViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +144,11 @@
 		636B2B8925E0C55D00AEC336 /* HTMLCSSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLCSSViewController.swift; sourceTree = "<group>"; };
 		6394AF5625D73EF600975194 /* PremiumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumViewController.swift; sourceTree = "<group>"; };
 		6394AF5925D752BF00975194 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		63B1B24F260C177D00DE466A /* RAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAViewController.swift; sourceTree = "<group>"; };
+		63B1B252260C178F00DE466A /* SynthesisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthesisViewController.swift; sourceTree = "<group>"; };
+		63B1B255260C17AF00DE466A /* ArgumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentViewController.swift; sourceTree = "<group>"; };
+		63B1B25A2610151B00DE466A /* MCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCViewController.swift; sourceTree = "<group>"; };
+		63B1B25D2610152700DE466A /* FRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRViewController.swift; sourceTree = "<group>"; };
 		63B678A525CE386400721571 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		63B678A825CE389100721571 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		63B678AB25CE38A000721571 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +182,34 @@
 				A5A611C2CB80F4AB2AB64147 /* Pods_Productivity_App.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		630E7FC02613C94C00523826 /* span12 */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B6125E0C48A00AEC336 /* Span12ViewController.swift */,
+				630E7FB6261285AF00523826 /* Span12VerbsViewController.swift */,
+			);
+			path = span12;
+			sourceTree = "<group>";
+		};
+		630E7FC22613C95C00523826 /* span34 */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B6525E0C49500AEC336 /* Span34ViewController.swift */,
+				630E7FBA2613C8F600523826 /* PorParaViewController.swift */,
+				630E7FBD2613C90300523826 /* PretViewController.swift */,
+			);
+			path = span34;
+			sourceTree = "<group>";
+		};
+		630E7FFF261519F900523826 /* span56 */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B6825E0C4A100AEC336 /* Span56ViewController.swift */,
+				630E7FFC261519F200523826 /* PerfectViewController.swift */,
+			);
+			path = span56;
 			sourceTree = "<group>";
 		};
 		6326CD8425E41F1100D33888 /* Timer */ = {
@@ -312,8 +358,8 @@
 			isa = PBXGroup;
 			children = (
 				636B2B3E25E0C36400AEC336 /* EnglishViewController.swift */,
-				636B2B5A25E0C46700AEC336 /* LangViewController.swift */,
-				636B2B5D25E0C47200AEC336 /* LitViewController.swift */,
+				63B1B258260C17BA00DE466A /* Lang */,
+				63B1B2602610152D00DE466A /* Lit */,
 			);
 			path = English;
 			sourceTree = "<group>";
@@ -322,9 +368,9 @@
 			isa = PBXGroup;
 			children = (
 				636B2B4125E0C36E00AEC336 /* SpanishViewController.swift */,
-				636B2B6125E0C48A00AEC336 /* Span12ViewController.swift */,
-				636B2B6525E0C49500AEC336 /* Span34ViewController.swift */,
-				636B2B6825E0C4A100AEC336 /* Span56ViewController.swift */,
+				630E7FC02613C94C00523826 /* span12 */,
+				630E7FC22613C95C00523826 /* span34 */,
+				630E7FFF261519F900523826 /* span56 */,
 			);
 			path = Spanish;
 			sourceTree = "<group>";
@@ -382,6 +428,27 @@
 				6326CD9025E5F89C00D33888 /* Goal.swift */,
 			);
 			path = "Goals tab";
+			sourceTree = "<group>";
+		};
+		63B1B258260C17BA00DE466A /* Lang */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B5A25E0C46700AEC336 /* LangViewController.swift */,
+				63B1B24F260C177D00DE466A /* RAViewController.swift */,
+				63B1B252260C178F00DE466A /* SynthesisViewController.swift */,
+				63B1B255260C17AF00DE466A /* ArgumentViewController.swift */,
+			);
+			path = Lang;
+			sourceTree = "<group>";
+		};
+		63B1B2602610152D00DE466A /* Lit */ = {
+			isa = PBXGroup;
+			children = (
+				636B2B5D25E0C47200AEC336 /* LitViewController.swift */,
+				63B1B25A2610151B00DE466A /* MCViewController.swift */,
+				63B1B25D2610152700DE466A /* FRViewController.swift */,
+			);
+			path = Lit;
 			sourceTree = "<group>";
 		};
 		ED931C57789A28C0D8FFDDF4 /* Pods */ = {
@@ -527,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63B1B253260C178F00DE466A /* SynthesisViewController.swift in Sources */,
 				6321283425DAC863001B48BF /* GuidesViewController.swift in Sources */,
 				6326CE0525FFC74100D33888 /* IdentitiesViewController.swift in Sources */,
 				6326CD8225E41EF700D33888 /* TimerSettingsViewController.swift in Sources */,
@@ -534,6 +602,7 @@
 				634B31E526025EDA00B3183D /* FunctionsViewController.swift in Sources */,
 				6346940525CC5B4E00C4107A /* ViewController.swift in Sources */,
 				63B678AC25CE38A000721571 /* SignUpViewController.swift in Sources */,
+				63B1B25E2610152700DE466A /* FRViewController.swift in Sources */,
 				636B2B7425E0C4DB00AEC336 /* USGovtViewController.swift in Sources */,
 				636B2B6925E0C4A100AEC336 /* Span56ViewController.swift in Sources */,
 				636B2B5625E0C45100AEC336 /* CalcViewController.swift in Sources */,
@@ -544,7 +613,9 @@
 				6394AF5725D73EF600975194 /* PremiumViewController.swift in Sources */,
 				6326CDFB25FFBD9600D33888 /* UnitCircleViewController.swift in Sources */,
 				636B2B5025E0C43900AEC336 /* AlgebraViewController.swift in Sources */,
+				63B1B25B2610151B00DE466A /* MCViewController.swift in Sources */,
 				636B2B7C25E0C51100AEC336 /* BiologyViewController.swift in Sources */,
+				63B1B256260C17AF00DE466A /* ArgumentViewController.swift in Sources */,
 				636B2B6E25E0C4BD00AEC336 /* USHistoryViewController.swift in Sources */,
 				636B2B7F25E0C51C00AEC336 /* ChemistryViewController.swift in Sources */,
 				636B2B8325E0C53200AEC336 /* JavaViewController.swift in Sources */,
@@ -565,6 +636,7 @@
 				634B31FC260501DB00B3183D /* IntegralsViewController.swift in Sources */,
 				636B2B3C25E0C35400AEC336 /* MathViewController.swift in Sources */,
 				636B2B5B25E0C46700AEC336 /* LangViewController.swift in Sources */,
+				630E7FFD261519F200523826 /* PerfectViewController.swift in Sources */,
 				634B31F126025F1300B3183D /* SystemsViewController.swift in Sources */,
 				636B2B3F25E0C36400AEC336 /* EnglishViewController.swift in Sources */,
 				6326CDFE25FFC14C00D33888 /* TrigViewController.swift in Sources */,
@@ -575,13 +647,17 @@
 				634B31F62605017600B3183D /* LimitsViewController.swift in Sources */,
 				63B678BB25CE38F100721571 /* RewardsViewController.swift in Sources */,
 				636B2B8A25E0C55D00AEC336 /* HTMLCSSViewController.swift in Sources */,
+				630E7FBB2613C8F600523826 /* PorParaViewController.swift in Sources */,
+				630E7FB7261285AF00523826 /* Span12VerbsViewController.swift in Sources */,
 				634B31F9260501CA00B3183D /* DerivativesViewController.swift in Sources */,
 				6326CD8B25E5F87E00D33888 /* AddGoalsViewController.swift in Sources */,
 				636B2B4B25E0C3FE00AEC336 /* CSViewController.swift in Sources */,
 				6326CD9125E5F89C00D33888 /* Goal.swift in Sources */,
+				630E7FBE2613C90300523826 /* PretViewController.swift in Sources */,
 				63B678B825CE38E500721571 /* GoalsViewController.swift in Sources */,
 				636B2B5E25E0C47200AEC336 /* LitViewController.swift in Sources */,
 				6394AF5A25D752C000975194 /* ShopViewController.swift in Sources */,
+				63B1B250260C177D00DE466A /* RAViewController.swift in Sources */,
 				6321283125D9F436001B48BF /* ChestsViewController.swift in Sources */,
 				6346940B25CC5B4E00C4107A /* Productivity_App.xcdatamodeld in Sources */,
 				636B2B2E25E0BEFD00AEC336 /* ProductivityViewController.swift in Sources */,

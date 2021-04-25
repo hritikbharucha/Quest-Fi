@@ -1,5 +1,5 @@
 //
-//  EnglishViewController.swift
+//  LitViewController.swift
 //  Productivity App
 //
 //  Created by Hritik Bharucha on 2/19/21.
@@ -7,21 +7,22 @@
 
 import UIKit
 
-class EnglishViewController: UIViewController {
+class LitViewController: UIViewController {
     
-    @IBOutlet weak var litView: UIView!
+    @IBOutlet weak var mcView: UIView!
     
-    @IBOutlet weak var litButton: UIButton!
+    @IBOutlet weak var mcButton: UIButton!
     
-    @IBOutlet weak var langView: UIView!
+    @IBOutlet weak var frView: UIView!
     
-    @IBOutlet weak var langButton: UIButton!
+    @IBOutlet weak var frButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        makeButtonGood(litButton, litView)
-        makeButtonGood(langButton, langView)
+        makeButtonGood(mcButton, mcView)
+        makeButtonGood(frButton, frView)
+        
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -37,12 +38,12 @@ class EnglishViewController: UIViewController {
         button.layer.cornerRadius = 20
     }
     
-    @IBAction func langPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "englishToLang", sender: self)
+    @IBAction func mcPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "litToMC", sender: self)
     }
     
-    @IBAction func litPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "englishToLit", sender: self)
+    @IBAction func frPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "litToFR", sender: self)
     }
     
 }
