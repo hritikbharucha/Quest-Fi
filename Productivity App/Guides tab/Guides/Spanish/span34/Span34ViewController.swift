@@ -1,5 +1,5 @@
 //
-//  EnglishViewController.swift
+//  Span34ViewController.swift
 //  Productivity App
 //
 //  Created by Hritik Bharucha on 2/19/21.
@@ -7,21 +7,22 @@
 
 import UIKit
 
-class EnglishViewController: UIViewController {
+class Span34ViewController: UIViewController {
     
-    @IBOutlet weak var litView: UIView!
+    @IBOutlet var porView: UIView!
     
-    @IBOutlet weak var litButton: UIButton!
+    @IBOutlet var porButton: UIButton!
     
-    @IBOutlet weak var langView: UIView!
+    @IBOutlet var pretView: UIView!
     
-    @IBOutlet weak var langButton: UIButton!
+    @IBOutlet var pretButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        makeButtonGood(litButton, litView)
-        makeButtonGood(langButton, langView)
+        makeButtonGood(porButton, porView)
+        makeButtonGood(pretButton, pretView)
+        
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -36,13 +37,5 @@ class EnglishViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
     }
-    
-    @IBAction func langPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "englishToLang", sender: self)
-    }
-    
-    @IBAction func litPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "englishToLit", sender: self)
-    }
-    
+
 }

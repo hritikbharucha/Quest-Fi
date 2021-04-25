@@ -1,13 +1,13 @@
 //
-//  LitViewController.swift
+//  PretViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/19/21.
+//  Created by Hritik Bharucha on 3/30/21.
 //
 
 import UIKit
 
-class LitViewController: UIViewController {
+class PretViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

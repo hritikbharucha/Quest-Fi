@@ -1,13 +1,13 @@
 //
-//  Span12ViewController.swift
+//  RAViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/19/21.
+//  Created by Hritik Bharucha on 3/24/21.
 //
 
 import UIKit
 
-class Span12ViewController: UIViewController {
+class RAViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

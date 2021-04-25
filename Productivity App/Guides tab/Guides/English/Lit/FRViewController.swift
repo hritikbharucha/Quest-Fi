@@ -1,13 +1,13 @@
 //
-//  LangViewController.swift
+//  FRViewController.swift
 //  Productivity App
 //
-//  Created by Hritik Bharucha on 2/19/21.
+//  Created by Hritik Bharucha on 3/27/21.
 //
 
 import UIKit
 
-class LangViewController: UIViewController {
+class FRViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
