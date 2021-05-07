@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TimerSettingsViewController: UIViewController {
 
@@ -28,6 +29,33 @@ class TimerSettingsViewController: UIViewController {
         makeButtonGood(button2, view2)
         makeButtonGood(button3, view3)
         
+        setup()
+        
+    }
+    
+    func setup() {
+        let db = Firestore.firestore()
+        
+        db.collection("Goals").document("Timer").getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data() ?? ["Error" : "Error"]
+                let length = dataDescription["Length"] as! Int
+                
+                if length == 1 {
+                    self.button1.backgroundColor = UIColor.systemTeal
+                    self.button2.backgroundColor = UIColor.lightGray
+                    self.button3.backgroundColor = UIColor.lightGray
+                } else if length == 2 {
+                    self.button1.backgroundColor = UIColor.lightGray
+                    self.button2.backgroundColor = UIColor.systemTeal
+                    self.button3.backgroundColor = UIColor.lightGray
+                } else if length == 3 {
+                    self.button1.backgroundColor = UIColor.lightGray
+                    self.button2.backgroundColor = UIColor.lightGray
+                    self.button3.backgroundColor = UIColor.systemTeal
+                }
+            }
+        }
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -48,6 +76,7 @@ class TimerSettingsViewController: UIViewController {
         button1.backgroundColor = UIColor.systemTeal
         button2.backgroundColor = UIColor.lightGray
         button3.backgroundColor = UIColor.lightGray
+        saveTimer(1)
         
     }
     
@@ -56,6 +85,7 @@ class TimerSettingsViewController: UIViewController {
         button1.backgroundColor = UIColor.lightGray
         button2.backgroundColor = UIColor.systemTeal
         button3.backgroundColor = UIColor.lightGray
+        saveTimer(2)
         
     }
     
@@ -64,7 +94,16 @@ class TimerSettingsViewController: UIViewController {
         button1.backgroundColor = UIColor.lightGray
         button2.backgroundColor = UIColor.lightGray
         button3.backgroundColor = UIColor.systemTeal
+        saveTimer(3)
         
+    }
+    
+    func saveTimer(_ length: Int) {
+        let db = Firestore.firestore()
+        
+        db.collection("Goals").document("Timer").setData([
+            "Length" : length
+        ])
     }
     
 }

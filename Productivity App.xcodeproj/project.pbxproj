@@ -12,6 +12,7 @@
 		630E7FBB2613C8F600523826 /* PorParaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E7FBA2613C8F600523826 /* PorParaViewController.swift */; };
 		630E7FBE2613C90300523826 /* PretViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E7FBD2613C90300523826 /* PretViewController.swift */; };
 		630E7FFD261519F200523826 /* PerfectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E7FFC261519F200523826 /* PerfectViewController.swift */; };
+		631DFFCB2638EB86007C8605 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 631DFFCA2638EB86007C8605 /* alarm.mp3 */; };
 		6321281225D89B8C001B48BF /* ForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321281125D89B8C001B48BF /* ForYouViewController.swift */; };
 		6321283125D9F436001B48BF /* ChestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321283025D9F436001B48BF /* ChestsViewController.swift */; };
 		6321283425DAC863001B48BF /* GuidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321283325DAC863001B48BF /* GuidesViewController.swift */; };
@@ -88,6 +89,7 @@
 		630E7FBA2613C8F600523826 /* PorParaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PorParaViewController.swift; sourceTree = "<group>"; };
 		630E7FBD2613C90300523826 /* PretViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PretViewController.swift; sourceTree = "<group>"; };
 		630E7FFC261519F200523826 /* PerfectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectViewController.swift; sourceTree = "<group>"; };
+		631DFFCA2638EB86007C8605 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		6321281125D89B8C001B48BF /* ForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewController.swift; sourceTree = "<group>"; };
 		6321283025D9F436001B48BF /* ChestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChestsViewController.swift; sourceTree = "<group>"; };
 		6321283325DAC863001B48BF /* GuidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidesViewController.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 		634693FF25CC5B4E00C4107A /* Productivity App */ = {
 			isa = PBXGroup;
 			children = (
+				631DFFCA2638EB86007C8605 /* alarm.mp3 */,
 				6346940025CC5B4E00C4107A /* AppDelegate.swift */,
 				6346940225CC5B4E00C4107A /* SceneDelegate.swift */,
 				6346940425CC5B4E00C4107A /* ViewController.swift */,
@@ -522,6 +525,7 @@
 			files = (
 				6346941025CC5B5100C4107A /* LaunchScreen.storyboard in Resources */,
 				6326CD8E25E5F89200D33888 /* Goal.xib in Resources */,
+				631DFFCB2638EB86007C8605 /* alarm.mp3 in Resources */,
 				63B678FC25CE463200721571 /* GoogleService-Info.plist in Resources */,
 				6346940D25CC5B5100C4107A /* Assets.xcassets in Resources */,
 				6346940825CC5B4E00C4107A /* Main.storyboard in Resources */,
