@@ -44,7 +44,8 @@ class GoalsViewController: UIViewController {
     
     static var completedNameArray = [""]
     
-    static var goalPoints = 0
+    var goalPoints = 0
+    var goalsCompleted = 0
     
     let db = Firestore.firestore()
     var addingForProgressive = false
@@ -309,18 +310,21 @@ class GoalsViewController: UIViewController {
         let db = Firestore.firestore()
         
         if addingForProgressive {
-            Self.goalPoints += 2
+            goalPoints += 2
             addingForProgressive = false
         } else if addingForLongProgressive {
-            Self.goalPoints += 5
+            goalPoints += 5
             addingForLongProgressive = false
         } else {
-            Self.goalPoints += 1
+            goalPoints += 1
         }
         
-        db.collection("Goals").document("Goal Points").setData([
+        goalsCompleted += 1
+        
+        db.collection("Goals").document("Goal Data").setData([
             
-            "points" : Self.goalPoints
+            "points" : goalPoints,
+            "completedGoals" : goalsCompleted
             
         ])
     }
@@ -328,13 +332,15 @@ class GoalsViewController: UIViewController {
     func createGoalPointsString() {
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Goal Points").getDocument {
+        db.collection("Goals").document("Goal Data").getDocument {
             (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data() ?? ["error" : "error"]
                 let points = dataDescription["points"] as! Int
+                let completed = dataDescription["completedGoals"] as! Int
                 
-                Self.goalPoints = points
+                self.goalPoints = points
+                self.goalsCompleted = completed
                 self.deleteLabel.isHidden = false
                 self.deleteLabel.text = "Goal Points: \(points)"
                 
@@ -353,11 +359,51 @@ class GoalsViewController: UIViewController {
         }
     }
     
+    func levelUp() {
+        
+        let db = Firestore.firestore()
+        
+        db.collection("Goals").document("Level Data").getDocument { document, error in
+            if let document = document, document.exists {
+                let dataDescription = document.data() ?? ["error" : "error"]
+                
+                let progress = dataDescription["progressNumber"] as! Int + 1
+                let total = dataDescription["total"] as! Int
+                let level = dataDescription["level"] as! Int + 1
+                print("progress over total: \(Float(progress)/Float(total))")
+                
+                if Float(progress/total) >= 1 {
+                    db.collection("Goals").document("Level Data").updateData([
+                        "progress" : 0,
+                        "progressNumber" : 0,
+                        "total" : Int(pow(Double(level), 1.5)),
+                        "level" : level
+                    ])
+                } else {
+                    db.collection("Goals").document("Level Data").updateData([
+                        "progress" : Float(progress)/Float(total),
+                        "progressNumber" : progress
+                    ])
+                }
+
+            } else {
+                db.collection("Goals").document("Level Data").setData([
+                    "progress" : 0,
+                    "progressNumber" : 0,
+                    "total" : 2,
+                    "level" : 2
+                ])
+            }
+        }
+                
+    }
+    
     @objc func completePressed(_ button: UIButton) {
         print("COMPLETE HAS BEEN PRESSED on goal \(button.tag)")
         
         addAndSaveGoalPoints()
         createGoalPointsString()
+        levelUp()
         
         if button.layer.borderWidth == 2 {
             print("PUTTING BLUE ON COMPLETE")
