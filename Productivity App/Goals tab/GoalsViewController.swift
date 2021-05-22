@@ -44,6 +44,7 @@ class GoalsViewController: UIViewController {
     
     static var completedNameArray = [""]
     
+    var completedGoalDates : [Date] = []
     var goalPoints = 0
     var goalsCompleted = 0
     
@@ -79,6 +80,7 @@ class GoalsViewController: UIViewController {
         doneButton.isHidden = true
         deleteLabel.isHidden = true
         
+        getGoalData()
         createGoalPointsString()
         
         self.makeTaskNameArray {
@@ -92,11 +94,10 @@ class GoalsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.async {
-            print("reloading")
+            
             self.goalsCount += 1
             self.index += 1
             
-            print("Goal count in dispatch: \(self.goalsCount)")
             
             if (self.goalsCount >= 1) {
                 self.saveTaskNames()
@@ -132,7 +133,6 @@ class GoalsViewController: UIViewController {
     @IBAction func addPressed(_ sender: UIButton) {
         
         if sender.title(for: .normal) == "Add" {
-            print("add")
             self.performSegue(withIdentifier: "goalsToAddGoals", sender: self)
         }
         
@@ -186,9 +186,6 @@ class GoalsViewController: UIViewController {
         
         let startHeight = label.frame.size.height
         let calcHeight = label.sizeThatFits(label.frame.size).height  //iOS 8+ only
-        
-        print("Start height: \(startHeight)")
-        print("Calc height: \(calcHeight)")
 
         if startHeight <= calcHeight {
 
@@ -223,7 +220,6 @@ class GoalsViewController: UIViewController {
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data() ?? ["error" : "error"]
-                print("CHICKENDUCK: \(dataDescription)")
                 
                 Self.taskNameArray = (dataDescription["tasks"] as! [String])
                 
@@ -254,7 +250,6 @@ class GoalsViewController: UIViewController {
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data() ?? ["error" : "error"]
-                print("CHICKENDUCK: \(dataDescription)")
                 
                 Self.completedNameArray = (dataDescription["tasks"] as! [String])
                 
@@ -270,7 +265,6 @@ class GoalsViewController: UIViewController {
     @objc func progressPressed(_ button: UIButton) {
         let db = Firestore.firestore()
         
-        print("PROGRESS HAS BEEN PRESSED ON GOAL \(button.tag)")
         
         let numArr = button.titleLabel?.text?.split(separator: "/")
         let startOptional = Int(numArr!.first ?? "0")
@@ -321,12 +315,40 @@ class GoalsViewController: UIViewController {
         
         goalsCompleted += 1
         
+        let date = Date()
+        completedGoalDates.append(date)
+        
         db.collection("Goals").document("Goal Data").setData([
             
             "points" : goalPoints,
-            "completedGoals" : goalsCompleted
-            
+            "completedGoals" : goalsCompleted,
+            "dates" : completedGoalDates,
+            "best" : 0
         ])
+    }
+    
+    func getGoalData() {
+        let db = Firestore.firestore()
+        
+        db.collection("Goals").document("Goal Data").getDocument {
+            (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data() ?? ["error" : "error"]
+                let points = dataDescription["points"] as! Int
+                let completed = dataDescription["completedGoals"] as! Int
+                let dates = dataDescription["dates"] as! [Timestamp]
+                
+                self.goalPoints = points
+                self.goalsCompleted = completed
+                print(dates)
+                for i in 0...dates.count-1 {
+                    self.completedGoalDates.append(dates[i].dateValue())
+                }
+                
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     func createGoalPointsString() {
@@ -337,12 +359,14 @@ class GoalsViewController: UIViewController {
             if let document = document, document.exists {
                 let dataDescription = document.data() ?? ["error" : "error"]
                 let points = dataDescription["points"] as! Int
-                let completed = dataDescription["completedGoals"] as! Int
-                
-                self.goalPoints = points
-                self.goalsCompleted = completed
+//                let completed = dataDescription["completedGoals"] as! Int
+//                let dates = dataDescription["dates"] as? [Date] ?? [Date]()
+//
+//                self.goalPoints = points
+//                self.goalsCompleted = completed
                 self.deleteLabel.isHidden = false
                 self.deleteLabel.text = "Goal Points: \(points)"
+//                self.completedGoalDates = dates
                 
                 if points >= 10 {
                     self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 20)
@@ -370,7 +394,6 @@ class GoalsViewController: UIViewController {
                 let progress = dataDescription["progressNumber"] as! Int + 1
                 let total = dataDescription["total"] as! Int
                 let level = dataDescription["level"] as! Int + 1
-                print("progress over total: \(Float(progress)/Float(total))")
                 
                 if Float(progress/total) >= 1 {
                     db.collection("Goals").document("Level Data").updateData([
@@ -399,14 +422,12 @@ class GoalsViewController: UIViewController {
     }
     
     @objc func completePressed(_ button: UIButton) {
-        print("COMPLETE HAS BEEN PRESSED on goal \(button.tag)")
         
         addAndSaveGoalPoints()
         createGoalPointsString()
         levelUp()
         
         if button.layer.borderWidth == 2 {
-            print("PUTTING BLUE ON COMPLETE")
             button.backgroundColor = UIColor.systemBlue
             delayNoReturn(0.5) {
                 button.backgroundColor = .clear
@@ -420,7 +441,6 @@ class GoalsViewController: UIViewController {
             if let document = document, document.exists {
                 let dataDescription = document.data() ?? ["error" : "error"]
                 
-                print("Setting data for Completed Goal\(Self.completedNameArray.count - 1)")
                 db.collection("Goals").document("Completed Goal\(Self.completedNameArray.count - 1)").setData([
                     
                     "color" : dataDescription["color"],
@@ -439,8 +459,6 @@ class GoalsViewController: UIViewController {
         }
 
         delayNoReturn(0.3) {
-            print("start: \(button.tag + 1)")
-            print("end: \(Self.taskNameArray.count - 2)")
 
             db.collection("Goals").document("Goal\(button.tag)").delete()
 
@@ -468,7 +486,6 @@ class GoalsViewController: UIViewController {
                             if let document = document, document.exists {
                                 let dataDescription = document.data() ?? ["error" : "error"]
 
-                                print("Setting data for Goal\(i-1)")
                                 db.collection("Goals").document("Goal\(i-1)").setData([
 
                                     "color" : dataDescription["color"],
@@ -508,10 +525,8 @@ class GoalsViewController: UIViewController {
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             if tableView.tag == 2 {
-                print("NUMBER OF ROWS FOR COMPLETE \(Self.completedNameArray.count - 1)")
                 return Self.completedNameArray.count - 1
             }
-            print("NUMBER OF ROWS FOR TASKS \(Self.taskNameArray.count - 1)")
             return Self.taskNameArray.count - 1
         }
         
@@ -520,17 +535,13 @@ class GoalsViewController: UIViewController {
         }
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            print("Goal count in create cell func: \(goalsCount)")
-            print("creating cell")
-            
+                        
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! Goal
             
             let db = Firestore.firestore()
             
             if tableView.tag == 2 {
-                
-                print("this is index row thing: Goal\(indexPath.row)")
-                
+                                
                 db.collection("Goals").document("Completed Goal\(indexPath.row)").getDocument {
                     (document, error) in
                     if let document = document, document.exists {
@@ -566,7 +577,6 @@ class GoalsViewController: UIViewController {
                 
             }
             
-            print("this is index row thing: Goal\(indexPath.row)")
             
             db.collection("Goals").document("Goal\(indexPath.row)").getDocument {
                 (document, error) in
@@ -594,7 +604,6 @@ class GoalsViewController: UIViewController {
                     cell.textLabel?.lineBreakMode = .byWordWrapping
 //                    cell.textLabel?.sizeToFit()
                     
-                    print("DELAYED RETURN OF LABEL WIDTH IS \(cell.textLabel?.frame.width)")
 //                    cell.textLabel?.adjustsFontSizeToFitWidth = true
 //                    cell.textLabel?.minimumScaleFactor = 0.5
                 
@@ -614,7 +623,6 @@ class GoalsViewController: UIViewController {
                     cell.completeButton.addTarget(self, action: #selector(self.completePressed), for: .touchUpInside)
                     cell.progressButton.addTarget(self, action: #selector(self.progressPressed), for: .touchUpInside)
                     
-                    print("The width of row \(indexPath.row) is \(cell.textLabel?.frame.width)")
                     
                     if (dataDescription["type"] as! String == "Progressive") {
                         print("\(String(describing: dataDescription["type"])) is a progressive cell")
@@ -674,12 +682,7 @@ class GoalsViewController: UIViewController {
             if tableView.tag == 1 {
                     
                 let db = Firestore.firestore()
-                db
                 
-    //            print("row in select row thing: \(indexPath.row)")
-    //
-    //            print("start: \(indexPath.row + 1)")
-    //            print("end: \(Self.taskNameArray.count - 2)")
                 
                 db.collection("Goals").document("Goal\(indexPath.row)").delete()
 
@@ -708,7 +711,6 @@ class GoalsViewController: UIViewController {
                                 if let document = document, document.exists {
                                     let dataDescription = document.data() ?? ["error" : "error"]
 
-                                    print("Setting data for Goal\(i-1)")
                                     db.collection("Goals").document("Goal\(i-1)").setData([
                                         
                                         "color" : dataDescription["color"],
