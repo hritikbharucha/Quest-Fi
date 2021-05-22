@@ -1,3 +1,13 @@
+# 8.0.0
+- [fixed] Fixed a crash that occurred when assigning auth settings (#7670).
+
+# 7.8.0
+- [fixed] Fixed auth state sharing during first app launch. (#7472)
+
+# 7.6.0
+- [fixed] Auth emulator now works across the local network. (#7350)
+- [fixed] Fixed incorrect import for watchOS (#7425)
+
 # 7.4.0
 - [fixed] Check if the reverse client ID is configured as a custom URL scheme before setting it as the callback scheme. (#7211)
 - [added] Add ability to sync auth state across devices. (#6924)

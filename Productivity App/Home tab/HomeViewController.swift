@@ -47,12 +47,13 @@ class HomeViewController: UIViewController {
         userButton.layer.cornerRadius = 30
         userView.layer.cornerRadius = 30
              
+        getData()
+        getGoalData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        print("HEELLLOOO")
         getData()
         getGoalData()
     }
@@ -141,6 +142,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func logPressed(_ sender: UIButton) {
+        
         self.performSegue(withIdentifier: "homeToCalendar", sender: self)
     }
     
