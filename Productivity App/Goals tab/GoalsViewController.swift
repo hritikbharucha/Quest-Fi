@@ -28,6 +28,8 @@ class GoalsViewController: UIViewController {
     
     @IBOutlet weak var doneButton: UIButton!
     
+//    var userID = ""
+    
     open var goalsCount = -1
     
     open var index = -1
@@ -54,6 +56,9 @@ class GoalsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        userID = Auth.auth().currentUser!.uid
+        
         toDoTableView.dataSource = self
         toDoTableView.delegate = self
         
@@ -104,10 +109,12 @@ class GoalsViewController: UIViewController {
                 self.saveCompletedNames()
             }
             
+            Self.taskNameArray = [""]
             self.makeTaskNameArray {
                 self.toDoTableView.reloadData()
             }
             
+            Self.completedNameArray = [""]
             self.makeCompletedNameArray {
                 self.completedTableView.reloadData()
             }
@@ -204,60 +211,72 @@ class GoalsViewController: UIViewController {
     
     func saveTaskNames() {
         let db = Firestore.firestore()
-        db.collection("Goals").document("Goal Names").setData([
-            
-            "tasks" : Self.taskNameArray
-            
-        ])
+        
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Goal Names").setData([
+                
+                "tasks" : Self.taskNameArray
+                
+            ])
+        }
+        
     }
     
     func makeTaskNameArray(completion: @escaping () -> Void) {
         
         let db = Firestore.firestore()
         
-        let docRef = db.collection("Goals").document("Goal Names")
-        
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["error" : "error"]
-                
-                Self.taskNameArray = (dataDescription["tasks"] as! [String])
-                
-            } else {
-                print("Document does not exist")
-            }
+        if let userID = Auth.auth().currentUser?.uid {
+            let docRef = db.collection("\(userID)").document("Goal Names")
             
-            completion()
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["error" : "error"]
+                    
+                    Self.taskNameArray = (dataDescription["tasks"] as! [String])
+                    
+                } else {
+                    print("Document does not exist")
+                }
+                
+                completion()
+            }
         }
         
     }
     
     func saveCompletedNames() {
         let db = Firestore.firestore()
-        db.collection("Goals").document("Completed Goal Names").setData([
-            
-            "tasks" : Self.completedNameArray
-            
-        ])
+        
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Completed Goal Names").setData([
+                
+                "tasks" : Self.completedNameArray
+                
+            ])
+        }
+        
     }
     
     func makeCompletedNameArray(completion: @escaping () -> Void) {
         
         let db = Firestore.firestore()
         
-        let docRef = db.collection("Goals").document("Completed Goal Names")
-        
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["error" : "error"]
-                
-                Self.completedNameArray = (dataDescription["tasks"] as! [String])
-                
-            } else {
-                print("Document does not exist")
-            }
+        if let userID = Auth.auth().currentUser?.uid {
+            let docRef = db.collection("\(userID)").document("Completed Goal Names")
             
-            completion()
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["error" : "error"]
+                    
+                    Self.completedNameArray = (dataDescription["tasks"] as! [String])
+                    
+                } else {
+                    print("Document does not exist")
+                }
+                
+                completion()
+            }
         }
         
     }
@@ -277,15 +296,18 @@ class GoalsViewController: UIViewController {
             start += 1
             button.setTitle("\(start)/\(end)", for: .normal)
             
-            db.collection("Goals").document("Goal\(button.tag)").updateData([
-                "progress": start
-            ]) { err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated")
+            if let userID = Auth.auth().currentUser?.uid {
+                db.collection("\(userID)").document("Goal\(button.tag)").updateData([
+                    "progress": start
+                ]) { err in
+                    if let err = err {
+                        print("Error updating document: \(err)")
+                    } else {
+                        print("Document successfully updated")
+                    }
                 }
             }
+            
         } else {
             start += 1
             button.setTitle("\(start)/\(end)", for: .normal)
@@ -318,104 +340,186 @@ class GoalsViewController: UIViewController {
         let date = Date()
         completedGoalDates.append(date)
         
-        db.collection("Goals").document("Goal Data").setData([
+        if let userID = Auth.auth().currentUser?.uid {
             
-            "points" : goalPoints,
-            "completedGoals" : goalsCompleted,
-            "dates" : completedGoalDates,
-            "best" : 0
-        ])
+            db.collection("\(userID)").document("Goal Data").getDocument { document, error in
+                if let document = document, document.exists {
+                    
+                    db.collection("\(userID)").document("Goal Data").updateData([
+                        
+                        "points" : self.goalPoints,
+                        "completedGoals" : self.goalsCompleted,
+                        "dates" : self.completedGoalDates
+                    ])
+                    
+                } else {
+                    print("document does not exist")
+                    
+                    db.collection("\(userID)").document("Goal Data").setData([
+                        
+                        "points" : self.goalPoints,
+                        "completedGoals" : self.goalsCompleted,
+                        "dates" : self.completedGoalDates,
+                        "best" : 0
+                    ])
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
     func getGoalData() {
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Goal Data").getDocument {
-            (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["error" : "error"]
-                let points = dataDescription["points"] as! Int
-                let completed = dataDescription["completedGoals"] as! Int
-                let dates = dataDescription["dates"] as! [Timestamp]
-                
-                self.goalPoints = points
-                self.goalsCompleted = completed
-                print(dates)
-                for i in 0...dates.count-1 {
-                    self.completedGoalDates.append(dates[i].dateValue())
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Goal Data").getDocument {
+                (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["error" : "error"]
+                    let points = dataDescription["points"] as! Int
+                    let completed = dataDescription["completedGoals"] as! Int
+                    let dates = dataDescription["dates"] as! [Timestamp]
+                    
+                    self.goalPoints = points
+                    self.goalsCompleted = completed
+                    print(dates)
+                    for i in 0...dates.count-1 {
+                        self.completedGoalDates.append(dates[i].dateValue())
+                    }
+                    
+                } else {
+                    print("Document does not exist")
                 }
-                
-            } else {
-                print("Document does not exist")
             }
         }
+        
     }
     
     func createGoalPointsString() {
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Goal Data").getDocument {
-            (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["error" : "error"]
-                let points = dataDescription["points"] as! Int
-//                let completed = dataDescription["completedGoals"] as! Int
-//                let dates = dataDescription["dates"] as? [Date] ?? [Date]()
-//
-//                self.goalPoints = points
-//                self.goalsCompleted = completed
-                self.deleteLabel.isHidden = false
-                self.deleteLabel.text = "Goal Points: \(points)"
-//                self.completedGoalDates = dates
-                
-                if points >= 10 {
-                    self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 20)
-                } else if points >= 100 {
-                    self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 15)
-                } else if points >= 1000 {
-                    self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 10)
-                } else if points >= 10000 {
-                    self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 5)
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Goal Data").getDocument {
+                (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["error" : "error"]
+                    let points = dataDescription["points"] as! Int
+    //                let completed = dataDescription["completedGoals"] as! Int
+    //                let dates = dataDescription["dates"] as? [Date] ?? [Date]()
+    //
+    //                self.goalPoints = points
+    //                self.goalsCompleted = completed
+                    self.deleteLabel.isHidden = false
+                    self.deleteLabel.text = "Goal Points: \(points)"
+    //                self.completedGoalDates = dates
+                    
+                    if points >= 10 {
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 20)
+                    } else if points >= 100 {
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 15)
+                    } else if points >= 1000 {
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 10)
+                    } else if points >= 10000 {
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 5)
+                    }
+                } else {
+                    print("Document does not exist")
                 }
-            } else {
-                print("Document does not exist")
             }
         }
+        
+        
     }
     
     func levelUp() {
         
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Level Data").getDocument { document, error in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["error" : "error"]
-                
-                let progress = dataDescription["progressNumber"] as! Int + 1
-                let total = dataDescription["total"] as! Int
-                let level = dataDescription["level"] as! Int + 1
-                
-                if Float(progress/total) >= 1 {
-                    db.collection("Goals").document("Level Data").updateData([
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Level Data").getDocument { document, error in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["error" : "error"]
+                    
+                    let progress = dataDescription["progressNumber"] as! Int + 1
+                    let total = dataDescription["total"] as! Int
+                    let level = dataDescription["level"] as! Int
+                    
+                    db.collection("\(userID)").document("User Data").getDocument { doc, err in
+                        if let doc = doc, doc.exists {
+                            let data = doc.data() ?? ["error" : "error"]
+                            
+                            let user = "User\(Int.random(in: 0...10000000))"
+                            
+                            let username = data["username"] as? String ?? user
+                            
+                            db.collection("Leaderboards").document(username).getDocument { docs, errs in
+                                if let docs = docs, docs.exists {
+                                    db.collection("Leaderboards").document(username).updateData([
+                                        "level" : level,
+                                        "name" : username
+                                    ])
+                                } else {
+                                    db.collection("Leaderboards").document(username).setData([
+                                        "level" : level,
+                                        "name" : username
+                                    ])
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                    if Float(progress/total) >= 1 {
+                        
+                        db.collection("\(userID)").document("Level Data").updateData([
+                            "progress" : 0,
+                            "progressNumber" : 0,
+                            "total" : Int(pow(Double(level), 1.5)),
+                            "level" : level + 1
+                        ])
+                    } else {
+                        db.collection("\(userID)").document("Level Data").updateData([
+                            "progress" : Float(progress)/Float(total),
+                            "progressNumber" : progress
+                        ])
+                    }
+
+                } else {
+                    db.collection("\(userID)").document("Level Data").setData([
                         "progress" : 0,
                         "progressNumber" : 0,
-                        "total" : Int(pow(Double(level), 1.5)),
-                        "level" : level
+                        "total" : 2,
+                        "level" : 2
                     ])
-                } else {
-                    db.collection("Goals").document("Level Data").updateData([
-                        "progress" : Float(progress)/Float(total),
-                        "progressNumber" : progress
-                    ])
+                    
+                    db.collection("\(userID)").document("User Data").getDocument { doc, err in
+                        if let doc = doc, doc.exists {
+                            let data = doc.data() ?? ["error" : "error"]
+                            
+                            let user = "User\(Int.random(in: 0...10000000))"
+                            
+                            let username = data["username"] as? String ?? user
+                            
+                            db.collection("Leaderboards").document(username).getDocument { docs, errs in
+                                if let docs = docs, docs.exists {
+                                    db.collection("Leaderboards").document(username).updateData([
+                                        "level" : 2,
+                                        "name" : username
+                                    ])
+                                } else {
+                                    db.collection("Leaderboards").document(username).setData([
+                                        "level" : 2,
+                                        "name" : username
+                                    ])
+                                }
+                            }
+                        }
+                    }
                 }
-
-            } else {
-                db.collection("Goals").document("Level Data").setData([
-                    "progress" : 0,
-                    "progressNumber" : 0,
-                    "total" : 2,
-                    "level" : 2
-                ])
             }
         }
                 
@@ -436,87 +540,89 @@ class GoalsViewController: UIViewController {
         
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Goal\(button.tag)").getDocument {
-            (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["error" : "error"]
-                
-                db.collection("Goals").document("Completed Goal\(Self.completedNameArray.count - 1)").setData([
-                    
-                    "color" : dataDescription["color"],
-                    "task" : dataDescription["task"],
-                    "total" : dataDescription["total"],
-                    "type" : dataDescription["type"]
-                    
-                ])
-                
-                Self.completedNameArray.append(dataDescription["task"] as! String)
-                self.completedTableView.reloadData()
-                
-            } else {
-                print("Document does not exist")
-            }
-        }
-
-        delayNoReturn(0.3) {
-
-            db.collection("Goals").document("Goal\(button.tag)").delete()
-
-            db.collection("Goals").document("Goals Index").getDocument {
-                document, error in
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Goal\(button.tag)").getDocument {
+                (document, error) in
                 if let document = document, document.exists {
                     let dataDescription = document.data() ?? ["error" : "error"]
-
-                    db.collection("Goals").document("Goals Index").setData ([
-
-                        "index" : dataDescription["index"] as! Int - 1
-
+                    
+                    db.collection("\(userID)").document("Completed Goal\(Self.completedNameArray.count - 1)").setData([
+                        
+                        "color" : dataDescription["color"],
+                        "task" : dataDescription["task"],
+                        "total" : dataDescription["total"],
+                        "type" : dataDescription["type"]
+                        
                     ])
+                    
+                    Self.completedNameArray.append(dataDescription["task"] as! String)
+                    self.completedTableView.reloadData()
+                    
                 } else {
                     print("Document does not exist")
                 }
             }
 
-            if (button.tag + 1 <= Self.taskNameArray.count - 2) {
-                for i in button.tag...Self.taskNameArray.count - 2 {
+            delayNoReturn(0.3) {
 
-                    self.delayNoReturn(Double(i)/20) {
-                        db.collection("Goals").document("Goal\(i)").getDocument {
-                            (document, error) in
-                            if let document = document, document.exists {
-                                let dataDescription = document.data() ?? ["error" : "error"]
+                db.collection("\(userID)").document("Goal\(button.tag)").delete()
 
-                                db.collection("Goals").document("Goal\(i-1)").setData([
+                db.collection("\(userID)").document("Goals Index").getDocument {
+                    document, error in
+                    if let document = document, document.exists {
+                        let dataDescription = document.data() ?? ["error" : "error"]
 
-                                    "color" : dataDescription["color"],
-                                    "index" : dataDescription["index"] as! Int - 1,
-                                    "task" : dataDescription["task"],
-                                    "total" : dataDescription["total"],
-                                    "type" : dataDescription["type"]
+                        db.collection("\(userID)").document("Goals Index").setData ([
 
-                                ])
+                            "index" : dataDescription["index"] as! Int - 1
 
-                                if (i != Self.taskNameArray.count - 2) {
-                                    db.collection("Goals").document("Goal\(i)").delete()
+                        ])
+                    } else {
+                        print("Document does not exist")
+                    }
+                }
+
+                if (button.tag + 1 <= Self.taskNameArray.count - 2) {
+                    for i in button.tag...Self.taskNameArray.count - 2 {
+
+                        self.delayNoReturn(Double(i)/20) {
+                            db.collection("\(userID)").document("Goal\(i)").getDocument {
+                                (document, error) in
+                                if let document = document, document.exists {
+                                    let dataDescription = document.data() ?? ["error" : "error"]
+
+                                    db.collection("\(userID)").document("Goal\(i-1)").setData([
+
+                                        "color" : dataDescription["color"],
+                                        "index" : dataDescription["index"] as! Int - 1,
+                                        "task" : dataDescription["task"],
+                                        "total" : dataDescription["total"],
+                                        "type" : dataDescription["type"]
+
+                                    ])
+
+                                    if (i != Self.taskNameArray.count - 2) {
+                                        db.collection("\(userID)").document("Goal\(i)").delete()
+                                    }
+
+                                } else {
+                                    print("Document does not exist")
                                 }
-
-                            } else {
-                                print("Document does not exist")
                             }
                         }
+
                     }
-
                 }
+
+                Self.taskNameArray.remove(at: button.tag + 1)
+                self.saveTaskNames()
+
+                self.delayNoReturn(0.3, closure: {
+                    self.toDoTableView.reloadData()
+                })
             }
-
-            Self.taskNameArray.remove(at: button.tag + 1)
-            self.saveTaskNames()
-
-            self.delayNoReturn(0.3, closure: {
-                self.toDoTableView.reloadData()
-            })
         }
-        
+         
     }
     
 }
@@ -540,12 +646,51 @@ class GoalsViewController: UIViewController {
             
             let db = Firestore.firestore()
             
-            if tableView.tag == 2 {
-                                
-                db.collection("Goals").document("Completed Goal\(indexPath.row)").getDocument {
+            if let userID = Auth.auth().currentUser?.uid {
+                if tableView.tag == 2 {
+                                    
+                    db.collection("\(userID)").document("Completed Goal\(indexPath.row)").getDocument {
+                        (document, error) in
+                        if let document = document, document.exists {
+                            let dataDescription = document.data() ?? ["error" : "error"]
+                            
+                            if (dataDescription["color"] as! String == "purple") {
+                                cell.goalContainerView.backgroundColor = UIColor(red: 178.0/255.0, green: 93.0/255.0, blue: 255.0/255.0, alpha: 0.85)
+                            } else if (dataDescription["color"] as! String == "teal") {
+                                cell.goalContainerView.backgroundColor = UIColor.systemTeal
+                            } else if (dataDescription["color"] as! String == "red") {
+                                cell.goalContainerView.backgroundColor = UIColor.systemRed
+                            } else if (dataDescription["color"] as! String == "green") {
+                                cell.goalContainerView.backgroundColor = UIColor.systemGreen
+                            } else if (dataDescription["color"] as! String == "orange") {
+                                cell.goalContainerView.backgroundColor = UIColor.systemOrange
+                            }
+                            
+                            cell.textLabel?.text = (dataDescription["task"] as! String)
+                            cell.textLabel?.font = UIFont(name: "DIN Alternate", size: 30)
+                            cell.textLabel?.numberOfLines = 0
+                            cell.textLabel?.translatesAutoresizingMaskIntoConstraints = true
+                            
+                            cell.selectionStyle = .none
+                            
+                            self.saveCompletedNames()
+                            
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
+
+                    return cell
+                    
+                }
+                
+                
+                db.collection("\(userID)").document("Goal\(indexPath.row)").getDocument {
                     (document, error) in
                     if let document = document, document.exists {
                         let dataDescription = document.data() ?? ["error" : "error"]
+                        
+                        self.textDict[indexPath.row] = (dataDescription["task"] as! String)
                         
                         if (dataDescription["color"] as! String == "purple") {
                             cell.goalContainerView.backgroundColor = UIColor(red: 178.0/255.0, green: 93.0/255.0, blue: 255.0/255.0, alpha: 0.85)
@@ -562,118 +707,81 @@ class GoalsViewController: UIViewController {
                         cell.textLabel?.text = (dataDescription["task"] as! String)
                         cell.textLabel?.font = UIFont(name: "DIN Alternate", size: 30)
                         cell.textLabel?.numberOfLines = 0
-                        cell.textLabel?.translatesAutoresizingMaskIntoConstraints = true
+                        cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
+                        cell.textLabel?.lineBreakMode = .byWordWrapping
+    //                    cell.textLabel?.sizeToFit()
                         
-                        cell.selectionStyle = .none
+    //                    cell.textLabel?.adjustsFontSizeToFitWidth = true
+    //                    cell.textLabel?.minimumScaleFactor = 0.5
+                    
+    //                    cell.textLabel?.adjustsFontForContentSizeCategory = true
                         
-                        self.saveCompletedNames()
+                        cell.textLabel?.leadingAnchor.constraint(equalTo: cell.goalContainerView.leadingAnchor, constant: 5).isActive = true
+                        cell.textLabel?.trailingAnchor.constraint(equalTo: cell.goalContainerView.trailingAnchor, constant: -60).isActive = true
+                        cell.textLabel?.topAnchor.constraint(equalTo: cell.goalContainerView.topAnchor, constant: 5).isActive = true
+    //                    cell.textLabel?.bottomAnchor.constraint(greaterThanOrEqualTo: cell.goalContainerView.bottomAnchor, constant: -5).isActive = true
+                        cell.textLabel?.widthAnchor.constraint(equalToConstant: 306).isActive = true
+                        
+                        cell.textLabel?.bottomAnchor.constraint(equalTo: cell.goalContainerView.bottomAnchor, constant: -5).isActive = true
+    //                    cell.textLabel?.heightAnchor.constraint(greaterThanOrEqualTo: cell.goalContainerView.heightAnchor, constant: 0).isActive = true
+                        
+    //                    cell.textLabel?.adjustsFontSizeToFitWidth = true
+
+                        cell.completeButton.addTarget(self, action: #selector(self.completePressed), for: .touchUpInside)
+                        cell.progressButton.addTarget(self, action: #selector(self.progressPressed), for: .touchUpInside)
+                        
+                        
+                        if (dataDescription["type"] as! String == "Progressive") {
+                            print("\(String(describing: dataDescription["type"])) is a progressive cell")
+                            cell.progressButton.isHidden = false
+                            cell.completeButton.isHidden = true
+                            cell.progressButton.setTitle("\(dataDescription["progress"] ?? "0")/\( dataDescription["total"] ?? "1")", for: .normal)
+                            print("0/\( dataDescription["total"] ?? "1")")
+                            cell.progressButton.tag = indexPath.row
+                            
+                            cell.progressButton.titleLabel?.adjustsFontSizeToFitWidth = true
+                            cell.progressButton.titleLabel?.minimumScaleFactor = 0.5
+                            cell.progressButton.titleLabel?.translatesAutoresizingMaskIntoConstraints = true
+                        } else if (dataDescription["type"] as! String == "One Time") {
+                            print("\(String(describing: dataDescription["type"])) is a one time cell")
+                            cell.progressButton.isHidden = true
+                            cell.completeButton.isHidden = false
+                            cell.completeButton.tag = indexPath.row
+                        }
+                        
+    //                    self.delayNoReturn(3) {
+    //                        print("DELAYED RETURN OF LABEL WIDTH IS \(cell.textLabel?.frame.width)")
+    //                        cell.textLabel?.adjustsFontSizeToFitWidth = true
+    //
+    //                        print("ADJUSTING HEIGHT OF GOAL \(indexPath.row)")
+    ////                        self.adjustHeight(cell.textLabel!)
+    ////                        cell.textLabel?.sizeToFit()
+    //                        cell.goalContainerView.frame.size.height = (cell.textLabel?.frame.height)!
+    //                        cell.goalContainerView.layoutIfNeeded()
+    //
+    //                        self.delayNoReturn(3) {
+    //                            cell.contentView.frame.size.height = cell.goalContainerView.frame.size.height
+    //                            cell.contentView.layoutIfNeeded()
+    //
+    //                            UIView.setAnimationsEnabled(false)  // Disable animations
+    //                            tableView.beginUpdates()
+    //                            tableView.endUpdates()
+    //
+    //
+    //                            let scrollTo = tableView.contentSize.height - tableView.frame.size.height
+    //                            tableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
+    //
+    //                            UIView.setAnimationsEnabled(true)
+    //                        }
+    //
+    //                    }
                         
                     } else {
                         print("Document does not exist")
                     }
                 }
-
-                return cell
-                
             }
             
-            
-            db.collection("Goals").document("Goal\(indexPath.row)").getDocument {
-                (document, error) in
-                if let document = document, document.exists {
-                    let dataDescription = document.data() ?? ["error" : "error"]
-                    
-                    self.textDict[indexPath.row] = (dataDescription["task"] as! String)
-                    
-                    if (dataDescription["color"] as! String == "purple") {
-                        cell.goalContainerView.backgroundColor = UIColor(red: 178.0/255.0, green: 93.0/255.0, blue: 255.0/255.0, alpha: 0.85)
-                    } else if (dataDescription["color"] as! String == "teal") {
-                        cell.goalContainerView.backgroundColor = UIColor.systemTeal
-                    } else if (dataDescription["color"] as! String == "red") {
-                        cell.goalContainerView.backgroundColor = UIColor.systemRed
-                    } else if (dataDescription["color"] as! String == "green") {
-                        cell.goalContainerView.backgroundColor = UIColor.systemGreen
-                    } else if (dataDescription["color"] as! String == "orange") {
-                        cell.goalContainerView.backgroundColor = UIColor.systemOrange
-                    }
-                    
-                    cell.textLabel?.text = (dataDescription["task"] as! String)
-                    cell.textLabel?.font = UIFont(name: "DIN Alternate", size: 30)
-                    cell.textLabel?.numberOfLines = 0
-                    cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
-                    cell.textLabel?.lineBreakMode = .byWordWrapping
-//                    cell.textLabel?.sizeToFit()
-                    
-//                    cell.textLabel?.adjustsFontSizeToFitWidth = true
-//                    cell.textLabel?.minimumScaleFactor = 0.5
-                
-//                    cell.textLabel?.adjustsFontForContentSizeCategory = true
-                    
-                    cell.textLabel?.leadingAnchor.constraint(equalTo: cell.goalContainerView.leadingAnchor, constant: 5).isActive = true
-                    cell.textLabel?.trailingAnchor.constraint(equalTo: cell.goalContainerView.trailingAnchor, constant: -60).isActive = true
-                    cell.textLabel?.topAnchor.constraint(equalTo: cell.goalContainerView.topAnchor, constant: 5).isActive = true
-//                    cell.textLabel?.bottomAnchor.constraint(greaterThanOrEqualTo: cell.goalContainerView.bottomAnchor, constant: -5).isActive = true
-                    cell.textLabel?.widthAnchor.constraint(equalToConstant: 306).isActive = true
-                    
-                    cell.textLabel?.bottomAnchor.constraint(equalTo: cell.goalContainerView.bottomAnchor, constant: -5).isActive = true
-//                    cell.textLabel?.heightAnchor.constraint(greaterThanOrEqualTo: cell.goalContainerView.heightAnchor, constant: 0).isActive = true
-                    
-//                    cell.textLabel?.adjustsFontSizeToFitWidth = true
-
-                    cell.completeButton.addTarget(self, action: #selector(self.completePressed), for: .touchUpInside)
-                    cell.progressButton.addTarget(self, action: #selector(self.progressPressed), for: .touchUpInside)
-                    
-                    
-                    if (dataDescription["type"] as! String == "Progressive") {
-                        print("\(String(describing: dataDescription["type"])) is a progressive cell")
-                        cell.progressButton.isHidden = false
-                        cell.completeButton.isHidden = true
-                        cell.progressButton.setTitle("\(dataDescription["progress"] ?? "0")/\( dataDescription["total"] ?? "1")", for: .normal)
-                        print("0/\( dataDescription["total"] ?? "1")")
-                        cell.progressButton.tag = indexPath.row
-                        
-                        cell.progressButton.titleLabel?.adjustsFontSizeToFitWidth = true
-                        cell.progressButton.titleLabel?.minimumScaleFactor = 0.5
-                        cell.progressButton.titleLabel?.translatesAutoresizingMaskIntoConstraints = true
-                    } else if (dataDescription["type"] as! String == "One Time") {
-                        print("\(String(describing: dataDescription["type"])) is a one time cell")
-                        cell.progressButton.isHidden = true
-                        cell.completeButton.isHidden = false
-                        cell.completeButton.tag = indexPath.row
-                    }
-                    
-//                    self.delayNoReturn(3) {
-//                        print("DELAYED RETURN OF LABEL WIDTH IS \(cell.textLabel?.frame.width)")
-//                        cell.textLabel?.adjustsFontSizeToFitWidth = true
-//
-//                        print("ADJUSTING HEIGHT OF GOAL \(indexPath.row)")
-////                        self.adjustHeight(cell.textLabel!)
-////                        cell.textLabel?.sizeToFit()
-//                        cell.goalContainerView.frame.size.height = (cell.textLabel?.frame.height)!
-//                        cell.goalContainerView.layoutIfNeeded()
-//
-//                        self.delayNoReturn(3) {
-//                            cell.contentView.frame.size.height = cell.goalContainerView.frame.size.height
-//                            cell.contentView.layoutIfNeeded()
-//
-//                            UIView.setAnimationsEnabled(false)  // Disable animations
-//                            tableView.beginUpdates()
-//                            tableView.endUpdates()
-//
-//
-//                            let scrollTo = tableView.contentSize.height - tableView.frame.size.height
-//                            tableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
-//
-//                            UIView.setAnimationsEnabled(true)
-//                        }
-//
-//                    }
-                    
-                } else {
-                    print("Document does not exist")
-                }
-            }
-
             return cell
         }
         
@@ -683,63 +791,65 @@ class GoalsViewController: UIViewController {
                     
                 let db = Firestore.firestore()
                 
-                
-                db.collection("Goals").document("Goal\(indexPath.row)").delete()
+                if let userID = Auth.auth().currentUser?.uid {
+                    db.collection("\(userID)").document("Goal\(indexPath.row)").delete()
 
-                db.collection("Goals").document("Goals Index").getDocument {
-                    document, error in
-                    if let document = document, document.exists {
-                        let dataDescription = document.data() ?? ["error" : "error"]
+                    db.collection("\(userID)").document("Goals Index").getDocument {
+                        document, error in
+                        if let document = document, document.exists {
+                            let dataDescription = document.data() ?? ["error" : "error"]
 
-                        db.collection("Goals").document("Goals Index").setData ([
+                            db.collection("\(userID)").document("Goals Index").setData ([
 
-                            "index" : dataDescription["index"] as! Int - 1
+                                "index" : dataDescription["index"] as! Int - 1
 
-                        ])
-                    } else {
-                        print("Document does not exist")
+                            ])
+                        } else {
+                            print("Document does not exist")
+                        }
                     }
-                }
-            
+                
 
-                if (indexPath.row + 1 <= Self.taskNameArray.count - 2) {
-                    for i in indexPath.row + 1...Self.taskNameArray.count - 2 {
+                    if (indexPath.row + 1 <= Self.taskNameArray.count - 2) {
+                        for i in indexPath.row + 1...Self.taskNameArray.count - 2 {
 
-                        delayNoReturn(Double(i)/20) {
-                            db.collection("Goals").document("Goal\(i)").getDocument {
-                                (document, error) in
-                                if let document = document, document.exists {
-                                    let dataDescription = document.data() ?? ["error" : "error"]
+                            delayNoReturn(Double(i)/20) {
+                                db.collection("\(userID)").document("Goal\(i)").getDocument {
+                                    (document, error) in
+                                    if let document = document, document.exists {
+                                        let dataDescription = document.data() ?? ["error" : "error"]
 
-                                    db.collection("Goals").document("Goal\(i-1)").setData([
+                                        db.collection("\(userID)").document("Goal\(i-1)").setData([
+                                            
+                                            "color" : dataDescription["color"],
+                                            "index" : dataDescription["index"] as! Int - 1,
+                                            "task" : dataDescription["task"],
+                                            "total" : dataDescription["total"],
+                                            "type" : dataDescription["type"]
+
+                                        ])
+
+                                        if (i != Self.taskNameArray.count - 2) {
+                                            db.collection("\(userID)").document("Goal\(i)").delete()
+                                        }
                                         
-                                        "color" : dataDescription["color"],
-                                        "index" : dataDescription["index"] as! Int - 1,
-                                        "task" : dataDescription["task"],
-                                        "total" : dataDescription["total"],
-                                        "type" : dataDescription["type"]
-
-                                    ])
-
-                                    if (i != Self.taskNameArray.count - 2) {
-                                        db.collection("Goals").document("Goal\(i)").delete()
+                                    } else {
+                                        print("Document does not exist")
                                     }
-                                    
-                                } else {
-                                    print("Document does not exist")
                                 }
                             }
+
                         }
-
                     }
+
+                    Self.taskNameArray.remove(at: indexPath.row + 1)
+                    saveTaskNames()
+
+                    delayNoReturn(0.3, closure: {
+                        self.toDoTableView.reloadData()
+                    })
                 }
-
-                Self.taskNameArray.remove(at: indexPath.row + 1)
-                saveTaskNames()
-
-                delayNoReturn(0.3, closure: {
-                    self.toDoTableView.reloadData()
-                })
+                
                 
             }
         }

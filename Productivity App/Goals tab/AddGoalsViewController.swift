@@ -48,6 +48,8 @@ class AddGoalsViewController: UIViewController {
     
     @IBOutlet weak var addButton: UIButton!
     
+//    var userID = ""
+    
     open var color = "UIColor.gray"
     
     open var text = ""
@@ -58,17 +60,22 @@ class AddGoalsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
+        
+//        userID = Auth.auth().currentUser!.uid
         
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Goals Index").getDocument { (document, error) in
-            if let document = document, document.exists {
-//                let dataDescription = document.data() ?? ["error" : "error"]
-                print("Document does exist")
-            } else {
-                db.collection("Goals").document("Goals Index").setData([
-                    "index" : 0
-                ])
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Goals Index").getDocument { (document, error) in
+                if let document = document, document.exists {
+    //                let dataDescription = document.data() ?? ["error" : "error"]
+                    print("Document does exist")
+                } else {
+                    db.collection("\(userID)").document("Goals Index").setData([
+                        "index" : 0
+                    ])
+                }
             }
         }
 
@@ -188,28 +195,30 @@ class AddGoalsViewController: UIViewController {
         
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Goals Index").getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["error" : "error"]
-                
-                let goalIndex = (dataDescription["index"])!
-                
-                db.collection("Goals").document("Goal\(goalIndex)").setData([
-                    "task" : self.taskTextView.text ?? "",
-                    "color" : self.color,
-                    "type" : self.type,
-                    "total" : self.totalTextField.text ?? "",
-                    "index" : goalIndex,
-                    "progress" : 0
-                ])
-                
-                GoalsViewController.taskNameArray.append(self.taskTextView.text)
-                
-                db.collection("Goals").document("Goals Index").setData([
-                    "index" : dataDescription["index"] as! Int + 1
-                ])
-            } else {
-                print("Document does not exist")
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Goals Index").getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["error" : "error"]
+                    
+                    let goalIndex = (dataDescription["index"])!
+                    
+                    db.collection("\(userID)").document("Goal\(goalIndex)").setData([
+                        "task" : self.taskTextView.text ?? "",
+                        "color" : self.color,
+                        "type" : self.type,
+                        "total" : self.totalTextField.text ?? "",
+                        "index" : goalIndex,
+                        "progress" : 0
+                    ])
+                    
+                    GoalsViewController.taskNameArray.append(self.taskTextView.text)
+                    
+                    db.collection("\(userID)").document("Goals Index").setData([
+                        "index" : dataDescription["index"] as! Int + 1
+                    ])
+                } else {
+                    print("Document does not exist")
+                }
             }
         }
         

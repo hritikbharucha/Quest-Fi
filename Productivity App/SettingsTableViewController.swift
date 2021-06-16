@@ -6,14 +6,25 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsTableViewController: UITableViewController {
 
-    let settings = ["Account", "Notifications", "Attributes", "Buy premium", "Log out"]
+    let settings = ["Account", "Help", "Attributes", "Log out"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    func dismissViewControllers() {
+
+        guard let vc = self.presentingViewController else { return }
+
+        while (vc.presentingViewController != nil) {
+            print("Dismissing view controllers")
+            vc.dismiss(animated: true, completion: nil)
+        }
     }
 
     // MARK: - Table view data source
@@ -41,6 +52,20 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (settings[indexPath.row] == "Buy premium") {
             self.performSegue(withIdentifier: "settingsToPremium", sender: self)
+        } else if (settings[indexPath.row] == "Account") {
+            self.performSegue(withIdentifier: "settingsToProfile", sender: self)
+        } else if (settings[indexPath.row] == "Log out") {
+            do {
+                try Auth.auth().signOut()
+                print("Signed out")
+                
+                self.navigationController?.popToRootViewController(animated: true)
+
+            } catch let signOutError as NSError {
+              print ("Error signing out: %@", signOutError)
+            }
+        } else if (settings[indexPath.row] == "Help") {
+            self.performSegue(withIdentifier: "settingsToHelp", sender: self)
         }
     }
 

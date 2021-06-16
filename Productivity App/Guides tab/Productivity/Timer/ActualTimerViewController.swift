@@ -21,6 +21,8 @@ class ActualTimerViewController: UIViewController {
     
     @IBOutlet weak var textLabel: UILabel!
     
+//    var userID = ""
+    
     var current = 0
     
     var sections = 0
@@ -54,7 +56,32 @@ class ActualTimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        userID = Auth.auth().currentUser!.uid
+        
         let db = Firestore.firestore()
+        
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Timer").getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["Error" : "Error"]
+                    
+                    let length = dataDescription["Length"] as! Int
+                    
+                    self.totalSeconds = length * 3600
+                    
+                    self.totalTimerLabel.text = "Time left: \(length):00:00"
+                    
+                    if length == 1 {
+                        self.sections = 4
+                    } else if length == 2 {
+                        self.sections = 8
+                    } else if length == 3 {
+                        self.sections = 11
+                        self.willHaveLongBreak = true
+                    }
+                }
+            }
+        }
 
         makeButtonGood(goStopButton, goStopView)
         goStopButton.backgroundColor = UIColor.green
@@ -79,26 +106,7 @@ class ActualTimerViewController: UIViewController {
             self.audio?.stop()
         }))
         
-        db.collection("Goals").document("Timer").getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["Error" : "Error"]
-                
-                let length = dataDescription["Length"] as! Int
-                
-                self.totalSeconds = length * 3600
-                
-                self.totalTimerLabel.text = "Time left: \(length):00:00"
-                
-                if length == 1 {
-                    self.sections = 4
-                } else if length == 2 {
-                    self.sections = 8
-                } else if length == 3 {
-                    self.sections = 11
-                    self.willHaveLongBreak = true
-                }
-            }
-        }
+        
     }
     
     func runTotalTimer() {
