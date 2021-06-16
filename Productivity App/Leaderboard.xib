@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="0.0" id="TR0-Lv-HCF" customClass="Leaderboard" customModule="Productivity_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TR0-Lv-HCF" id="xid-z3-A0r">
+                <rect key="frame" x="0.0" y="0.0" width="356" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4N-FN-VYE">
+                        <rect key="frame" x="0.0" y="10" width="356" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgf-Ry-8h8">
+                                <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpe-Rx-417">
+                                <rect key="frame" x="73" y="0.0" width="174" height="30"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4h-hG-5OA">
+                                <rect key="frame" x="274" y="0.0" width="66" height="30"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Bpe-Rx-417" firstAttribute="leading" secondItem="S4N-FN-VYE" secondAttribute="leading" constant="73" id="0Fk-RP-uzq"/>
+                            <constraint firstItem="Vgf-Ry-8h8" firstAttribute="top" secondItem="S4N-FN-VYE" secondAttribute="top" id="2YY-cT-qE8"/>
+                            <constraint firstAttribute="bottom" secondItem="K4h-hG-5OA" secondAttribute="bottom" id="KGe-EA-rdz"/>
+                            <constraint firstAttribute="bottom" secondItem="Vgf-Ry-8h8" secondAttribute="bottom" id="NIf-Ys-nz4"/>
+                            <constraint firstAttribute="bottom" secondItem="Bpe-Rx-417" secondAttribute="bottom" id="YfD-Ie-RTa"/>
+                            <constraint firstItem="Vgf-Ry-8h8" firstAttribute="leading" secondItem="S4N-FN-VYE" secondAttribute="leading" id="bCC-jr-97o"/>
+                            <constraint firstAttribute="trailing" secondItem="Bpe-Rx-417" secondAttribute="trailing" constant="109" id="cdE-LD-ELc"/>
+                            <constraint firstItem="K4h-hG-5OA" firstAttribute="leading" secondItem="S4N-FN-VYE" secondAttribute="leading" constant="274" id="d4H-eK-R3S"/>
+                            <constraint firstItem="K4h-hG-5OA" firstAttribute="top" secondItem="S4N-FN-VYE" secondAttribute="top" id="eqR-gb-s5n"/>
+                            <constraint firstItem="Bpe-Rx-417" firstAttribute="top" secondItem="S4N-FN-VYE" secondAttribute="top" id="gSw-sh-pQ4"/>
+                            <constraint firstAttribute="trailing" secondItem="Vgf-Ry-8h8" secondAttribute="trailing" constant="310" id="sna-5I-pWX"/>
+                            <constraint firstAttribute="trailing" secondItem="K4h-hG-5OA" secondAttribute="trailing" constant="16" id="vmB-DV-hhm"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="S4N-FN-VYE" secondAttribute="trailing" id="2Ds-Nw-HCp"/>
+                    <constraint firstItem="S4N-FN-VYE" firstAttribute="top" secondItem="xid-z3-A0r" secondAttribute="top" constant="10" id="4p8-Bp-Mqv"/>
+                    <constraint firstItem="S4N-FN-VYE" firstAttribute="leading" secondItem="xid-z3-A0r" secondAttribute="leading" id="o88-X4-dwT"/>
+                    <constraint firstAttribute="bottom" secondItem="S4N-FN-VYE" secondAttribute="bottom" constant="10" id="pXe-vf-2K1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="leaderboardContainerView" destination="S4N-FN-VYE" id="UMf-ew-bBU"/>
+                <outlet property="levelLabel" destination="K4h-hG-5OA" id="0bx-WD-ZMe"/>
+                <outlet property="nameLabel" destination="Bpe-Rx-417" id="4cP-ni-UcM"/>
+                <outlet property="rankLabel" destination="Vgf-Ry-8h8" id="GdB-0A-9Gq"/>
+            </connections>
+            <point key="canvasLocation" x="220.28985507246378" y="-133.25892857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

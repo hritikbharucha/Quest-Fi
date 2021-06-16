@@ -22,6 +22,8 @@ class TimerSettingsViewController: UIViewController {
     
     @IBOutlet weak var button3: UIButton!
     
+//    var userID = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,31 +33,37 @@ class TimerSettingsViewController: UIViewController {
         
         setup()
         
+//        userID = Auth.auth().currentUser!.uid
+        
     }
     
     func setup() {
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Timer").getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data() ?? ["Error" : "Error"]
-                let length = dataDescription["Length"] as! Int
-                
-                if length == 1 {
-                    self.button1.backgroundColor = UIColor.systemTeal
-                    self.button2.backgroundColor = UIColor.lightGray
-                    self.button3.backgroundColor = UIColor.lightGray
-                } else if length == 2 {
-                    self.button1.backgroundColor = UIColor.lightGray
-                    self.button2.backgroundColor = UIColor.systemTeal
-                    self.button3.backgroundColor = UIColor.lightGray
-                } else if length == 3 {
-                    self.button1.backgroundColor = UIColor.lightGray
-                    self.button2.backgroundColor = UIColor.lightGray
-                    self.button3.backgroundColor = UIColor.systemTeal
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Timer").getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["Error" : "Error"]
+                    let length = dataDescription["Length"] as! Int
+                    
+                    if length == 1 {
+                        self.button1.backgroundColor = UIColor.systemTeal
+                        self.button2.backgroundColor = UIColor.lightGray
+                        self.button3.backgroundColor = UIColor.lightGray
+                    } else if length == 2 {
+                        self.button1.backgroundColor = UIColor.lightGray
+                        self.button2.backgroundColor = UIColor.systemTeal
+                        self.button3.backgroundColor = UIColor.lightGray
+                    } else if length == 3 {
+                        self.button1.backgroundColor = UIColor.lightGray
+                        self.button2.backgroundColor = UIColor.lightGray
+                        self.button3.backgroundColor = UIColor.systemTeal
+                    }
                 }
             }
         }
+        
+        
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -101,9 +109,12 @@ class TimerSettingsViewController: UIViewController {
     func saveTimer(_ length: Int) {
         let db = Firestore.firestore()
         
-        db.collection("Goals").document("Timer").setData([
-            "Length" : length
-        ])
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Timer").setData([
+                "Length" : length
+            ])
+        }
+        
     }
     
 }
