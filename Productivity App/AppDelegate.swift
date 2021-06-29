@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let db = Firestore.firestore()
         
+        if #available(iOS 13, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
+        
         return true
     }
 
