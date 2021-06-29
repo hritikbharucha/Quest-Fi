@@ -120,6 +120,8 @@ class GoalsViewController: UIViewController {
             }
             
         }
+        
+        createGoalPointsString()
 //        index += 1
 //        print("Goal Index in view will appear: \(index)")
     }
@@ -367,6 +369,10 @@ class GoalsViewController: UIViewController {
                 
             }
             
+        }
+        
+        delayNoReturn(1) {
+            self.createGoalPointsString()
         }
         
         

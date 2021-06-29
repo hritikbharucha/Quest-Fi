@@ -34,6 +34,8 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var nextLevel: UILabel!
     
+    @IBOutlet weak var gpLogo: UILabel!
+    
 //    var userID = ""
     
     var progress = 0
@@ -51,6 +53,11 @@ class HomeViewController: UIViewController {
              
         getData()
         getGoalData()
+        
+        gpLogo.layer.masksToBounds = true
+        gpLogo.layer.cornerRadius = 40
+        gpLogo.layer.borderWidth = 2
+        gpLogo.layer.borderColor = UIColor.black.cgColor
         
 //        userID = Auth.auth().currentUser!.uid
     }
@@ -128,7 +135,7 @@ class HomeViewController: UIViewController {
                     let points = dataDescription["points"] as! Int
                     let completed = dataDescription["completedGoals"] as! Int
                     
-                    self.pointsLabel.text = "\(points) Goal Points"
+                    self.pointsLabel.text = "\(points)"
                     self.completedLabel.text = "\(completed) goals"
                         
                 }
