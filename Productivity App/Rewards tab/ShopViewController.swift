@@ -71,8 +71,10 @@ class ShopViewController: UIViewController {
         makeButtonGood(rareBtn, rareView)
         makeButtonGood(magicalBtn, magicalView)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadGP()
-        
     }
     
     func loadGP() {
