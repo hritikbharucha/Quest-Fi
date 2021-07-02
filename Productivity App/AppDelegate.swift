@@ -27,6 +27,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.overrideUserInterfaceStyle = .light
         }
         
+//        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+//
+//        let root = storyboard.instantiateViewController(withIdentifier: "root") as! UINavigationController
+//
+//        let destination = storyboard.instantiateViewController(withIdentifier: "main_vc")
+//
+//        root.pushViewController(destination, animated: false)
+//
+//        self.window?.rootViewController = root
+//        
+//        root.present(destination, animated: false, completion: nil)
+        
+//        let rootViewController = self.window?.rootViewController as? UINavigationController
+//        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "main_vc")
+//        rootViewController?.pushViewController(mainViewController, animated: true)
+        
         return true
     }
 

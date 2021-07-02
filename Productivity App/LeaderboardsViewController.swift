@@ -24,6 +24,15 @@ class LeaderboardsViewController: UIViewController {
         
         leaderboardsTableView.register(UINib(nibName: "Leaderboard", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
+//        self.ranks = [String]()
+//        setRanks {
+//            print("Reloading data")
+//            self.leaderboardsTableView.reloadData()
+//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        self.ranks = [String]()
         setRanks {
             print("Reloading data")
             self.leaderboardsTableView.reloadData()
