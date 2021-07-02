@@ -79,7 +79,15 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
                     
                 } else {
                     print("SUCCESS")
-                    self.performSegue(withIdentifier: "logInToHome", sender: self)
+//                    self.performSegue(withIdentifier: "logInToHome", sender: self)
+                    
+                    UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                    UserDefaults.standard.synchronize()
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
+                    
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainNavigationController)
                 }
             }
         }
@@ -167,7 +175,15 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
                         }
                     }
                     
-                    self.performSegue(withIdentifier: "logInToHome", sender: self)
+//                    self.performSegue(withIdentifier: "logInToHome", sender: self)
+                    
+                    UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                    UserDefaults.standard.synchronize()
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
+                    
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainNavigationController)
                 }
             })
         }

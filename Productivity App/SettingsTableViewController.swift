@@ -59,7 +59,15 @@ class SettingsTableViewController: UITableViewController {
                 try Auth.auth().signOut()
                 print("Signed out")
                 
-                self.navigationController?.popToRootViewController(animated: true)
+//                self.navigationController?.popToRootViewController(animated: true)
+                
+                UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+                UserDefaults.standard.synchronize()
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+                
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
 
             } catch let signOutError as NSError {
               print ("Error signing out: %@", signOutError)

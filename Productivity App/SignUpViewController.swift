@@ -164,7 +164,15 @@ class SignUpViewController: UIViewController {
                             ])
                         }
                         
-                        self.performSegue(withIdentifier: "signUpToHome", sender: self)
+//                        self.performSegue(withIdentifier: "signUpToHome", sender: self)
+                        
+                        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                        UserDefaults.standard.synchronize()
+                        
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
+                        
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainNavigationController)
                     }
                 }
             }
