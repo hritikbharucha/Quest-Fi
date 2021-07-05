@@ -55,11 +55,16 @@ class HomeViewController: UIViewController {
         getGoalData()
         
         gpLogo.layer.masksToBounds = true
-        gpLogo.layer.cornerRadius = 40
+//        gpLogo.layer.cornerRadius = gpLogo.frame.width/2
         gpLogo.layer.borderWidth = 2
         gpLogo.layer.borderColor = UIColor.black.cgColor
         
 //        userID = Auth.auth().currentUser!.uid
+    }
+    
+    override func viewDidLayoutSubviews() {
+        gpLogo.layer.cornerRadius = gpLogo.frame.width/2
+        gpLogo.font = gpLogo.font.withSize(gpLogo.frame.width*2/3)
     }
     
     override func viewWillAppear(_ animated: Bool) {

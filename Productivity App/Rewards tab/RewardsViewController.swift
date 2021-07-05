@@ -183,6 +183,10 @@ class RewardsViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        outlineView(yourCollectionView)
+    }
+    
     func loadChestCount() {
         let db = Firestore.firestore()
         

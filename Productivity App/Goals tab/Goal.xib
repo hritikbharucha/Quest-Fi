@@ -22,6 +22,8 @@
                                 <rect key="frame" x="307" y="22.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="J5f-Pj-VD3"/>
+                                    <constraint firstAttribute="width" constant="35" id="dmL-k3-u3W"/>
+                                    <constraint firstAttribute="width" secondItem="4yR-b7-RcM" secondAttribute="height" multiplier="1:1" id="yI2-ej-sNC"/>
                                 </constraints>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLh-MU-Qqk">
@@ -44,19 +46,17 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="W3C-xi-frv" secondAttribute="bottom" constant="19" id="1EQ-w1-qit"/>
-                            <constraint firstAttribute="bottom" secondItem="4yR-b7-RcM" secondAttribute="bottom" constant="22.5" id="2q3-Mb-F1N"/>
                             <constraint firstItem="DLh-MU-Qqk" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" id="Hgb-e9-FYc"/>
                             <constraint firstItem="W3C-xi-frv" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="296" id="I77-MC-e2t"/>
                             <constraint firstItem="4yR-b7-RcM" firstAttribute="leading" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="19" id="Kws-vq-WVD"/>
                             <constraint firstAttribute="trailing" secondItem="4yR-b7-RcM" secondAttribute="trailing" constant="23" id="SeM-dI-XhN"/>
                             <constraint firstItem="W3C-xi-frv" firstAttribute="leading" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="8" symbolic="YES" id="Tgi-Pn-Tde"/>
-                            <constraint firstItem="4yR-b7-RcM" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="22.5" id="dfx-MN-13s"/>
                             <constraint firstAttribute="bottom" secondItem="DLh-MU-Qqk" secondAttribute="bottom" id="ebN-wf-VYc"/>
                             <constraint firstItem="DLh-MU-Qqk" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" id="fNI-BY-AH9"/>
                             <constraint firstItem="W3C-xi-frv" firstAttribute="top" secondItem="QE6-if-4Hh" secondAttribute="top" constant="19" id="nCV-Jr-nRv"/>
-                            <constraint firstItem="4yR-b7-RcM" firstAttribute="leading" secondItem="QE6-if-4Hh" secondAttribute="leading" constant="307" id="o6p-BN-Rer"/>
                             <constraint firstAttribute="trailing" secondItem="DLh-MU-Qqk" secondAttribute="trailing" constant="77" id="pm3-ZJ-cOH"/>
                             <constraint firstAttribute="trailing" secondItem="W3C-xi-frv" secondAttribute="trailing" constant="9" id="qih-lT-M4b"/>
+                            <constraint firstItem="4yR-b7-RcM" firstAttribute="centerY" secondItem="QE6-if-4Hh" secondAttribute="centerY" id="u8D-sn-13p"/>
                         </constraints>
                     </view>
                 </subviews>
