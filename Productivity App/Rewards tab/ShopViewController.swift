@@ -73,6 +73,16 @@ class ShopViewController: UIViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        setUpGP(gpLogo, gpLogo.frame.width/2)
+        gpLogo.font = gpLogo.font.withSize(gpLogo.frame.width*2/3)
+        gpLabel.font = gpLabel.font.withSize(gpLabel.frame.height*0.85)
+        
+        makeButtonGood(commonBtn, commonView)
+        makeButtonGood(rareBtn, rareView)
+        makeButtonGood(magicalBtn, magicalView)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         loadGP()
     }

@@ -129,6 +129,8 @@ extension LeaderboardsViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.rankLabel.text = "\(indexPath.row + 1)"
         
+        cell.selectionStyle = .none
+        
         let db = Firestore.firestore()
         
         if indexPath.row < ranks.count {
