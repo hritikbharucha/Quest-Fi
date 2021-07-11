@@ -206,7 +206,7 @@ class SignUpViewController: UIViewController {
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         self.extendedLayoutIncludesOpaqueBars = true
         
-        passwordTextField.textContentType = .oneTimeCode
+//        passwordTextField.textContentType = .oneTimeCode
         
         signUpButton.layer.cornerRadius = 10
     }

@@ -121,8 +121,12 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
         
     }
     
-    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if user == nil {
+            return
+        }
+        
         if let authentication = user.authentication {
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
 

@@ -32,19 +32,19 @@ class ActualTimerViewController: UIViewController {
     var totalTimer = Timer()
     var isTotalTimeRunning = false
     
-    var seconds = 15
+    var seconds = 1500
     var timer = Timer()
     var isTimeRunning = false
     
-    var breakSeconds = 5
+    var breakSeconds = 300
     var breakTimer = Timer()
     var isBreakTimeRunning = false
     
-    var longBreakSeconds = 7
+    var longBreakSeconds = 900
     var longBreakTimer = Timer()
     var isLongBreakTimeRunning = false
     
-    var shortWorkSeconds = 10
+    var shortWorkSeconds = 1200
     var shortWorkTimer = Timer()
     var isShortWorkTimeRunning = false
     
@@ -334,12 +334,17 @@ class ActualTimerViewController: UIViewController {
             goStopButton.backgroundColor = UIColor.green
             goStopButton.setTitle("Go", for: .normal)
             
+            if isTotalTimeRunning {
+                totalTimer.invalidate()
+                isTotalTimeRunning = false
+            }
+            
             if current == 0 {
                 timer.invalidate()
                 isTimeRunning = false
             } else if current == 1 {
-                totalTimer.invalidate()
-                isTotalTimeRunning = false
+                breakTimer.invalidate()
+                isBreakTimeRunning = false
             } else if current == 2 {
                 longBreakTimer.invalidate()
                 isLongBreakTimeRunning = false
