@@ -37,5 +37,13 @@ class Span34ViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
     }
-
+    
+    @IBAction func porPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "34ToPor", sender: self)
+    }
+    
+    @IBAction func pretPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "34ToPret", sender: self)
+    }
+    
 }

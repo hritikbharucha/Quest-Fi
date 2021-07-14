@@ -114,7 +114,7 @@ class ShopViewController: UIViewController {
     
     func makeLabelGood(_ label: UILabel,_ string: String,_ size: CGFloat) {
         let stringAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: size),
+            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: size) ?? label.font.withSize(size),
             NSAttributedString.Key.strokeWidth: -3.0,
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white

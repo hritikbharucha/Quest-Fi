@@ -33,4 +33,8 @@ class Span12ViewController: UIViewController {
         button.layer.cornerRadius = 20
     }
     
+    @IBAction func verbsPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "12ToVerbs", sender: self)
+    }
+    
 }
