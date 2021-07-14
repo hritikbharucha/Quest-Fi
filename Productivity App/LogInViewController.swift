@@ -172,8 +172,8 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
                             let username = "User\(Int.random(in: 1...1000000))"
                             
                             db.collection(userID).document("User Data").setData([
-                                "email" : user.email,
-                                "name" : user.displayName,
+                                "email" : user.email ?? "",
+                                "name" : user.displayName ?? "",
                                 "username" : username
                             ])
                         }

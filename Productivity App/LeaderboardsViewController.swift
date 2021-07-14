@@ -141,7 +141,6 @@ extension LeaderboardsViewController: UITableViewDelegate, UITableViewDataSource
             db.collection("Leaderboards").document(doc).getDocument { document, error in
                 if let document = document, document.exists {
                     let dataDescription = document.data() ?? ["error" : "error"]
-                    let level = dataDescription["level"] as! Int
 
                     cell.nameLabel.text = dataDescription["name"] as? String ?? "Guest"
                     cell.levelLabel.text = "\(dataDescription["level"] ?? 0)"

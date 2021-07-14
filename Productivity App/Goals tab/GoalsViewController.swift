@@ -554,10 +554,10 @@ class GoalsViewController: UIViewController {
                     
                     db.collection("\(userID)").document("Completed Goal\(Self.completedNameArray.count - 1)").setData([
                         
-                        "color" : dataDescription["color"],
-                        "task" : dataDescription["task"],
-                        "total" : dataDescription["total"],
-                        "type" : dataDescription["type"]
+                        "color" : dataDescription["color"] ?? "",
+                        "task" : dataDescription["task"] ?? "",
+                        "total" : dataDescription["total"] ?? "",
+                        "type" : dataDescription["type"] ?? ""
                         
                     ])
                     
@@ -599,11 +599,11 @@ class GoalsViewController: UIViewController {
 
                                     db.collection("\(userID)").document("Goal\(i-1)").setData([
 
-                                        "color" : dataDescription["color"],
+                                        "color" : dataDescription["color"] ?? "",
                                         "index" : dataDescription["index"] as! Int - 1,
-                                        "task" : dataDescription["task"],
-                                        "total" : dataDescription["total"],
-                                        "type" : dataDescription["type"]
+                                        "task" : dataDescription["task"] ?? "",
+                                        "total" : dataDescription["total"] ?? "",
+                                        "type" : dataDescription["type"] ?? ""
 
                                     ])
 
@@ -827,11 +827,11 @@ class GoalsViewController: UIViewController {
 
                                         db.collection("\(userID)").document("Goal\(i-1)").setData([
                                             
-                                            "color" : dataDescription["color"],
+                                            "color" : dataDescription["color"] ?? "",
                                             "index" : dataDescription["index"] as! Int - 1,
-                                            "task" : dataDescription["task"],
-                                            "total" : dataDescription["total"],
-                                            "type" : dataDescription["type"]
+                                            "task" : dataDescription["task"] ?? "",
+                                            "total" : dataDescription["total"] ?? "",
+                                            "type" : dataDescription["type"] ?? ""
 
                                         ])
 

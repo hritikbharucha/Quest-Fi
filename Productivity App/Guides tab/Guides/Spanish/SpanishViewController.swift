@@ -41,5 +41,17 @@ class SpanishViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
     }
-
+    
+    @IBAction func span12Pressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "spanTo12", sender: self)
+    }
+    
+    @IBAction func span34Pressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "spanTo34", sender: self)
+    }
+    
+    @IBAction func span56Pressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "spanTo56", sender: self)
+    }
+    
 }

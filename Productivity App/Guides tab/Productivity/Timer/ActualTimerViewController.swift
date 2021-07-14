@@ -299,7 +299,6 @@ class ActualTimerViewController: UIViewController {
         if goStopButton.backgroundColor == UIColor.green {
             
             //Begin timer here
-            let db = Firestore.firestore()
             
             goStopButton.backgroundColor = UIColor.red
             goStopButton.setTitle("Stop", for: .normal)
@@ -329,7 +328,6 @@ class ActualTimerViewController: UIViewController {
         } else {
             
             //Stop timer here
-            let db = Firestore.firestore()
             
             goStopButton.backgroundColor = UIColor.green
             goStopButton.setTitle("Go", for: .normal)
