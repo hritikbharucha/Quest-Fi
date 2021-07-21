@@ -87,6 +87,7 @@
 		63B678BB25CE38F100721571 /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B678BA25CE38F100721571 /* RewardsViewController.swift */; };
 		63B678FC25CE463200721571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63B678FB25CE463200721571 /* GoogleService-Info.plist */; };
 		63B8EA6F25E027CB00943325 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8EA6E25E027CB00943325 /* CalendarViewController.swift */; };
+		63EBFB9726A35E3500C1D366 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EBFB9626A35E3500C1D366 /* AttributesViewController.swift */; };
 		C98EA7935A80390AF6E6CA7C /* Pods_Productivity_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA6146CA02993D8EC5689AA /* Pods_Productivity_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +175,7 @@
 		63B678BA25CE38F100721571 /* RewardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
 		63B678FB25CE463200721571 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		63B8EA6E25E027CB00943325 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		63EBFB9626A35E3500C1D366 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
 		D55854DAD300C6AACD024B9C /* Pods-Productivity App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productivity App.debug.xcconfig"; path = "Target Support Files/Pods-Productivity App/Pods-Productivity App.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA6146CA02993D8EC5689AA /* Pods_Productivity_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Productivity_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -265,6 +267,7 @@
 				6346940225CC5B4E00C4107A /* SceneDelegate.swift */,
 				6346940425CC5B4E00C4107A /* ViewController.swift */,
 				63B678A525CE386400721571 /* SettingsTableViewController.swift */,
+				63EBFB9626A35E3500C1D366 /* AttributesViewController.swift */,
 				63B678A825CE389100721571 /* LogInViewController.swift */,
 				63B678AB25CE38A000721571 /* SignUpViewController.swift */,
 				63B678AE25CE38C000721571 /* InboxViewController.swift */,
@@ -622,6 +625,7 @@
 				6326CE0525FFC74100D33888 /* IdentitiesViewController.swift in Sources */,
 				6326CD8225E41EF700D33888 /* TimerSettingsViewController.swift in Sources */,
 				636B2B3725E0BF5C00AEC336 /* GeneralTipsViewController.swift in Sources */,
+				63EBFB9726A35E3500C1D366 /* AttributesViewController.swift in Sources */,
 				634B31E526025EDA00B3183D /* FunctionsViewController.swift in Sources */,
 				6346940525CC5B4E00C4107A /* ViewController.swift in Sources */,
 				63B678AC25CE38A000721571 /* SignUpViewController.swift in Sources */,

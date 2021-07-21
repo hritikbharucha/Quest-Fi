@@ -10,7 +10,7 @@ import Firebase
 
 class SettingsTableViewController: UITableViewController {
 
-    let settings = ["Account", "Help", "Attributes", "Log out"]
+    let settings = ["Account", "Help", "About", "Log out"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +74,8 @@ class SettingsTableViewController: UITableViewController {
             }
         } else if (settings[indexPath.row] == "Help") {
             self.performSegue(withIdentifier: "settingsToHelp", sender: self)
+        } else if (settings[indexPath.row] == "About") {
+            self.performSegue(withIdentifier: "settingsToAttributes", sender: self)
         }
     }
 

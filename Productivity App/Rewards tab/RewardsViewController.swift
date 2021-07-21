@@ -242,7 +242,7 @@ class RewardsViewController: UIViewController {
     
     func makeViewGlow(_ containerView: UIView) {
         containerView.clipsToBounds = false
-        containerView.layer.shadowColor = UIColor.red.cgColor
+        containerView.layer.shadowColor = UIColor.cyan.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
         containerView.layer.shadowRadius = 7.5
