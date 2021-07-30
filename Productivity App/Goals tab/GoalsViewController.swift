@@ -28,12 +28,6 @@ class GoalsViewController: UIViewController {
     
     @IBOutlet weak var doneButton: UIButton!
     
-//    var userID = ""
-    
-    open var goalsCount = -1
-    
-    open var index = -1
-    
     open var textDict = [Int : String]()
     
     open var colorDict = [Int : UIColor]()
@@ -45,6 +39,8 @@ class GoalsViewController: UIViewController {
     static var taskNameArray = [""]
     
     static var completedNameArray = [""]
+    
+    var readyToSave = false
     
     var completedGoalDates : [Date] = []
     var goalPoints = 0
@@ -58,6 +54,8 @@ class GoalsViewController: UIViewController {
         super.viewDidLoad()
         
 //        userID = Auth.auth().currentUser!.uid
+        
+        readyToSave = false
         
         toDoTableView.dataSource = self
         toDoTableView.delegate = self
@@ -90,6 +88,7 @@ class GoalsViewController: UIViewController {
         
         self.makeTaskNameArray {
             self.toDoTableView.reloadData()
+            self.readyToSave = true
         }
         
         self.makeCompletedNameArray {
@@ -98,32 +97,20 @@ class GoalsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            
-            self.goalsCount += 1
-            self.index += 1
-            
-            
-            if (self.goalsCount >= 1) {
-                self.saveTaskNames()
-                self.saveCompletedNames()
-            }
-            
-            Self.taskNameArray = [""]
-            self.makeTaskNameArray {
-                self.toDoTableView.reloadData()
-            }
-            
-            Self.completedNameArray = [""]
-            self.makeCompletedNameArray {
-                self.completedTableView.reloadData()
-            }
-            
-        }
+        
+        readyToSave = false
+        
+        self.toDoTableView.reloadData()
+        self.completedTableView.reloadData()
         
         createGoalPointsString()
-//        index += 1
-//        print("Goal Index in view will appear: \(index)")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if readyToSave {
+            self.saveTaskNames()
+            self.saveCompletedNames()
+        }
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -311,6 +298,7 @@ class GoalsViewController: UIViewController {
             }
             
         } else {
+            button.isUserInteractionEnabled = false
             start += 1
             button.setTitle("\(start)/\(end)", for: .normal)
             
@@ -487,6 +475,31 @@ class GoalsViewController: UIViewController {
                             "total" : Int(pow(Double(level), 1.5)),
                             "level" : level + 1
                         ])
+                        
+                        db.collection("\(userID)").document("User Data").getDocument { doc, err in
+                            if let doc = doc, doc.exists {
+                                let data = doc.data() ?? ["error" : "error"]
+                                
+                                let user = "User\(Int.random(in: 0...10000000))"
+                                
+                                let username = data["username"] as? String ?? user
+                                
+                                db.collection("Leaderboards").document(username).getDocument { docs, errs in
+                                    if let docs = docs, docs.exists {
+                                        db.collection("Leaderboards").document(username).updateData([
+                                            "level" : level+1,
+                                            "name" : username
+                                        ])
+                                    } else {
+                                        db.collection("Leaderboards").document(username).setData([
+                                            "level" : level+1,
+                                            "name" : username
+                                        ])
+                                    }
+                                }
+                                
+                            }
+                        }
                     } else {
                         db.collection("\(userID)").document("Level Data").updateData([
                             "progress" : Float(progress)/Float(total),

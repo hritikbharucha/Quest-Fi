@@ -77,6 +77,51 @@ class RewardsViewController: UIViewController {
         makeButtonGood(chestButton, chestView)
         makeButtonGood(shopButton, shopView)
         
+        setImageTap(image: legendaryImage)
+        setImageTap(image: epic1Image)
+        setImageTap(image: epic2Image)
+        setImageTap(image: epic3Image)
+        setImageTap(image: rare1Image)
+        setImageTap(image: rare2Image)
+        setImageTap(image: rare3Image)
+        setImageTap(image: rare4Image)
+        setImageTap(image: rare5Image)
+        setImageTap(image: rare6Image)
+        setImageTap(image: common1Image)
+        setImageTap(image: common2Image)
+        setImageTap(image: common3Image)
+        setImageTap(image: common4Image)
+        setImageTap(image: common5Image)
+        setImageTap(image: common6Image)
+        setImageTap(image: common7Image)
+        setImageTap(image: common8Image)
+        setImageTap(image: common9Image)
+    }
+    
+    func setImageTap(image: UIImageView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        
+        image.addGestureRecognizer(tap)
+    }
+    
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .white
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,24 +183,62 @@ class RewardsViewController: UIViewController {
                     let common9 = dataDesc["common9"] as? Bool ?? false
                     
                     self.legendaryImage.isHidden = !legendary
+                    self.legendaryImage.isUserInteractionEnabled = legendary
+                    
                     self.epic1Image.isHidden = !epic1
+                    self.epic1Image.isUserInteractionEnabled = epic1
+                    
                     self.epic2Image.isHidden = !epic2
+                    self.epic2Image.isUserInteractionEnabled = epic2
+                    
                     self.epic3Image.isHidden = !epic3
+                    self.epic3Image.isUserInteractionEnabled = epic3
+                    
                     self.rare1Image.isHidden = !rare1
+                    self.rare1Image.isUserInteractionEnabled = rare1
+                    
                     self.rare2Image.isHidden = !rare2
+                    self.rare2Image.isUserInteractionEnabled = rare2
+                    
                     self.rare3Image.isHidden = !rare3
+                    self.rare3Image.isUserInteractionEnabled = rare3
+                    
                     self.rare4Image.isHidden = !rare4
+                    self.rare4Image.isUserInteractionEnabled = rare4
+                    
                     self.rare5Image.isHidden = !rare5
+                    self.rare5Image.isUserInteractionEnabled = rare5
+                    
                     self.rare6Image.isHidden = !rare6
+                    self.rare6Image.isUserInteractionEnabled = rare6
+                    
                     self.common1Image.isHidden = !common1
+                    self.common1Image.isUserInteractionEnabled = common1
+                    
                     self.common2Image.isHidden = !common2
+                    self.common2Image.isUserInteractionEnabled = common2
+                    
                     self.common3Image.isHidden = !common3
+                    self.common3Image.isUserInteractionEnabled = common3
+                    
                     self.common4Image.isHidden = !common4
+                    self.common4Image.isUserInteractionEnabled = common4
+                    
                     self.common5Image.isHidden = !common5
+                    self.common5Image.isUserInteractionEnabled = common5
+                    
                     self.common6Image.isHidden = !common6
+                    self.common6Image.isUserInteractionEnabled = common6
+                    
                     self.common7Image.isHidden = !common7
+                    self.common7Image.isUserInteractionEnabled = common7
+                    
                     self.common8Image.isHidden = !common8
+                    self.common8Image.isUserInteractionEnabled = common8
+                    
                     self.common9Image.isHidden = !common9
+                    self.common9Image.isUserInteractionEnabled = common9
+                    
                 } else {
                     ref.setData([
                         "legendary" : false,
@@ -186,6 +269,7 @@ class RewardsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         outlineView(yourCollectionView)
     }
+    
     
     func loadChestCount() {
         let db = Firestore.firestore()

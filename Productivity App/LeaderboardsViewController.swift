@@ -24,17 +24,10 @@ class LeaderboardsViewController: UIViewController {
         
         leaderboardsTableView.register(UINib(nibName: "Leaderboard", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
-//        self.ranks = [String]()
-//        setRanks {
-//            print("Reloading data")
-//            self.leaderboardsTableView.reloadData()
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.ranks = [String]()
         setRanks {
-            print("Reloading data")
             self.leaderboardsTableView.reloadData()
         }
     }
@@ -42,75 +35,25 @@ class LeaderboardsViewController: UIViewController {
     func setRanks(completion: @escaping () -> Void) {
         let db = Firestore.firestore()
         
-        db.collection("Leaderboards").getDocuments { querySnapshot, err in
-            if let err = err {
-                print("error getting documents: \(err)")
+        self.ranks = [String]()
+        
+        var count = 0
+        
+        let orderedUsers = db.collection("Leaderboards").order(by: "level", descending: true).limit(to: 10)
+        print("Users ordered: \(orderedUsers)")
+        
+        orderedUsers.getDocuments { querySnapshot, error in
+            if let error = error {
+                print("error getting documents: \(error)")
             } else {
-                
-                var count = querySnapshot!.documents.count
-                
-                while (count > 0) {
-                    
-                    var timer = 1
-                    var highest = 0
-                    var user = ""
-                    var exists = false
-                    
-                    for document in querySnapshot!.documents {
-                        
-                        let level = document.data()["level"] as? Int ?? 1
-                        let name = document.data()["name"] as? String ?? ""
-
-                        if level > highest {
-                            print("found new highest: \(name)")
-                            for string in self.ranks {
-                                if name == string {
-                                    print("name already exists in ranks")
-                                    exists = true
-                                }
-                            }
-                            
-                            if (!exists) {
-                                print("setting timer to 0")
-                                highest = level
-                                user = name
-                                timer = 0
-                            }
-                            
-                        }
-
-                    }
-
-                    if timer == 0 && self.ranks.count < 10 {
-                        self.ranks.append(user)
-                        print("appended user: \(user)")
-                        count -= 1
-                        timer = 1
-                    }
-                    
+                for document in querySnapshot!.documents {
+                    let name = document.data()["name"] as? String ?? ""
+                    self.ranks.append(name)
+                    count += 1
                 }
-                
-//                for document in querySnapshot!.documents {
-//
-//                    let level = document.data()["level"] as? Int ?? 1
-//                    let name = document.data()["name"] as? String ?? ""
-//
-//                    if level > highest {
-//                        for string in self.ranks {
-//                            if name == string {
-//                                print("name already exists in ranks")
-//                            } else {
-//                                highest = level
-//                                user = name
-//                            }
-//                        }
-//                    }
-//
-//                }
-//
-//                self.ranks.append(user)
-//                count -= 1
-                
+            }
+            
+            if count == querySnapshot!.count {
                 completion()
             }
         }
@@ -125,7 +68,6 @@ extension LeaderboardsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! Leaderboard
-//        print("Reloading data")
         
         cell.rankLabel.text = "\(indexPath.row + 1)"
         
@@ -135,8 +77,6 @@ extension LeaderboardsViewController: UITableViewDelegate, UITableViewDataSource
         
         if indexPath.row < ranks.count {
             let doc = ranks[indexPath.row]
-            print("index: \(indexPath.row)")
-            print("doc: \(doc)")
             
             db.collection("Leaderboards").document(doc).getDocument { document, error in
                 if let document = document, document.exists {

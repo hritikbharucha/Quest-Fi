@@ -6195,10 +6195,10 @@
                                     <constraint firstItem="NsW-9w-pS4" firstAttribute="leading" secondItem="l5t-k9-3LH" secondAttribute="leading" id="wWv-di-9UT"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Time!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3U-tG-UqP">
-                                <rect key="frame" x="87.5" y="429" width="239.5" height="58.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Time!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3U-tG-UqP">
+                                <rect key="frame" x="87.5" y="429" width="239.5" height="125"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58.5" id="Ngf-Ug-V3S"/>
+                                    <constraint firstAttribute="height" constant="125" id="Ngf-Ug-V3S"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="50"/>
                                 <nil key="textColor"/>
@@ -6421,7 +6421,7 @@
                                     <constraint firstAttribute="width" constant="349" id="H71-WI-f8G"/>
                                     <constraint firstAttribute="height" constant="236" id="pTA-W0-IdH"/>
                                 </constraints>
-                                <string key="text">If you have a giant load of work to do over a certain timer period, then you need to split the tasks up into small tasks. You should try to focus and put all of your attention towards one task that needs to be done and put everything else aside. Also, you need to give your mind and body time to relax and refuel, you cannot simply continue working and working every single hour of your life and not expect negative effects from the work overload.</string>
+                                <string key="text">If you have a giant load of work to do over a certain time period, then you need to split the tasks up into small tasks. You should try to focus and put all of your attention towards one task that needs to be done and put everything else aside. Also, you need to give your mind and body time to relax and refuel, you cannot simply continue working and working every single hour of your life and not expect negative effects from the work overload.</string>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
