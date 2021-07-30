@@ -79,6 +79,9 @@ class ActualTimerViewController: UIViewController {
                         self.sections = 11
                         self.willHaveLongBreak = true
                     }
+                } else {
+                    print("doc does not exist")
+                    self.totalSeconds = 3600
                 }
             }
         }

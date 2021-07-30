@@ -64,7 +64,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     }
                     
                     var sortedDates = dates.sorted(by: { $0.compare($1) == .orderedAscending })
-                    
+                    print("sorted dates: \(sortedDates)")
                     self.setStreaks(self.getStreaks(sortedDates), best)
                     print("STREAKS ARE: \(self.getStreaks(sortedDates) )")
                     
@@ -124,7 +124,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         if dates.count > 1 {
             if calen.startOfDay(for: Date()) == calen.startOfDay(for: dates.last ?? Date()) {
                 streak += 1
-                
+                print("ADDED TODAY ALSO: \(dates.last)")
                 for i in stride(from: dates.count-1, to: 1, by: -1) {
                     
                     let previousDay = calen.date(byAdding: .day, value: -1, to: dates[i])
@@ -137,9 +137,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     
                     if prev == actualPrev {
                         streak += 1
-                    } else {
-                        break
-                    }
+                    } 
                 }
             }
         }

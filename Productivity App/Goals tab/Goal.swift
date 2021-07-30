@@ -28,6 +28,14 @@ class Goal: UITableViewCell {
         completeButton.layer.borderWidth = 2
         completeButton.layer.borderColor = UIColor.black.cgColor
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.contentView.backgroundColor = .clear
+        self.goalContainerView.backgroundColor = .clear
+        self.taskLabel.text = .none
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

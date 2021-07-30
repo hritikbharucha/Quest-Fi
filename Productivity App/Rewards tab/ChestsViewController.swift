@@ -50,6 +50,17 @@ class ChestsViewController: UIViewController {
         
     }
     
+    func makeChestNoOpen() {
+        self.commonCount.isHidden = true
+        self.commonButton.isUserInteractionEnabled = false
+        
+        self.rareCount.isHidden = false
+        self.rareButton.isUserInteractionEnabled = true
+        
+        self.magicalCount.isHidden = true
+        self.magicalButton.isUserInteractionEnabled = false
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         loadChestCount()
     }
@@ -97,8 +108,30 @@ class ChestsViewController: UIViewController {
                         self.magicalButton.isUserInteractionEnabled = true
                     }
                     
+                } else {
+                    print("Document does not exist")
+                    
+                    self.commonCount.isHidden = true
+                    self.commonButton.isUserInteractionEnabled = false
+                    
+                    self.rareCount.isHidden = false
+                    self.rareButton.isUserInteractionEnabled = true
+                    
+                    self.magicalCount.isHidden = true
+                    self.magicalButton.isUserInteractionEnabled = false
                 }
             }
+        } else {
+            print("Document does not exist")
+            
+            self.commonCount.isHidden = true
+            self.commonButton.isUserInteractionEnabled = false
+            
+            self.rareCount.isHidden = false
+            self.rareButton.isUserInteractionEnabled = true
+            
+            self.magicalCount.isHidden = true
+            self.magicalButton.isUserInteractionEnabled = false
         }
     }
     
@@ -256,16 +289,17 @@ class ChestsViewController: UIViewController {
     }
     
     @IBAction func commonPressed(_ sender: UIButton) {
+        
         let alert = UIAlertController(title: "Open Confirmation", message: "Are you sure you want to open one common chest?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             switch action.style{
-                case .default:
-                    self.getCommonReward()
+            case .default:
+                self.getCommonReward()
                 
-                case .cancel:
+            case .cancel:
                 print("cancel")
                 
-                case .destructive:
+            case .destructive:
                 print("destructive")
                 
             @unknown default:
@@ -274,13 +308,13 @@ class ChestsViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
             switch action.style{
-                case .default:
+            case .default:
                 print("default")
                 
-                case .cancel:
+            case .cancel:
                 print("cancel")
                 
-                case .destructive:
+            case .destructive:
                 print("destructive")
                 
             @unknown default:
@@ -288,6 +322,7 @@ class ChestsViewController: UIViewController {
             }
         }))
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func rarePressed(_ sender: UIButton) {
@@ -323,6 +358,7 @@ class ChestsViewController: UIViewController {
             }
         }))
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func magicalPressed(_ sender: UIButton) {
@@ -358,6 +394,7 @@ class ChestsViewController: UIViewController {
             }
         }))
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     func addToCollection() {
