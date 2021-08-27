@@ -26,7 +26,7 @@ class PremiumViewController: UIViewController {
         paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15)]
 
         let stringAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 30),
+            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 30)!,
             NSAttributedString.Key.strokeWidth: -3.0,
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,

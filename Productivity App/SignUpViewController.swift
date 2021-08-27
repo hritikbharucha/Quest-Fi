@@ -198,6 +198,9 @@ class SignUpViewController: UIViewController {
     
     }
     
+    @IBAction func logInPressed(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -208,7 +211,7 @@ class SignUpViewController: UIViewController {
         
 //        passwordTextField.textContentType = .oneTimeCode
         
-        signUpButton.layer.cornerRadius = 10
+        signUpButton.layer.cornerRadius = 20
     }
 
 
