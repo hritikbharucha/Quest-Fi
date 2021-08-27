@@ -107,11 +107,11 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         self.extendedLayoutIncludesOpaqueBars = true
         
-        passwordTextField.textContentType = .oneTimeCode
+//        passwordTextField.textContentType = .oneTimeCode
         
-        loginButton.layer.cornerRadius = 10
-        
-        signUpButton.layer.cornerRadius = 10
+        loginButton.layer.cornerRadius = 20
+        emailOrNameTextField.layer.cornerRadius = 10
+        passwordTextField.layer.cornerRadius = 10
         
     }
     
@@ -120,6 +120,11 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
          GIDSignIn.sharedInstance().signIn()
         
     }
+    
+    @IBAction func forgotPressed(_ sender: UIButton) {
+        
+    }
+    
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
@@ -199,3 +204,5 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
     }
 
 }
+
+

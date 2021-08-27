@@ -234,7 +234,7 @@ class ProfileViewController: UIViewController {
         
         db.collection("Leaderboards").getDocuments { querySnapshot, err in
             
-            if let err = err {
+            if err != nil {
                 print("error")
             } else {
                 var count = querySnapshot!.count
@@ -253,6 +253,8 @@ class ProfileViewController: UIViewController {
                                 case .destructive:
                                     print("destructive")
                                 
+                            @unknown default:
+                                fatalError()
                             }
                         }))
                         self.present(alert, animated: true, completion: nil)

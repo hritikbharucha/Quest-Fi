@@ -72,6 +72,8 @@
 		638F3DED268D1AF400637CD0 /* OpenChestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638F3DEC268D1AF400637CD0 /* OpenChestViewController.swift */; };
 		6394AF5725D73EF600975194 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6394AF5625D73EF600975194 /* PremiumViewController.swift */; };
 		6394AF5A25D752C000975194 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6394AF5925D752BF00975194 /* ShopViewController.swift */; };
+		6396BDFA26D84930002526EE /* DesignableUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6396BDF926D84930002526EE /* DesignableUITextField.swift */; };
+		63A6EB9226D988CB00AAD90B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6EB9126D988CB00AAD90B /* ForgotPasswordViewController.swift */; };
 		63B1B250260C177D00DE466A /* RAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B24F260C177D00DE466A /* RAViewController.swift */; };
 		63B1B253260C178F00DE466A /* SynthesisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B252260C178F00DE466A /* SynthesisViewController.swift */; };
 		63B1B256260C17AF00DE466A /* ArgumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1B255260C17AF00DE466A /* ArgumentViewController.swift */; };
@@ -160,6 +162,8 @@
 		638F3DEC268D1AF400637CD0 /* OpenChestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChestViewController.swift; sourceTree = "<group>"; };
 		6394AF5625D73EF600975194 /* PremiumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumViewController.swift; sourceTree = "<group>"; };
 		6394AF5925D752BF00975194 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		6396BDF926D84930002526EE /* DesignableUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableUITextField.swift; sourceTree = "<group>"; };
+		63A6EB9126D988CB00AAD90B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		63B1B24F260C177D00DE466A /* RAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAViewController.swift; sourceTree = "<group>"; };
 		63B1B252260C178F00DE466A /* SynthesisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthesisViewController.swift; sourceTree = "<group>"; };
 		63B1B255260C17AF00DE466A /* ArgumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentViewController.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 				63EBFB9626A35E3500C1D366 /* AttributesViewController.swift */,
 				63B678A825CE389100721571 /* LogInViewController.swift */,
 				63B678AB25CE38A000721571 /* SignUpViewController.swift */,
+				63A6EB9126D988CB00AAD90B /* ForgotPasswordViewController.swift */,
 				63B678AE25CE38C000721571 /* InboxViewController.swift */,
 				6394AF5625D73EF600975194 /* PremiumViewController.swift */,
 				6388789D2659DA89005D1F46 /* ProfileViewController.swift */,
@@ -277,6 +282,7 @@
 				634B8ECA2672FB1000C95ACE /* LeaderboardsViewController.swift */,
 				634B8ECC2672FC7600C95ACE /* Leaderboard.swift */,
 				634B8ECE2672FC8200C95ACE /* Leaderboard.xib */,
+				6396BDF926D84930002526EE /* DesignableUITextField.swift */,
 				636B2B2A25E0BE9600AEC336 /* Home tab */,
 				636B2B8E25E0C57300AEC336 /* Guides tab */,
 				636B2B8F25E0C5E700AEC336 /* Goals tab */,
@@ -680,9 +686,11 @@
 				63B678BB25CE38F100721571 /* RewardsViewController.swift in Sources */,
 				636B2B8A25E0C55D00AEC336 /* HTMLCSSViewController.swift in Sources */,
 				630E7FBB2613C8F600523826 /* PorParaViewController.swift in Sources */,
+				6396BDFA26D84930002526EE /* DesignableUITextField.swift in Sources */,
 				630E7FB7261285AF00523826 /* Span12VerbsViewController.swift in Sources */,
 				634B31F9260501CA00B3183D /* DerivativesViewController.swift in Sources */,
 				6326CD8B25E5F87E00D33888 /* AddGoalsViewController.swift in Sources */,
+				63A6EB9226D988CB00AAD90B /* ForgotPasswordViewController.swift in Sources */,
 				636B2B4B25E0C3FE00AEC336 /* CSViewController.swift in Sources */,
 				6326CD9125E5F89C00D33888 /* Goal.swift in Sources */,
 				630E7FBE2613C90300523826 /* PretViewController.swift in Sources */,
