@@ -15,15 +15,19 @@ class Goal: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
     
-    @IBOutlet weak var progressButton: UIButton!
+//    @IBOutlet weak var progressButton: UIButton!
+    
+    @IBOutlet weak var dateTimeLabel: UILabel!
+    
+    @IBOutlet weak var clockImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         addShadowAndRoundCorners(goalContainerView)
-        progressButton.isHidden = true
-        completeButton.isHidden = true
-        completeButton.layer.cornerRadius = 15
+//        progressButton.isHidden = true
+//        completeButton.isHidden = true
+        completeButton.layer.cornerRadius = 12.5
         completeButton.clipsToBounds = true
         completeButton.layer.borderWidth = 2
         completeButton.layer.borderColor = UIColor.black.cgColor
@@ -35,6 +39,7 @@ class Goal: UITableViewCell {
         self.contentView.backgroundColor = .clear
         self.goalContainerView.backgroundColor = .clear
         self.taskLabel.text = .none
+        self.dateTimeLabel.text = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

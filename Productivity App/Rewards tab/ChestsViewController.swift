@@ -137,7 +137,7 @@ class ChestsViewController: UIViewController {
     
     func makeButtonLabelGood(_ label: UIButton,_ string: String) {
         let stringAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 30),
+            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 30)!,
             NSAttributedString.Key.strokeWidth: -3.0,
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white

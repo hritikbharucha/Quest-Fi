@@ -140,15 +140,15 @@ class ProfileViewController: UIViewController {
     func saveProfileData() {
         let db = Firestore.firestore()
         
-        let userID = Firebase.Auth.auth().currentUser!.uid
-             
-        db.collection("\(userID)").document("User Data").updateData([
-            "name" : self.nameTextField.text ?? "",
-            "username" : self.usernameTextField.text ?? "",
-            "phone number" : self.phoneNumberTextField.text ?? "",
-            "email" : self.emailTextField.text ?? "",
-            "password" : self.passwordTextField.text ?? ""
-        ])
+        if let userID = Firebase.Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("User Data").setData([
+                "name" : self.nameTextField.text ?? "",
+                "username" : self.usernameTextField.text ?? "",
+                "phone number" : self.phoneNumberTextField.text ?? "",
+                "email" : self.emailTextField.text ?? "",
+                "password" : self.passwordTextField.text ?? ""
+            ], mergeFields: ["name", "username", "phone number", "email", "password"])
+        }
         
         db.collection("Leaderboards").document("\(previousName)").getDocument { document, error in
             if let document = document, document.exists {
@@ -286,6 +286,8 @@ class ProfileViewController: UIViewController {
                 case .destructive:
                     print("destructive")
                 
+            @unknown default:
+                print("unknown action")
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in

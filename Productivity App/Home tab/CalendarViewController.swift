@@ -11,7 +11,11 @@ import FSCalendar
 
 class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
     
-    @IBOutlet weak var goalsLabel: UILabel!
+//    @IBOutlet weak var leaderboardsButton: UIButton!
+    
+//    @IBOutlet weak var leaderboardsView: UIView!
+    
+//    @IBOutlet weak var goalsLabel: UILabel!
     
     @IBOutlet weak var bestLabel: UILabel!
     
@@ -19,19 +23,70 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     @IBOutlet weak var calendar: FSCalendar!
     
-//    var userID = ""
+    @IBOutlet weak var currentView: UIView!
+    
+    @IBOutlet weak var bestView: UIView!
+    
+    @IBOutlet weak var goalsView: UIView!
+    
+    @IBOutlet weak var pointsView: UIView!
+    
+    @IBOutlet weak var pointsLabel: UILabel!
+    
+    @IBOutlet weak var completedLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUpCalendar()
-        getGoals()
-        
-//        userID = Auth.auth().currentUser!.uid
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        
         getGoals()
+        getGoalData()
+        setUpCalendar()
+        
+        customize(currentView)
+        customize(bestView)
+        customize(goalsView)
+        customize(pointsView)
+        
+//        createGradientAndRound(currentView, UIColor(red: 161, green: 88, blue: 255, alpha: 1).cgColor, UIColor(red: 205, green: 128, blue: 255, alpha: 1).cgColor)
+//        createGradientAndRound(bestView, UIColor.systemTeal.cgColor, UIColor.blue.cgColor)
+//        createGradientAndRound(goalsView, UIColor.blue.cgColor, UIColor.systemTeal.cgColor)
+//        createGradientAndRound(pointsView, UIColor(red: 54, green: 148, blue: 155, alpha: 1).cgColor, UIColor(red: 28, green: 67, blue: 72, alpha: 1).cgColor)
+    }
+    
+    func customize(_ view: UIView) {
+        view.layer.cornerRadius = 10
+    }
+    
+//    func createGradientAndRound(_ view: UIView,_ firstColor: CGColor,_ secondColor: CGColor) {
+//        let gradient = CAGradientLayer()
+//
+//        gradient.frame = view.bounds
+//        gradient.colors = [firstColor, secondColor]
+//
+//        view.layer.insertSublayer(gradient, at: 0)
+//        view.layer.cornerRadius = 10
+//    }
+    
+    func getGoalData() {
+        
+        let db = Firestore.firestore()
+        
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("Goal Data").getDocument { document, error in
+                if let document = document, document.exists {
+                    let dataDescription = document.data() ?? ["error" : "error"]
+                    let points = dataDescription["points"] as! Int
+                    let completed = dataDescription["completedGoals"] as! Int
+                    self.pointsLabel.text = "\(points)"
+                    let completedText = "\(completed) goals"
+                    
+                    self.setSizes(self.completedLabel, completedText)
+                }
+            }
+        }
     }
     
     func setUpCalendar() {
@@ -40,6 +95,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         calendar.dataSource = self
         calendar.today = Date()
         calendar.allowsMultipleSelection = true
+        
     }
     
     func getGoals() {
@@ -63,7 +119,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                         dates.append(rightDate ?? Date())
                     }
                     
-                    var sortedDates = dates.sorted(by: { $0.compare($1) == .orderedAscending })
+                    let sortedDates = dates.sorted(by: { $0.compare($1) == .orderedAscending })
                     print("sorted dates: \(sortedDates)")
                     self.setStreaks(self.getStreaks(sortedDates), best)
                     print("STREAKS ARE: \(self.getStreaks(sortedDates) )")
@@ -81,7 +137,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                         }
                     }
                     
-                    self.goalsLabel.text = "\(goalsThisMonth) goals completed this month"
+//                    self.goalsLabel.text = "\(goalsThisMonth) goals completed this month"
                     self.calendar.allowsSelection = false
                 }
             }
@@ -103,18 +159,28 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     func setStreaks(_ streak: Int, _ best: Int) {
         
-        currentLabel.text = "\(streak)"
+        let currentText = "\(streak) days"
+        var bestText = ""
         
         print("STREEEEAAAAKKKSSS: \(streak)")
         print("BEEESSTTTT: \(best)")
         
         if streak > best {
-            bestLabel.text = "\(streak)"
+            bestText = "\(streak) days"
             print("New BEST: \(streak)")
             setBest(streak)
         } else {
-            bestLabel.text = "\(best)"
+            bestText = "\(best) days"
         }
+        
+        setSizes(currentLabel, currentText)
+        setSizes(bestLabel, bestText)
+    }
+    
+    func setSizes(_ label: UILabel,_ string: String) {
+        let attributedString = string.attributedString(letterSize: 25.0, digitSize: 35.0)
+        
+        label.attributedText = attributedString
     }
     
     func getStreaks(_ dates: [Date]) -> Int {
@@ -124,7 +190,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         if dates.count > 1 {
             if calen.startOfDay(for: Date()) == calen.startOfDay(for: dates.last ?? Date()) {
                 streak += 1
-                print("ADDED TODAY ALSO: \(dates.last)")
+                print("ADDED TODAY ALSO: \(String(describing: dates.last))")
                 for i in stride(from: dates.count-1, to: 1, by: -1) {
                     
                     let previousDay = calen.date(byAdding: .day, value: -1, to: dates[i])
@@ -160,5 +226,18 @@ extension Date {
 
     func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
         return calendar.component(component, from: self)
+    }
+}
+
+extension String {
+
+    func attributedString(letterSize: CGFloat, digitSize: CGFloat) -> NSAttributedString
+    {
+        let pattern = "\\d+"
+        let regex = try! NSRegularExpression(pattern: pattern)
+        let matches = regex.matches(in: self, range: NSRange(location: 0, length: self.count))
+        let attributedString = NSMutableAttributedString(string: self, attributes: [.font : UIFont.systemFont(ofSize: letterSize)])
+        matches.forEach { attributedString.addAttributes([.font : UIFont.systemFont(ofSize: digitSize)], range: $0.range) }
+        return attributedString.copy() as! NSAttributedString
     }
 }
