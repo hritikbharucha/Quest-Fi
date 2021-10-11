@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
-        let db = Firestore.firestore()
+//        let db = Firestore.firestore()
         
         if #available(iOS 13, *) {
             window?.overrideUserInterfaceStyle = .light

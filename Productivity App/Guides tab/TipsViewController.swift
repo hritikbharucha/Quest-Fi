@@ -13,8 +13,6 @@ class TipsViewController: UIViewController {
     
     @IBOutlet weak var forYouButton: UIButton!
     
-    @IBOutlet weak var guidesButton: UIButton!
-    
     @IBOutlet weak var productivityButton: UIButton!
     
     @IBOutlet weak var guidesView: UIView!
@@ -27,7 +25,6 @@ class TipsViewController: UIViewController {
         super.viewDidLoad()
         
         makeButtonGood(forYouButton, forYouView)
-        makeButtonGood(guidesButton, guidesView)
         makeButtonGood(productivityButton, productivityView)
         
     }
@@ -48,10 +45,6 @@ class TipsViewController: UIViewController {
     
     @IBAction func forYouPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "tipsToForYou", sender: self)
-    }
-    
-    @IBAction func guidesPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "tipsToGuides", sender: self)
     }
     
     @IBAction func prodPressed(_ sender: UIButton) {
