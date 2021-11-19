@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.overrideUserInterfaceStyle = .light
         }
         
+        let pageControl = UIPageControl.appearance()
+        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.pageIndicatorTintColor = .lightGray
+        
 //        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
 //
 //        let root = storyboard.instantiateViewController(withIdentifier: "root") as! UINavigationController

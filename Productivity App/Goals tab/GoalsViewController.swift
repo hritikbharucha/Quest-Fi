@@ -526,6 +526,8 @@ class GoalsViewController: UIViewController {
         self.loadingAnimation.startAnimating()
         self.view.addSubview(self.loadingAnimation)
         
+        print("LOADING NOW")
+        
         if let userID = Auth.auth().currentUser?.uid {
             let docRef = db.collection("\(userID)").document("Goal Names")
             
@@ -537,6 +539,9 @@ class GoalsViewController: UIViewController {
                     
                 } else {
                     print("Document does not exist")
+                    self.loadingAnimation.stopAnimating()
+                    self.todayTableView.reloadData()
+                    completion()
                 }
                 
                 self.makeTodayNameArray {
@@ -552,6 +557,8 @@ class GoalsViewController: UIViewController {
                 
                 completion()
             }
+        } else {
+            completion()
         }
         
     }
@@ -577,6 +584,9 @@ class GoalsViewController: UIViewController {
                                 placeholderArray.append(["name" : Self.taskNameArray[i]["name"]!, "code" : Self.taskNameArray[i]["code"]!])
                             }
                         }
+                    } else {
+                        print("Doc does not exist")
+                        completionGroup.leave()
                     }
                     completionGroup.leave()
                 }
@@ -610,6 +620,9 @@ class GoalsViewController: UIViewController {
                         if !scheduled {
                             placeholderArray.append(["name" : Self.taskNameArray[i]["name"]!, "code" : Self.taskNameArray[i]["code"]!])
                         }
+                    } else {
+                        print("doc does not exist")
+                        completionGroup.leave()
                     }
                     completionGroup.leave()
                 }

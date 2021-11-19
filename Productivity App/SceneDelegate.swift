@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let userLoginStatus = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
-            
+
         if userLoginStatus {
             let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
             window?.rootViewController = mainNavigationController
