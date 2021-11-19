@@ -29,7 +29,7 @@ class ChestsViewController: UIViewController {
     @IBOutlet weak var magicalCount: UILabel!
     
     var color = UIColor.white
-    var image = "common1"
+    var image = "hair1"
     
     var commonChests = 0
     var rareChests = 0
@@ -114,8 +114,8 @@ class ChestsViewController: UIViewController {
                     self.commonCount.isHidden = true
                     self.commonButton.isUserInteractionEnabled = false
                     
-                    self.rareCount.isHidden = false
-                    self.rareButton.isUserInteractionEnabled = true
+                    self.rareCount.isHidden = true
+                    self.rareButton.isUserInteractionEnabled = false
                     
                     self.magicalCount.isHidden = true
                     self.magicalButton.isUserInteractionEnabled = false
@@ -127,8 +127,8 @@ class ChestsViewController: UIViewController {
             self.commonCount.isHidden = true
             self.commonButton.isUserInteractionEnabled = false
             
-            self.rareCount.isHidden = false
-            self.rareButton.isUserInteractionEnabled = true
+            self.rareCount.isHidden = true
+            self.rareButton.isUserInteractionEnabled = false
             
             self.magicalCount.isHidden = true
             self.magicalButton.isUserInteractionEnabled = false
@@ -210,40 +210,34 @@ class ChestsViewController: UIViewController {
     }
     
     func getRandomCommon() {
-        let random = Int.random(in: 1...9)
+        let random = Int.random(in: 2...5)
         
-        image = "common\(random)"
+        image = "hair\(random)"
         
         color = UIColor.systemGray3
     }
     
     func getRandomRare() {
-        let random = Int.random(in: 1...6)
-        
-        image = "rare\(random)"
-        
+        image = "red"
         color = UIColor.blue
     }
     
     func getRandomEpic() {
-        let random = Int.random(in: 1...3)
-        
-        image = "epic\(random)"
-        
+        image = "chain"
         color = UIColor.purple
     }
     
     func getLegendary() {
-        image = "legendary"
+        image = "crown"
         color = UIColor.yellow
     }
     
     func getCommonReward() {
         let random = Double.random(in: 0.0...100.0)
         
-        if random <= 95.0 {
+        if random <= 98 {
             getRandomCommon()
-        } else if random <= 97.5 {
+        } else if random <= 99 {
             getRandomRare()
         } else if random <= 99.9 {
             getRandomEpic()
@@ -259,9 +253,9 @@ class ChestsViewController: UIViewController {
     func getRareReward() {
         let random = Double.random(in: 0.0...100.0)
         
-        if random <= 70.0 {
+        if random <= 75 {
             getRandomRare()
-        } else if random <= 97.5 {
+        } else if random <= 90 {
             getRandomEpic()
         } else {
             getLegendary()
@@ -275,9 +269,9 @@ class ChestsViewController: UIViewController {
     func getMagicalReward() {
         let random = Double.random(in: 0.0...100.0)
         
-        if random <= 15.0 {
+        if random <= 10 {
             getRandomRare()
-        } else if random <= 85.0 {
+        } else if random <= 75 {
             getRandomEpic()
         } else {
             getLegendary()
@@ -401,9 +395,9 @@ class ChestsViewController: UIViewController {
         let db = Firestore.firestore()
         
         if let userID = Auth.auth().currentUser?.uid {
-            db.collection("\(userID)").document("Rewards Data").updateData([
+            db.collection("\(userID)").document("Rewards Data").setData([
                 image : true
-            ])
+            ], mergeFields: [image])
         }
     }
     

@@ -13,7 +13,7 @@ class OpenChestViewController: UIViewController {
     
     @IBOutlet weak var rewardImage: UIImageView!
     
-    static var imageName = "common1"
+    static var imageName = "hair1"
     
     static var bgColor = UIColor.systemGray3
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6303E49427337B8B0020974C /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303E49227337B8B0020974C /* CharactersViewController.swift */; };
+		6303E499273786DF0020974C /* EditCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303E498273786DF0020974C /* EditCharacterViewController.swift */; };
 		631DFFCB2638EB86007C8605 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 631DFFCA2638EB86007C8605 /* alarm.mp3 */; };
 		6321283125D9F436001B48BF /* ChestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321283025D9F436001B48BF /* ChestsViewController.swift */; };
 		6326CD8225E41EF700D33888 /* TimerSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6326CD8125E41EF700D33888 /* TimerSettingsViewController.swift */; };
@@ -27,7 +29,6 @@
 		634B8ECD2672FC7600C95ACE /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B8ECC2672FC7600C95ACE /* Leaderboard.swift */; };
 		634B8ECF2672FC8200C95ACE /* Leaderboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 634B8ECE2672FC8200C95ACE /* Leaderboard.xib */; };
 		6363F0B326E308E300703E33 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6363F0B226E308E300703E33 /* CircularProgress.swift */; };
-		636B2B2E25E0BEFD00AEC336 /* ProductivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B2B2D25E0BEFD00AEC336 /* ProductivityViewController.swift */; };
 		636B2B3425E0BF4900AEC336 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B2B3325E0BF4900AEC336 /* TimerViewController.swift */; };
 		636B2B3725E0BF5C00AEC336 /* GeneralTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B2B3625E0BF5C00AEC336 /* GeneralTipsViewController.swift */; };
 		6377CE3926E921B100C50B71 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377CE3826E921B100C50B71 /* TabCollectionViewCell.swift */; };
@@ -51,11 +52,14 @@
 		63F0178226EA641F00E54B90 /* TabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F0178126EA641F00E54B90 /* TabCollectionViewCell.xib */; };
 		63F0178426EC2CA900E54B90 /* MyDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0178326EC2CA900E54B90 /* MyDatePicker.swift */; };
 		63F0178626EC3C8100E54B90 /* ViewWithDiagonalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0178526EC3C8100E54B90 /* ViewWithDiagonalLine.swift */; };
+		63F70AFF272E4DDA00422BA2 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F70AFE272E4DDA00422BA2 /* TestViewController.swift */; };
 		C98EA7935A80390AF6E6CA7C /* Pods_Productivity_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA6146CA02993D8EC5689AA /* Pods_Productivity_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		384C87DC8F6F406FCF58EC7D /* Pods-Productivity App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productivity App.release.xcconfig"; path = "Target Support Files/Pods-Productivity App/Pods-Productivity App.release.xcconfig"; sourceTree = "<group>"; };
+		6303E49227337B8B0020974C /* CharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewController.swift; sourceTree = "<group>"; };
+		6303E498273786DF0020974C /* EditCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCharacterViewController.swift; sourceTree = "<group>"; };
 		631DFFCA2638EB86007C8605 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		6321283025D9F436001B48BF /* ChestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChestsViewController.swift; sourceTree = "<group>"; };
 		6326CD8125E41EF700D33888 /* TimerSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +82,6 @@
 		634B8ECC2672FC7600C95ACE /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		634B8ECE2672FC8200C95ACE /* Leaderboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Leaderboard.xib; sourceTree = "<group>"; };
 		6363F0B226E308E300703E33 /* CircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
-		636B2B2D25E0BEFD00AEC336 /* ProductivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductivityViewController.swift; sourceTree = "<group>"; };
 		636B2B3325E0BF4900AEC336 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		636B2B3625E0BF5C00AEC336 /* GeneralTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTipsViewController.swift; sourceTree = "<group>"; };
 		6377CE3826E921B100C50B71 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 		63F0178126EA641F00E54B90 /* TabCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabCollectionViewCell.xib; sourceTree = "<group>"; };
 		63F0178326EC2CA900E54B90 /* MyDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDatePicker.swift; sourceTree = "<group>"; };
 		63F0178526EC3C8100E54B90 /* ViewWithDiagonalLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWithDiagonalLine.swift; sourceTree = "<group>"; };
+		63F70AFE272E4DDA00422BA2 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		D55854DAD300C6AACD024B9C /* Pods-Productivity App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productivity App.debug.xcconfig"; path = "Target Support Files/Pods-Productivity App/Pods-Productivity App.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA6146CA02993D8EC5689AA /* Pods_Productivity_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Productivity_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -151,6 +155,7 @@
 			children = (
 				631DFFCA2638EB86007C8605 /* alarm.mp3 */,
 				6346940025CC5B4E00C4107A /* AppDelegate.swift */,
+				63F70AFE272E4DDA00422BA2 /* TestViewController.swift */,
 				6346940225CC5B4E00C4107A /* SceneDelegate.swift */,
 				6346940425CC5B4E00C4107A /* ViewController.swift */,
 				63B678A525CE386400721571 /* SettingsTableViewController.swift */,
@@ -193,9 +198,11 @@
 			isa = PBXGroup;
 			children = (
 				63B678BA25CE38F100721571 /* RewardsViewController.swift */,
+				6303E498273786DF0020974C /* EditCharacterViewController.swift */,
 				6394AF5925D752BF00975194 /* ShopViewController.swift */,
 				6321283025D9F436001B48BF /* ChestsViewController.swift */,
 				638F3DEC268D1AF400637CD0 /* OpenChestViewController.swift */,
+				6303E49227337B8B0020974C /* CharactersViewController.swift */,
 			);
 			path = "Rewards tab";
 			sourceTree = "<group>";
@@ -203,9 +210,9 @@
 		636B2B3925E0C2ED00AEC336 /* Productivity */ = {
 			isa = PBXGroup;
 			children = (
-				636B2B2D25E0BEFD00AEC336 /* ProductivityViewController.swift */,
 				6326CD8425E41F1100D33888 /* Timer */,
 				636B2B3625E0BF5C00AEC336 /* GeneralTipsViewController.swift */,
+				63B678B425CE38D800721571 /* TipsViewController.swift */,
 			);
 			path = Productivity;
 			sourceTree = "<group>";
@@ -213,7 +220,6 @@
 		636B2B8E25E0C57300AEC336 /* Guides tab */ = {
 			isa = PBXGroup;
 			children = (
-				63B678B425CE38D800721571 /* TipsViewController.swift */,
 				636B2B3925E0C2ED00AEC336 /* Productivity */,
 			);
 			path = "Guides tab";
@@ -412,6 +418,7 @@
 				634B8ECD2672FC7600C95ACE /* Leaderboard.swift in Sources */,
 				63B8EA6F25E027CB00943325 /* CalendarViewController.swift in Sources */,
 				634B8ECB2672FB1000C95ACE /* LeaderboardsViewController.swift in Sources */,
+				6303E49427337B8B0020974C /* CharactersViewController.swift in Sources */,
 				63B678A925CE389100721571 /* LogInViewController.swift in Sources */,
 				63B678B225CE38CD00721571 /* HomeViewController.swift in Sources */,
 				63F0178626EC3C8100E54B90 /* ViewWithDiagonalLine.swift in Sources */,
@@ -431,9 +438,10 @@
 				6326CD9125E5F89C00D33888 /* Goal.swift in Sources */,
 				63B678B825CE38E500721571 /* GoalsViewController.swift in Sources */,
 				6394AF5A25D752C000975194 /* ShopViewController.swift in Sources */,
+				6303E499273786DF0020974C /* EditCharacterViewController.swift in Sources */,
 				6321283125D9F436001B48BF /* ChestsViewController.swift in Sources */,
+				63F70AFF272E4DDA00422BA2 /* TestViewController.swift in Sources */,
 				6346940B25CC5B4E00C4107A /* Productivity_App.xcdatamodeld in Sources */,
-				636B2B2E25E0BEFD00AEC336 /* ProductivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,7 +597,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Productivity-App-HB";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Questify-HB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -610,7 +618,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Productivity-App-HB";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Questify-HB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
