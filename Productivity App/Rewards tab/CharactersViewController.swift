@@ -23,6 +23,7 @@ class CharactersViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         
         characterNameTextView.text = nameText
         characterNameTextView.delegate = self
@@ -31,13 +32,24 @@ class CharactersViewController: UIViewController, UITextViewDelegate {
         characterNameTextView.isEditable = editMode ?? false
         characterNameTextView.isUserInteractionEnabled = editMode ?? false
         characterNameTextView.isSelectable = editMode ?? false
+        characterNameTextView.isScrollEnabled = false
+        characterNameTextView.textContainer.maximumNumberOfLines = 1
+        
+        if editMode ?? false {
+            characterNameTextView.becomeFirstResponder()
+        }
+        
         editBtn.tag = index ?? -1
 
         setUpButton(editBtn)
     }
     
+    override func viewDidLayoutSubviews() {
+        characterNameTextView.clipsToBounds = true
+    }
+    
     func setUpButton(_ button: UIButton) {
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = (15/414)*view.frame.width
     }
     
     @IBAction func editPressed(_ sender: UIButton) {
@@ -50,6 +62,7 @@ class CharactersViewController: UIViewController, UITextViewDelegate {
         EditCharacterViewController.name = nameText ?? "Character 1"
         EditCharacterViewController.model = imageName ?? "hair1bluecrfalsechfalse"
         EditCharacterViewController.character = "character\((index ?? 0) + 1)"
+        EditCharacterViewController.index = (index ?? 0)
     }
     
     func textViewDidChange(_ textView: UITextView) {

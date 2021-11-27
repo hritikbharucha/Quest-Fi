@@ -18,20 +18,28 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate 
     
     @IBOutlet weak var submitButton: UIButton!
     
+    var viewWidth : CGFloat = 414
+    var viewHeight : CGFloat = 896
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setGradientColor(submitButton)
-        
-        makeButtonGood(submitButton, submitView)
-
-        nameTextView.layer.borderColor = UIColor.black.cgColor
-        nameTextView.layer.borderWidth = 2
-        
-        messageTextView.layer.borderColor = UIColor.black.cgColor
-        messageTextView.layer.borderWidth = 2
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
         
         hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        makeButtonGood(submitButton, submitView)
+        
+        setGradientColor(submitButton)
+        
+        nameTextView.layer.borderColor = UIColor.black.cgColor
+        nameTextView.layer.borderWidth = (2/414)*viewWidth
+        
+        messageTextView.layer.borderColor = UIColor.black.cgColor
+        messageTextView.layer.borderWidth = (2/414)*viewWidth
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -40,11 +48,11 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate 
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (5/896)*viewHeight
+        containerView.layer.cornerRadius = (20/896)*viewHeight
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/896)*viewHeight).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = (20/896)*viewHeight
     }
     
     func setGradientColor(_ view: UIView) {

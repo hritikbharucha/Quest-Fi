@@ -35,8 +35,18 @@ class ChestsViewController: UIViewController {
     var rareChests = 0
     var magicalChests = 0
     
+    var viewHeight : CGFloat = 896
+    var viewWidth : CGFloat = 414
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         makeButtonGood(commonButton, commonView)
         makeButtonGood(rareButton, rareView)
@@ -44,10 +54,9 @@ class ChestsViewController: UIViewController {
         
         commonButton.layer.cornerRadius = 0
         
-        makeCircle(commonCount)
-        makeCircle(rareCount)
-        makeCircle(magicalCount)
-        
+        makeCircle(commonCount, commonView)
+        makeCircle(rareCount, rareView)
+        makeCircle(magicalCount, magicalView)
     }
     
     func makeChestNoOpen() {
@@ -108,6 +117,10 @@ class ChestsViewController: UIViewController {
                         self.magicalButton.isUserInteractionEnabled = true
                     }
                     
+                    self.scaleFonts(common, self.commonCount)
+                    self.scaleFonts(rare, self.rareCount)
+                    self.scaleFonts(magical, self.magicalCount)
+                    
                 } else {
                     print("Document does not exist")
                     
@@ -135,6 +148,16 @@ class ChestsViewController: UIViewController {
         }
     }
     
+    func scaleFonts(_ count: Int, _ label: UILabel) {
+        if count >= 100 {
+            label.font = .boldSystemFont(ofSize: (10/896)*self.viewHeight)
+        } else if count >= 10 {
+            label.font = .boldSystemFont(ofSize: (15/896)*self.viewHeight)
+        } else {
+            label.font = .boldSystemFont(ofSize: (20/896)*self.viewHeight)
+        }
+    }
+    
     func makeButtonLabelGood(_ label: UIButton,_ string: String) {
         let stringAttributes = [
             NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: 30)!,
@@ -148,11 +171,19 @@ class ChestsViewController: UIViewController {
         label.setAttributedTitle(text, for: .normal)
     }
     
-    func makeCircle(_ label: UILabel) {
+    func makeCircle(_ label: UILabel, _ view : UIView) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            label.rightAnchor.constraint(equalTo: view.rightAnchor, constant: label.frame.width/2),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: -label.frame.height/2),
+            label.widthAnchor.constraint(equalToConstant: label.frame.width),
+            label.heightAnchor.constraint(equalToConstant: label.frame.height)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
         label.layer.cornerRadius = label.frame.size.height/2
         label.layer.masksToBounds = true
-        label.isHidden = true
-        label.isUserInteractionEnabled = false
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -161,11 +192,11 @@ class ChestsViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (5/414)*view.frame.width
+        containerView.layer.cornerRadius = (20/414)*view.frame.width
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/414)*view.frame.width).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = (20/414)*view.frame.width
         
     }
     
@@ -174,9 +205,9 @@ class ChestsViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (5/414)*view.frame.width
+        containerView.layer.cornerRadius = (20/414)*view.frame.width
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/414)*view.frame.width).cgPath
     }
     
     func removeCommonChest() {

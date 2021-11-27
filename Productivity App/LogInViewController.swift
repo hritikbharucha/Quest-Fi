@@ -109,10 +109,12 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
         
 //        passwordTextField.textContentType = .oneTimeCode
         
-        loginButton.layer.cornerRadius = 20
-        emailOrNameTextField.layer.cornerRadius = 10
-        passwordTextField.layer.cornerRadius = 10
+        loginButton.layer.cornerRadius = (20/414)*view.frame.width
+        emailOrNameTextField.layer.cornerRadius = (10/414)*view.frame.width
+        passwordTextField.layer.cornerRadius = (10/414)*view.frame.width
         
+        emailOrNameTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
+        passwordTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
     }
     
     @IBAction func googleSignInPressed(_ sender: UIButton) {

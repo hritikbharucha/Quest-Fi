@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - AMXFontAutoScale (1.2.0)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
@@ -379,6 +380,7 @@ PODS:
   - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
+  - AMXFontAutoScale
   - Calendar-iOS
   - Firebase/Analytics
   - Firebase/Firestore
@@ -389,6 +391,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - AMXFontAutoScale
     - AppAuth
     - BoringSSL-GRPC
     - Calendar-iOS
@@ -415,6 +418,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  AMXFontAutoScale: 142e4296a62cab27f9191971657483000655bc00
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Calendar-iOS: a7bb0e6d2cee372e7e3de98d44d60ac7364be7f3
@@ -439,6 +443,6 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: 211324eaf7b4b83b678c156e7821b7380ff3b6c2
+PODFILE CHECKSUM: 178f61f22a5e3fcdc6782c5facc7bc42715d6945
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

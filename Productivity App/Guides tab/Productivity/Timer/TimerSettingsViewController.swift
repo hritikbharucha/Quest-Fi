@@ -22,19 +22,27 @@ class TimerSettingsViewController: UIViewController {
     
     @IBOutlet weak var button3: UIButton!
     
+    var viewWidth : CGFloat = 414
+    var viewHeight : CGFloat = 896
+    
 //    var userID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        makeButtonGood(button1, view1)
-        makeButtonGood(button2, view2)
-        makeButtonGood(button3, view3)
         
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
+
         setup()
         
 //        userID = Auth.auth().currentUser!.uid
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        makeButtonGood(button1, view1)
+        makeButtonGood(button2, view2)
+        makeButtonGood(button3, view3)
     }
     
     func setup() {
@@ -72,11 +80,11 @@ class TimerSettingsViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (5/896)*viewHeight
+        containerView.layer.cornerRadius = (20/896)*viewHeight
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/896)*viewHeight).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = (20/896)*viewHeight
     }
     
     @IBAction func button1Pressed(_ sender: UIButton) {

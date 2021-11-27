@@ -35,8 +35,14 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     @IBOutlet weak var completedLabel: UILabel!
     
+    var viewWidth : CGFloat = 414
+    var viewHeight : CGFloat = 896
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +63,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     }
     
     func customize(_ view: UIView) {
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = (10/896)*viewHeight
     }
     
 //    func createGradientAndRound(_ view: UIView,_ firstColor: CGColor,_ secondColor: CGColor) {
@@ -178,7 +184,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     }
     
     func setSizes(_ label: UILabel,_ string: String) {
-        let attributedString = string.attributedString(letterSize: 25.0, digitSize: 35.0)
+        let attributedString = string.attributedString(letterSize: (25.0/896)*viewHeight, digitSize: (35.0/896)*viewHeight)
         
         label.attributedText = attributedString
     }
@@ -187,11 +193,13 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         let calen = Calendar.current
         var streak = 0
         
+        print("date count \(dates.count)")
+        
         if dates.count > 1 {
             if calen.startOfDay(for: Date()) == calen.startOfDay(for: dates.last ?? Date()) {
                 streak += 1
                 print("ADDED TODAY ALSO: \(String(describing: dates.last))")
-                for i in stride(from: dates.count-1, to: 1, by: -1) {
+                for i in stride(from: dates.count-1, to: 0, by: -1) {
                     
                     let previousDay = calen.date(byAdding: .day, value: -1, to: dates[i])
                     print("PREVIOUS DAY: \(String(describing: previousDay))")
@@ -203,7 +211,11 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     
                     if prev == actualPrev {
                         streak += 1
-                    } 
+                    }
+                    
+                    if prev > actualPrev {
+                        return streak
+                    }
                 }
             }
         }

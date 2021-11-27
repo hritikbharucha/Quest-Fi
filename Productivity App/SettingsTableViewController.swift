@@ -50,9 +50,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (settings[indexPath.row] == "Buy premium") {
-            self.performSegue(withIdentifier: "settingsToPremium", sender: self)
-        } else if (settings[indexPath.row] == "Account") {
+        if (settings[indexPath.row] == "Account") {
             self.performSegue(withIdentifier: "settingsToProfile", sender: self)
         } else if (settings[indexPath.row] == "Log out") {
             do {

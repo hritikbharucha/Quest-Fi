@@ -37,6 +37,9 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
     
+    var viewWidth : CGFloat = 414
+    var viewHeight : CGFloat = 896
+    
     var previousName = ""
     
     var secure = true
@@ -44,18 +47,25 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
+        
         hideKeyboardWhenTappedAround()
 
-        setGradientColor(topView)
-        setGradientColor(editButton)
-        
-        makeButtonGood(editButton, editView)
-        makeButtonGood(cancelButton, cancelView)
-        makeButtonGood(saveButton, saveView)
-        
         getProfileData()
         
         checkMode()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setGradientColor(topView)
+        setGradientColor(editButton)
+        makeButtonGood(editButton, editView)
+        makeButtonGood(cancelButton, cancelView)
+        makeButtonGood(saveButton, saveView)
     }
     
     func checkMode() {
@@ -107,11 +117,11 @@ class ProfileViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (5/896)*viewHeight
+        containerView.layer.cornerRadius = (20/896)*viewHeight
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/896)*viewHeight).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = (20/896)*viewHeight
     }
     
     func getProfileData() {

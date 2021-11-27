@@ -20,8 +20,11 @@ class RewardsViewController: UIViewController {
     
     @IBOutlet weak var chestCount: UILabel!
     
-    private var pageController: UIPageViewController?
-    private var currentIndex = 0
+    var pageController: UIPageViewController?
+    var currentIndex = 0
+    
+    var viewHeight : CGFloat = 896
+    var viewWidth : CGFloat = 414
     
     var names = ["Character 1", "Character 2", "Character 3"]
     var models = ["hair1bluecrfalsechfalse", "hair1bluecrfalsechfalse", "hair1bluecrfalsechfalse"]
@@ -29,19 +32,26 @@ class RewardsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpPageController()
-        makeButtonGood(shopButton, shopView)
-        makeButtonGood(chestButton, chestView)
-        
-        makeCircle(chestCount)
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         loadChestCount()
         
+        currentIndex = EditCharacterViewController.index
         loadCharacters {
             self.setUpPageController()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+//        setUpPageController()
+        makeButtonGood(shopButton, shopView)
+        makeButtonGood(chestButton, chestView)
+        
+        makeCircle(chestCount)
     }
     
     func loadChestCount() {
@@ -65,6 +75,14 @@ class RewardsViewController: UIViewController {
                         self.chestCount.isHidden = false
                     }
                     
+                    if chests >= 100 {
+                        self.chestCount.font = .boldSystemFont(ofSize: (8/896)*self.viewHeight)
+                    } else if chests >= 10 {
+                        self.chestCount.font = .boldSystemFont(ofSize: (11/896)*self.viewHeight)
+                    } else {
+                        self.chestCount.font = .boldSystemFont(ofSize: (15/896)*self.viewHeight)
+                    }
+                    
                 }
             }
         }
@@ -81,11 +99,24 @@ class RewardsViewController: UIViewController {
         self.view.addSubview(self.pageController!.view)
         
         pageController?.view.translatesAutoresizingMaskIntoConstraints = false
-        let horizontalConstraint = NSLayoutConstraint(item: pageController?.view, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: pageController?.view, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 47.5)
-        let widthConstraint = NSLayoutConstraint(item: pageController?.view, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 400)
-        let heightConstraint = NSLayoutConstraint(item: pageController?.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 575)
-        view.addConstraints([horizontalConstraint, verticalConstraint, widthConstraint, heightConstraint])
+        
+        let topConstraint = NSLayoutConstraint(item: pageController?.view as Any, attribute: .top, relatedBy: .equal, toItem: chestView, attribute: .bottom, multiplier: 1, constant: (8/896)*viewHeight)
+        
+        let bottomConstraint = NSLayoutConstraint(item: pageController?.view as Any, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -(20/896)*viewHeight)
+        
+        let horizontalConstraint = NSLayoutConstraint(item: pageController?.view as Any, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+        
+//        let verticalConstraint = NSLayoutConstraint(item: pageController?.view as Any, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: (47.5/896)*viewHeight)
+        
+//        let widthConstraint = NSLayoutConstraint(item: pageController?.view as Any, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 0.96618357487, constant: 0)
+        
+//        let heightConstraint = NSLayoutConstraint(item: pageController?.view as Any, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: pageController?.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 575/414, constant: 0)
+        
+        let widthConstraint = NSLayoutConstraint(item: pageController?.view as Any, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: pageController?.view, attribute: NSLayoutConstraint.Attribute.height, multiplier: 414/650, constant: 0)
+        
+        
+        
+        view.addConstraints([horizontalConstraint, topConstraint, widthConstraint, bottomConstraint])
         
         guard let initialVC = detailViewControllerAt(index: currentIndex) else {
             return
@@ -161,11 +192,11 @@ class RewardsViewController: UIViewController {
                             dispatchGroup.leave()
                         }
                     }
+                    dispatchGroup.leave()
                 } else {
                     print("Rewards doc does not exist")
                     dispatchGroup.leave()
                 }
-                dispatchGroup.leave()
             }
         }
         
@@ -176,9 +207,19 @@ class RewardsViewController: UIViewController {
     }
     
     func makeCircle(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            label.rightAnchor.constraint(equalTo: chestView.rightAnchor, constant: label.frame.width/2),
+            label.topAnchor.constraint(equalTo: chestView.topAnchor, constant: -label.frame.height/2),
+            label.widthAnchor.constraint(equalToConstant: label.frame.width),
+            label.heightAnchor.constraint(equalToConstant: label.frame.height)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
         label.layer.cornerRadius = label.frame.size.height/2
         label.layer.masksToBounds = true
-        label.isHidden = true
+//        label.isHidden = true
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -187,47 +228,47 @@ class RewardsViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath        
+        containerView.layer.shadowRadius = (5/414)*viewWidth
+        containerView.layer.cornerRadius = (20/414)*viewWidth
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/414)*viewWidth).cgPath
     }
     
-    func makeViewGood(_ containerView: UIView) {
-        containerView.clipsToBounds = false
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 1
-        containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
-    }
-    
-    func makeViewGlow(_ containerView: UIView) {
-        containerView.clipsToBounds = false
-        containerView.layer.shadowColor = UIColor.cyan.cgColor
-        containerView.layer.shadowOpacity = 1
-        containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 7.5
-        containerView.layer.cornerRadius = 25
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 25).cgPath
-    }
-    
-    func outlineView(_ v: UIView) {
-        
-        let maskLayer = CAShapeLayer()
-        maskLayer.frame = v.bounds
-        maskLayer.path = UIBezierPath(roundedRect: v.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 25, height: 25)).cgPath
-        v.layer.mask = maskLayer
-        
-        let borderLayer = CAShapeLayer()
-        borderLayer.path = maskLayer.path
-        borderLayer.fillColor = UIColor.clear.cgColor
-        borderLayer.strokeColor = UIColor.black.cgColor
-        borderLayer.lineWidth = 5
-        borderLayer.frame = v.bounds
-        v.layer.addSublayer(borderLayer)
-        
-    }
+//    func makeViewGood(_ containerView: UIView) {
+//        containerView.clipsToBounds = false
+//        containerView.layer.shadowColor = UIColor.black.cgColor
+//        containerView.layer.shadowOpacity = 1
+//        containerView.layer.shadowOffset = CGSize.zero
+//        containerView.layer.shadowRadius = (5/414)*viewWidth
+//        containerView.layer.cornerRadius = (20/414)*viewWidth
+//        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/414)*viewWidth).cgPath
+//    }
+//
+//    func makeViewGlow(_ containerView: UIView) {
+//        containerView.clipsToBounds = false
+//        containerView.layer.shadowColor = UIColor.cyan.cgColor
+//        containerView.layer.shadowOpacity = 1
+//        containerView.layer.shadowOffset = CGSize.zero
+//        containerView.layer.shadowRadius = (7.5/414)*viewWidth
+//        containerView.layer.cornerRadius = (25/414)*viewWidth
+//        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (25/414)*viewWidth).cgPath
+//    }
+//
+//    func outlineView(_ v: UIView) {
+//
+//        let maskLayer = CAShapeLayer()
+//        maskLayer.frame = v.bounds
+//        maskLayer.path = UIBezierPath(roundedRect: v.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 25, height: 25)).cgPath
+//        v.layer.mask = maskLayer
+//
+//        let borderLayer = CAShapeLayer()
+//        borderLayer.path = maskLayer.path
+//        borderLayer.fillColor = UIColor.clear.cgColor
+//        borderLayer.strokeColor = UIColor.black.cgColor
+//        borderLayer.lineWidth = 5
+//        borderLayer.frame = v.bounds
+//        v.layer.addSublayer(borderLayer)
+//
+//    }
     
     @IBAction func shopPressed(_ sender: UIButton) {
         
@@ -281,6 +322,6 @@ extension RewardsViewController: UIPageViewControllerDelegate, UIPageViewControl
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return self.currentIndex
+        return currentIndex
     }
 }

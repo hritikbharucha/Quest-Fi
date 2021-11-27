@@ -54,6 +54,8 @@ class GoalsViewController: UIViewController {
     
     static var weeklyNameArray = [[String : String]]()
     
+    @IBOutlet var completedTableViewHeight: NSLayoutConstraint!
+    
     var readyToSave = false
     
     var visibleTableView = 0
@@ -79,6 +81,8 @@ class GoalsViewController: UIViewController {
         
         readyToSave = false
         
+        completedTableViewHeight.constant = (193/896)*view.frame.height
+        
         self.loadingAnimation.center = view.center
         self.loadingAnimation.style = .large
         
@@ -99,10 +103,6 @@ class GoalsViewController: UIViewController {
         completedTableView.register(UINib(nibName: "Goal", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
         tabsView.register(UINib(nibName: "TabCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
-        
-        makeButtonGood(addButton, addView)
-        makeButtonGood(doneButton, doneView)
-        makeButtonGood(selectButton, selectView)
         
         doneView.isHidden = true
         doneButton.isHidden = true
@@ -151,11 +151,17 @@ class GoalsViewController: UIViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        makeButtonGood(addButton, addView)
+        makeButtonGood(doneButton, doneView)
+        makeButtonGood(selectButton, selectView)
+    }
+    
     func setUpTableViews(_ tableView: UITableView, _ tag: Int) {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tag = tag
-        tableView.rowHeight = 90
+        tableView.rowHeight = (100/896)*view.frame.height
         tableView.allowsSelection = false
     }
     
@@ -423,11 +429,11 @@ class GoalsViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 2
-        containerView.layer.cornerRadius = 15
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 15).cgPath
+        containerView.layer.shadowRadius = (2/414)*view.frame.width
+        containerView.layer.cornerRadius = (15/414)*view.frame.width
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (15/414)*view.frame.width).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = (15/414)*view.frame.width
     }
     
     @IBAction func addPressed(_ sender: UIButton) {
@@ -867,13 +873,13 @@ class GoalsViewController: UIViewController {
                     //                self.completedGoalDates = dates
                     
                     if points >= 10 {
-                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 20)
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: (20/414)*self.view.frame.width)
                     } else if points >= 100 {
-                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 15)
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: (15/414)*self.view.frame.width)
                     } else if points >= 1000 {
-                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 10)
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: (10/414)*self.view.frame.width)
                     } else if points >= 10000 {
-                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: 5)
+                        self.deleteLabel.font = UIFont(name: "DIN Alternate", size: (5/414)*self.view.frame.width)
                     }
                 } else {
                     print("Document does not exist")
@@ -1408,8 +1414,8 @@ extension GoalsViewController: UITableViewDataSource, UITableViewDelegate {
                         cell.taskLabel?.translatesAutoresizingMaskIntoConstraints = false
                         cell.taskLabel?.lineBreakMode = .byWordWrapping
                         
-                        cell.taskLabel?.topAnchor.constraint(equalTo: cell.goalContainerView.topAnchor, constant: 0).isActive = true
-                        cell.taskLabel?.bottomAnchor.constraint(equalTo: cell.dateTimeLabel.bottomAnchor, constant: -22).isActive = true
+//                        cell.taskLabel?.topAnchor.constraint(equalTo: cell.goalContainerView.topAnchor, constant: 0).isActive = true
+//                        cell.taskLabel?.bottomAnchor.constraint(equalTo: cell.dateTimeLabel.bottomAnchor, constant: -22).isActive = true
                         
                         cell.dateTimeLabel.isHidden = true
                         cell.clockImage.isHidden = true
@@ -1544,7 +1550,7 @@ extension GoalsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.items.count
@@ -1556,7 +1562,7 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         
         cell.tabLabel.text = self.items[indexPath.row]
         cell.contentView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
-        cell.layer.cornerRadius = 15
+        cell.layer.cornerRadius = (15/414)*view.frame.width
         
         cell.tag = indexPath.row
         
@@ -1596,4 +1602,7 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         cell.tabLabel.textColor = .black
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (128/414)*view.frame.width, height: (42/813)*view.frame.height)
+    }
 }
