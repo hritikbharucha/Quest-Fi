@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4F91D2ECAC31D494531E121B750D88A5"
-               BuildableName = "FirebaseAuthUI.bundle"
-               BlueprintName = "FirebaseUI-FirebaseAuthUI"
+               BlueprintIdentifier = "6DED00AA4E1F5846B39C2D02C3E728A6"
+               BuildableName = "AMXFontAutoScale.framework"
+               BlueprintName = "AMXFontAutoScale"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
