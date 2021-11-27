@@ -13,6 +13,7 @@ class EditCharacterViewController: UIViewController {
     static var character = "character1"
     static var name = "Character 1"
     static var model = "hair1bluecrfalsechfalse"
+    static var index = 0
     
     var headgearList = ["hair1"]
     var topsList = ["blue"]
@@ -24,30 +25,34 @@ class EditCharacterViewController: UIViewController {
     var topsPV = UIPickerView()
     var accessoriesPV = UIPickerView()
     
+    @IBOutlet weak var headgearLabel: UILabel!
+    
     var hair = "hair1"
     var crown = false
     var settingUp = true
     var chain = false
     var top = "blue"
     
+    var currentCharacter = CharactersViewController()
+    
+    var viewHeight : CGFloat = 896
+    var viewWidth : CGFloat = 414
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurePickerView(headgearPV, 1, 550)
-        configurePickerView(topsPV, 2, 625)
-        configurePickerView(accessoriesPV, 3, 700)
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
+        
+        configurePickerView(headgearPV, 1, (550/896)*viewHeight)
+        configurePickerView(topsPV, 2, (625/896)*viewHeight)
+        configurePickerView(accessoriesPV, 3, (700/896)*viewHeight)
         
     }
     
     func setPickerViews(completion: @escaping () -> Void) {
         let hair = String(Self.model[...Self.model.index(Self.model.startIndex, offsetBy: 4)])
         if hair != "hair0" {
-            
-            
-            // SIGN IN WITH APPLE AND CONSTRAINTS AND BUGS AND FOLLOW GUIDELINES SUBMIT SATURDAY
-            
-            
-            
             self.headgearPV.selectRow(headgearList.firstIndex(of: hair) ?? 0, inComponent: 0, animated: false)
             self.pickerView(self.headgearPV, didSelectRow: headgearList.firstIndex(of: hair) ?? 0, inComponent: 0)
         } else {
@@ -79,6 +84,8 @@ class EditCharacterViewController: UIViewController {
                 "\(Self.character)Model" : Self.model
             ], mergeFields: ["\(Self.character)Name", "\(Self.character)Model"])
         }
+        
+        currentCharacter.removeFromParent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,20 +141,23 @@ class EditCharacterViewController: UIViewController {
         }
     }
     
-    func configurePickerView(_ pickerView: UIPickerView, _ tag: Int, _ y: Int) {
+    func configurePickerView(_ pickerView: UIPickerView, _ tag: Int, _ y: CGFloat) {
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.tag = tag
         self.view.addSubview(pickerView)
         pickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        pickerView.frame = CGRect(x: 100, y: y, width: Int(view.bounds.width-150), height: 75)
+    
+        let newY = y + CGFloat(tag-1)*((30/896)*viewHeight)
         
-        pickerView.translatesAutoresizingMaskIntoConstraints = true
-        let horizontalConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 100)
-        let verticalConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: -(view.bounds.height-CGFloat(y)))
-        let widthConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: view.bounds.width-150)
-        let heightConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 75)
-        view.addConstraints([horizontalConstraint, verticalConstraint, widthConstraint, heightConstraint])
+        pickerView.frame = CGRect(x: (100/414)*viewWidth, y: newY, width: viewWidth-(150/414)*viewWidth, height: (75/896)*viewHeight)
+        
+//        pickerView.translatesAutoresizingMaskIntoConstraints = false
+//        let horizontalConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: (100/414)*viewWidth)
+//        let verticalConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: -(viewHeight-y))
+//        let widthConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: viewWidth-(150/414)*viewWidth)
+//        let heightConstraint = NSLayoutConstraint(item: pickerView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: (75/896)*viewHeight)
+//        view.addConstraints([horizontalConstraint, verticalConstraint, widthConstraint, heightConstraint])
     }
     
     func setUpCharacter() {
@@ -156,18 +166,23 @@ class EditCharacterViewController: UIViewController {
             return
         }
         
-        characterVC.view.frame = CGRect(x: (view.bounds.width/2)-200, y: 50, width: 400, height: 475)
-        addChild(characterVC)
-        view.addSubview(characterVC.view)
+//        characterVC.view.frame = CGRect(x: (view.bounds.width/2)-(200/414)*viewWidth, y: (50/896)*viewHeight, width: (400/414)*viewWidth, height: (475/896)*viewHeight)
+        currentCharacter = characterVC
+        addChild(currentCharacter)
+        view.addSubview(currentCharacter.view)
         
-        characterVC.view.translatesAutoresizingMaskIntoConstraints = false
-        let horizontalConstraint = NSLayoutConstraint(item: characterVC.view, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: characterVC.view, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 50)
-        let widthConstraint = NSLayoutConstraint(item: characterVC.view, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 400)
-        let heightConstraint = NSLayoutConstraint(item: characterVC.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 475)
-        view.addConstraints([horizontalConstraint, verticalConstraint, widthConstraint, heightConstraint])
+        currentCharacter.view.translatesAutoresizingMaskIntoConstraints = false
+        let horizontalConstraint = NSLayoutConstraint(item: currentCharacter.view as Any, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+        let topConstraint = NSLayoutConstraint(item: currentCharacter.view as Any, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: (50/896)*viewHeight)
+        let bottomConstraint = NSLayoutConstraint(item: characterVC.view as Any, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 0.55, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: characterVC.view as Any, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: characterVC.view, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant: 0)
         
-        characterVC.didMove(toParent: self)
+//        let widthConstraint = NSLayoutConstraint(item: currentCharacter.view as Any, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2*viewWidth/viewHeight, constant: 0)
+//        let heightConstraint = NSLayoutConstraint(item: currentCharacter.view as Any, attribute: .height, relatedBy: .equal, toItem: currentCharacter.view as Any, attribute: .width, multiplier: 1, constant: 0)
+        
+        view.addConstraints([horizontalConstraint, topConstraint, bottomConstraint, widthConstraint])
+        
+        currentCharacter.didMove(toParent: self)
         
     }
     
@@ -196,7 +211,7 @@ extension EditCharacterViewController: UIPickerViewDataSource, UIPickerViewDeleg
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 75
+        return (75/896)*viewHeight
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -214,9 +229,9 @@ extension EditCharacterViewController: UIPickerViewDataSource, UIPickerViewDeleg
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 
         let modeView = UIView()
-        modeView.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        modeView.frame = CGRect(x: 0, y: 0, width: (75/896)*viewHeight, height: (75/896)*viewHeight)
         
-        let itemImageView = UIImageView(frame: CGRect(x: 2.5, y: 2.5, width: 70, height: 70))
+        let itemImageView = UIImageView(frame: CGRect(x: 2.5, y: 2.5, width: (70/896)*viewHeight, height: (70/896)*viewHeight))
 
         if pickerView.tag == 1 {
             itemImageView.image = UIImage(named: headgearList[row])

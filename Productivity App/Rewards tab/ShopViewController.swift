@@ -52,13 +52,29 @@ class ShopViewController: UIViewController {
     
     var points = 0
     
+    var viewHeight : CGFloat = 896
+    var viewWidth : CGFloat = 414
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpGP(gpLogo, 35)
-        setUpGP(commonGP, 25)
-        setUpGP(rareGP, 25)
-        setUpGP(magicalGP, 25)
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setUpGP(gpLogo, gpLogo.frame.width/2)
+        setUpGP(commonGP, commonGP.frame.width/2)
+        setUpGP(rareGP, rareGP.frame.width/2)
+        setUpGP(magicalGP, magicalGP.frame.width/2)
+        
+        gpLogo.font = gpLogo.font.withSize(gpLogo.frame.width*2/3)
+        gpLabel.font = gpLabel.font.withSize(gpLabel.frame.height*0.85)
+        
+        makeButtonGood(commonBtn, commonView)
+        makeButtonGood(rareBtn, rareView)
+        makeButtonGood(magicalBtn, magicalView)
         
         makeLabelGood(commonLabel, "Common Chest", 30)
         makeLabelGood(commonPrice, "10", 50)
@@ -66,21 +82,6 @@ class ShopViewController: UIViewController {
         makeLabelGood(rarePrice, "25", 50)
         makeLabelGood(magicalLabel, "Magical Chest", 30)
         makeLabelGood(magicalPrice, "100", 50)
-        
-        makeButtonGood(commonBtn, commonView)
-        makeButtonGood(rareBtn, rareView)
-        makeButtonGood(magicalBtn, magicalView)
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        setUpGP(gpLogo, gpLogo.frame.width/2)
-        gpLogo.font = gpLogo.font.withSize(gpLogo.frame.width*2/3)
-        gpLabel.font = gpLabel.font.withSize(gpLabel.frame.height*0.85)
-        
-        makeButtonGood(commonBtn, commonView)
-        makeButtonGood(rareBtn, rareView)
-        makeButtonGood(magicalBtn, magicalView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,13 +109,13 @@ class ShopViewController: UIViewController {
     func setUpGP(_ gp: UILabel, _ radius: CGFloat) {
         gp.layer.masksToBounds = true
         gp.layer.cornerRadius = radius
-        gp.layer.borderWidth = 2
+        gp.layer.borderWidth = (2/414)*viewWidth
         gp.layer.borderColor = UIColor.black.cgColor
     }
     
     func makeLabelGood(_ label: UILabel,_ string: String,_ size: CGFloat) {
         let stringAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: size) ?? label.font.withSize(size),
+            NSAttributedString.Key.font: UIFont(name: "DIN Alternate", size: (size/896*viewHeight)) ?? label.font.withSize(size),
             NSAttributedString.Key.strokeWidth: -3.0,
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white
@@ -129,11 +130,11 @@ class ShopViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (5/414)*viewWidth
+        containerView.layer.cornerRadius = (20/414)*viewWidth
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/414)*viewWidth).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = (20/414)*viewWidth
         
     }
     

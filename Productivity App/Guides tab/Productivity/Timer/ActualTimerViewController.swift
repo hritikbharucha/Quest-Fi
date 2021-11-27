@@ -53,8 +53,14 @@ class ActualTimerViewController: UIViewController {
     var breakAlert = UIAlertController()
     var finishAlert = UIAlertController()
     
+    var viewWidth : CGFloat = 414
+    var viewHeight : CGFloat = 896
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
         
 //        userID = Auth.auth().currentUser!.uid
         
@@ -86,7 +92,6 @@ class ActualTimerViewController: UIViewController {
             }
         }
 
-        makeButtonGood(goStopButton, goStopView)
         goStopButton.backgroundColor = UIColor.green
         
         
@@ -110,6 +115,10 @@ class ActualTimerViewController: UIViewController {
         }))
         
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        makeButtonGood(goStopButton, goStopView)
     }
     
     func runTotalTimer() {
@@ -164,7 +173,7 @@ class ActualTimerViewController: UIViewController {
         } else {
             seconds -= 1
             timerLabel.text = timeString(time: TimeInterval(seconds))
-            timerLabel.font = UIFont(name: "Times New Roman", size: 125)
+            timerLabel.font = UIFont(name: "Times New Roman", size: (125/896)*viewHeight)
         }
     }
     
@@ -207,7 +216,7 @@ class ActualTimerViewController: UIViewController {
         } else {
             breakSeconds -= 1
             timerLabel.text = breakTimeString(time: TimeInterval(breakSeconds))
-            timerLabel.font = UIFont(name: "Times New Roman", size: 125)
+            timerLabel.font = UIFont(name: "Times New Roman", size: (125/896)*viewHeight)
         }
     }
     
@@ -240,7 +249,7 @@ class ActualTimerViewController: UIViewController {
         } else {
             longBreakSeconds -= 1
             timerLabel.text = longBreakTimeString(time: TimeInterval(longBreakSeconds))
-            timerLabel.font = UIFont(name: "Times New Roman", size: 125)
+            timerLabel.font = UIFont(name: "Times New Roman", size: (125/896)*viewHeight)
         }
     }
     
@@ -273,7 +282,7 @@ class ActualTimerViewController: UIViewController {
         } else {
             shortWorkSeconds -= 1
             timerLabel.text = shortWorkTimeString(time: TimeInterval(shortWorkSeconds))
-            timerLabel.font = UIFont(name: "Times New Roman", size: 125)
+            timerLabel.font = UIFont(name: "Times New Roman", size: (125/896)*viewHeight)
         }
     }
     
@@ -290,11 +299,11 @@ class ActualTimerViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (5/896)*viewHeight
+        containerView.layer.cornerRadius = (20/896)*viewHeight
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (20/896)*viewHeight).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = (20/896)*viewHeight
     }
 
     @IBAction func goStopPressed(_ sender: UIButton) {

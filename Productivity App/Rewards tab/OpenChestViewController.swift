@@ -20,8 +20,10 @@ class OpenChestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    override func viewDidLayoutSubviews() {
         xBtn.layer.cornerRadius = xBtn.frame.size.width/2
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

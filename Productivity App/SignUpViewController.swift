@@ -212,6 +212,14 @@ class SignUpViewController: UIViewController {
 //        passwordTextField.textContentType = .oneTimeCode
         
         signUpButton.layer.cornerRadius = 20
+        
+        firstNameTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
+        lastNameTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
+        usernameTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
+        emailAddressTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
+        phoneNumberTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
+        passwordTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
+        confirmPasswordTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
     }
 
 

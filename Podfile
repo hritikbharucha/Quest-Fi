@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '10.0'
+ platform :ios, '10.0'
 
 target 'Productivity App' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -11,5 +11,6 @@ target 'Productivity App' do
   pod 'FirebaseUI/Google'
   pod 'Calendar-iOS'
   pod 'FSCalendar'
+  pod 'AMXFontAutoScale'
 
 end

@@ -18,7 +18,9 @@ class ForgotPasswordViewController: UIViewController {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
 
-        sendBtn.layer.cornerRadius = 20
+        sendBtn.layer.cornerRadius = (20/414)*view.frame.width
+        
+        emailTextField.font = .systemFont(ofSize: (17/414)*view.frame.width)
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {

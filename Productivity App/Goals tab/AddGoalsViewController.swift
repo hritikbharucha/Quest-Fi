@@ -72,6 +72,9 @@ class AddGoalsViewController: UIViewController {
     
     var date = Date()
     
+    var viewHeight : CGFloat = 896
+    var viewWidth : CGFloat = 414
+    
     let selectionColor = UIColor(red: 64/255.0, green: 143/255.0, blue: 245/255.0, alpha: 1.0)
     
     let myPicker: MyDatePicker = {
@@ -108,11 +111,24 @@ class AddGoalsViewController: UIViewController {
 //            }
 //        }
         
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
+        
+        myButton.layer.cornerRadius = (15/414)*viewWidth
+        
         frequencyPicker.dataSource = self
         frequencyPicker.delegate = self
         
-//        makeButtonGood(progressiveButton, progressiveView)
-//        makeButtonGood(oneTimeButton, oneTimeView)
+        grayButton.backgroundColor = selectionColor
+        
+        taskTextView.layer.borderColor = UIColor.black.cgColor
+        taskTextView.layer.borderWidth = (2/414)*viewWidth
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setUpDatePicker()
+        
         makeButtonGood(addButton, addView)
         
         makeSelectionButton(grayButton)
@@ -121,16 +137,6 @@ class AddGoalsViewController: UIViewController {
         makeSelectionButton(redButton)
         makeSelectionButton(greenButton)
         makeSelectionButton(orangeButton)
-        
-        grayButton.backgroundColor = selectionColor
-        
-        taskTextView.layer.borderColor = UIColor.black.cgColor
-        taskTextView.layer.borderWidth = 2
-        
-//        totalTextField.isHidden = true
-//        totalLabel.isHidden = true
-        
-        setUpDatePicker()
     }
     
     func setUpDatePicker() {
@@ -148,9 +154,9 @@ class AddGoalsViewController: UIViewController {
             myPicker.bottomAnchor.constraint(equalTo: g.bottomAnchor),
             
             myButton.centerXAnchor.constraint(equalTo: g.centerXAnchor),
-            myButton.bottomAnchor.constraint(equalTo: chooseDateTimeLabel.bottomAnchor, constant: 65.0),
+            myButton.bottomAnchor.constraint(equalTo: chooseDateTimeLabel.bottomAnchor, constant: (65/896)*viewHeight),
             myButton.widthAnchor.constraint(equalTo: g.widthAnchor, multiplier: 0.5),
-            myButton.heightAnchor.constraint(equalToConstant: 40.0),
+            myButton.heightAnchor.constraint(equalToConstant: (40/896)*viewHeight),
             
         ])
         
@@ -191,9 +197,9 @@ class AddGoalsViewController: UIViewController {
     
     func makeSelectionButton(_ button: UIButton) {
         
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = (12/414)*viewWidth
         button.clipsToBounds = true
-        button.layer.borderWidth = 1
+        button.layer.borderWidth = (1/414)*viewWidth
         button.layer.borderColor = UIColor.black.cgColor
         
     }
@@ -204,11 +210,11 @@ class AddGoalsViewController: UIViewController {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 0.2
-        containerView.layer.cornerRadius = 10
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 10).cgPath
+        containerView.layer.shadowRadius = (0.2/414)*viewWidth
+        containerView.layer.cornerRadius = (10/414)*viewWidth
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (10/414)*viewWidth).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = (10/414)*viewWidth
     }
     
     @IBAction func purplePressed(_ sender: UIButton) {

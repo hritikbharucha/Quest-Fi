@@ -21,6 +21,7 @@ class LeaderboardsViewController: UIViewController {
 
         leaderboardsTableView.dataSource = self
         leaderboardsTableView.delegate = self
+        leaderboardsTableView.estimatedRowHeight = (43.5/896)*view.frame.height
         
         leaderboardsTableView.register(UINib(nibName: "Leaderboard", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
@@ -64,6 +65,10 @@ class LeaderboardsViewController: UIViewController {
 extension LeaderboardsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

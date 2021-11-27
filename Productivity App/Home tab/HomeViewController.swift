@@ -17,9 +17,9 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var helloLabel: UILabel!
     
-    @IBOutlet weak var userView: UIView!
-    
-    @IBOutlet weak var userButton: UIButton!
+//    @IBOutlet weak var userView: UIView!
+//
+//    @IBOutlet weak var userButton: UIButton!
     
     @IBOutlet weak var levelLabel: UILabel!
     
@@ -37,21 +37,21 @@ class HomeViewController: UIViewController {
     
     static var todayNameArray = [[String : String]]()
     
+    var viewWidth : CGFloat = 414
+    var viewHeight : CGFloat = 896
+    
     var progress = 0
     var total = 1
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        makeButtonGood(leaderboardsButton, leaderBoardsView)
-        makeButtonGood(userButton, userView)
+        viewHeight = view.frame.height
+        viewWidth = view.frame.width
         
-        userButton.layer.cornerRadius = 30
-        userView.layer.cornerRadius = 30
+        seeAllBtn.layer.cornerRadius = (10/896)*viewHeight
         
-        seeAllBtn.layer.cornerRadius = 10
-        
-        noActiveLabel.layer.cornerRadius = 5
+        noActiveLabel.layer.cornerRadius = (5/896)*viewHeight
         
         setUpTableViews(todayTaskTableView)
         
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
     func setUpTableViews(_ tableView: UITableView) {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 90
+        tableView.rowHeight = (90/896)*viewHeight
         tableView.allowsSelection = false
         tableView.register(UINib(nibName: "Goal", bundle: nil), forCellReuseIdentifier: "ReusableCell")
     }
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
             db.collection("\(userID)").document("User Data").getDocument { document, error in
                 if let document = document, document.exists {
                     let dataDescription = document.data() ?? ["error" : "error"]
-                    let name = dataDescription["name"] as! String
+                    let name = dataDescription["name"] as? String ?? ""
                     let first = name.components(separatedBy: " ").first
 //                    print("\(name), \(first)")
                     
@@ -87,6 +87,12 @@ class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
 //        gpLogo.layer.cornerRadius = gpLogo.frame.width/2
 //        gpLogo.font = gpLogo.font.withSize(gpLogo.frame.width*2/3)
+        
+        weekdayLabel.roundedLabelTop()
+        
+        circularProgress.lineWidth = (12/414)*viewWidth
+        
+        makeButtonGood(leaderboardsButton, leaderBoardsView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +103,6 @@ class HomeViewController: UIViewController {
 //        getGoalData()
         getName()
         loadCalendar()
-        weekdayLabel.roundedLabelTop()
         
 //        setUpCalendar()
     }
@@ -123,17 +128,19 @@ class HomeViewController: UIViewController {
                     
                     print("tasks array is \(tasksArray)")
                     
-                    if let code = tasksArray[0]["code"], let name = tasksArray[0]["name"] {
-                        db.collection("\(userID)").document("\(code)").getDocument { doc, err in
-                            if let doc = doc, doc.exists {
-                                let dataDesc = doc.data() ?? ["error" : "error"]
-                                let scheduled = dataDesc["scheduled"] as! Bool
-                                if scheduled {
-                                    let date = (dataDesc["dateAndTime"] as! Timestamp).dateValue()
-                                    if date.get(.day) == Date().get(.day) {
-                                        Self.todayNameArray.append(["name" : name, "code" : code])
-                                        print("today array at this point \(Self.todayNameArray)")
-                                        completionGroup.leave()
+                    if !tasksArray.isEmpty {
+                        if let code = tasksArray[0]["code"], let name = tasksArray[0]["name"] {
+                            db.collection("\(userID)").document("\(code)").getDocument { doc, err in
+                                if let doc = doc, doc.exists {
+                                    let dataDesc = doc.data() ?? ["error" : "error"]
+                                    let scheduled = dataDesc["scheduled"] as! Bool
+                                    if scheduled {
+                                        let date = (dataDesc["dateAndTime"] as! Timestamp).dateValue()
+                                        if date.get(.day) == Date().get(.day) {
+                                            Self.todayNameArray.append(["name" : name, "code" : code])
+                                            print("today array at this point \(Self.todayNameArray)")
+                                            completionGroup.leave()
+                                        }
                                     }
                                 }
                             }
@@ -152,7 +159,7 @@ class HomeViewController: UIViewController {
     }
     
     func loadCalendar() {
-        calendarButton.layer.cornerRadius = 10
+        calendarButton.layer.cornerRadius = (10/896)*viewHeight
         calendarButton.contentVerticalAlignment = UIControl.ContentVerticalAlignment.bottom
         
         let dateFormatter = DateFormatter()
@@ -200,7 +207,7 @@ class HomeViewController: UIViewController {
         
     }
     
-    @IBAction func calendarPressed(_ sender: UITapGestureRecognizer) {
+    @IBAction func calendarPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "homeToCalendar", sender: self)
     }
     
@@ -208,13 +215,13 @@ class HomeViewController: UIViewController {
         
         containerView.clipsToBounds = false
         containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 1
+        containerView.layer.shadowOpacity = 0.5
         containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.cornerRadius = 20
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 20).cgPath
+        containerView.layer.shadowRadius = (4/896)*viewHeight
+        containerView.layer.cornerRadius = (15/896)*viewHeight
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: (15/896)*viewHeight).cgPath
         button.clipsToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = (15/896)*viewHeight
         
     }
     

@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleSignIn
+import AMXFontAutoScale
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
-//        let db = Firestore.firestore()
+        UILabel.amx_autoScaleFont(forReferenceScreenSize: .size5p5Inch)
+        UITextView.amx_autoScaleFont(forReferenceScreenSize: .size5p5Inch)
         
         if #available(iOS 13, *) {
             window?.overrideUserInterfaceStyle = .light

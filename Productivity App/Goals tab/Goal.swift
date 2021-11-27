@@ -27,7 +27,7 @@ class Goal: UITableViewCell {
         addShadowAndRoundCorners(goalContainerView)
 //        progressButton.isHidden = true
 //        completeButton.isHidden = true
-        completeButton.layer.cornerRadius = 12.5
+        completeButton.layer.cornerRadius = (12.5/414)*UIScreen.main.bounds.width
         completeButton.clipsToBounds = true
         completeButton.layer.borderWidth = 2
         completeButton.layer.borderColor = UIColor.black.cgColor
