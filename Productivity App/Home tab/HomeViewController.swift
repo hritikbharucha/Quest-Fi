@@ -129,17 +129,19 @@ class HomeViewController: UIViewController {
                     print("tasks array is \(tasksArray)")
                     
                     if !tasksArray.isEmpty {
-                        if let code = tasksArray[0]["code"], let name = tasksArray[0]["name"] {
-                            db.collection("\(userID)").document("\(code)").getDocument { doc, err in
-                                if let doc = doc, doc.exists {
-                                    let dataDesc = doc.data() ?? ["error" : "error"]
-                                    let scheduled = dataDesc["scheduled"] as! Bool
-                                    if scheduled {
-                                        let date = (dataDesc["dateAndTime"] as! Timestamp).dateValue()
-                                        if date.get(.day) == Date().get(.day) {
-                                            Self.todayNameArray.append(["name" : name, "code" : code])
-                                            print("today array at this point \(Self.todayNameArray)")
-                                            completionGroup.leave()
+                        for i in 0..<tasksArray.count {
+                            if let code = tasksArray[i]["code"], let name = tasksArray[i]["name"] {
+                                db.collection("\(userID)").document("\(code)").getDocument { doc, err in
+                                    if let doc = doc, doc.exists {
+                                        let dataDesc = doc.data() ?? ["error" : "error"]
+                                        let scheduled = dataDesc["scheduled"] as! Bool
+                                        if scheduled {
+                                            let date = (dataDesc["dateAndTime"] as! Timestamp).dateValue()
+                                            if date.get(.day) == Date().get(.day) {
+                                                Self.todayNameArray.append(["name" : name, "code" : code])
+                                                print("today array at this point \(Self.todayNameArray)")
+                                                completionGroup.leave()
+                                            }
                                         }
                                     }
                                 }
@@ -251,6 +253,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             todayTaskTableView.isHidden = false
             return 1
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (100/896)*view.frame.height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
