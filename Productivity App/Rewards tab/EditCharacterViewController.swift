@@ -171,9 +171,16 @@ class EditCharacterViewController: UIViewController {
         addChild(currentCharacter)
         view.addSubview(currentCharacter.view)
         
+        var top = (2 * (self.navigationController?.navigationBar.frame.height ?? 0)/896)*viewHeight
+        
+        if top > 100 {
+            top = 75
+        }
+        
+        print("nav bar height \(top)")
         currentCharacter.view.translatesAutoresizingMaskIntoConstraints = false
         let horizontalConstraint = NSLayoutConstraint(item: currentCharacter.view as Any, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-        let topConstraint = NSLayoutConstraint(item: currentCharacter.view as Any, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: (50/896)*viewHeight)
+        let topConstraint = NSLayoutConstraint(item: currentCharacter.view as Any, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: top)
         let bottomConstraint = NSLayoutConstraint(item: characterVC.view as Any, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 0.55, constant: 0)
         let widthConstraint = NSLayoutConstraint(item: characterVC.view as Any, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: characterVC.view, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant: 0)
         

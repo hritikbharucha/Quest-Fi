@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -27,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let userLoginStatus = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
 
-        if userLoginStatus {
+        if userLoginStatus && Firebase.Auth.auth().currentUser?.uid != nil {
             let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
             window?.rootViewController = mainNavigationController
         } else {
