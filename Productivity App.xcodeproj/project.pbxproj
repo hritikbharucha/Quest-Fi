@@ -81,6 +81,7 @@
 		6363F0B226E308E300703E33 /* CircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
 		636B2B3325E0BF4900AEC336 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		636B2B3625E0BF5C00AEC336 /* GeneralTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTipsViewController.swift; sourceTree = "<group>"; };
+		637652062752D435003473B9 /* Productivity App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Productivity App.entitlements"; sourceTree = "<group>"; };
 		6377CE3826E921B100C50B71 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
 		6388789D2659DA89005D1F46 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		638F3DEC268D1AF400637CD0 /* OpenChestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChestViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		634693FF25CC5B4E00C4107A /* Productivity App */ = {
 			isa = PBXGroup;
 			children = (
+				637652062752D435003473B9 /* Productivity App.entitlements */,
 				631DFFCA2638EB86007C8605 /* alarm.mp3 */,
 				6346940025CC5B4E00C4107A /* AppDelegate.swift */,
 				6346940225CC5B4E00C4107A /* SceneDelegate.swift */,
@@ -577,15 +579,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Productivity App/Productivity App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 34B2SRNAMQ;
+				DEVELOPMENT_TEAM = 347H8J4ZXU;
 				INFOPLIST_FILE = "Productivity App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Questify-HB";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Productivity-App-HB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -598,15 +601,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Productivity App/Productivity App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 34B2SRNAMQ;
+				DEVELOPMENT_TEAM = 347H8J4ZXU;
 				INFOPLIST_FILE = "Productivity App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Questify-HB";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Productivity-App-HB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

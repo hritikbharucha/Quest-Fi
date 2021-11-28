@@ -79,6 +79,13 @@ class GoalsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Self.taskNameArray = [[String : String]]()
+        Self.todayNameArray = [[String : String]]()
+        Self.unscheduledNameArray = [[String : String]]()
+        Self.completedNameArray = [[String : String]]()
+        Self.dailyNameArray = [[String : String]]()
+        Self.weeklyNameArray = [[String : String]]()
+        
         readyToSave = false
         
         completedTableViewHeight.constant = (193/896)*view.frame.height
@@ -134,10 +141,10 @@ class GoalsViewController: UIViewController {
         
         self.makeCompletedNameArray {
             self.completedTableView.reloadData()
-            self.saveCompletedNames()
+//            self.saveCompletedNames()
             self.removeYesterdayCompletedTasks {
                 self.completedTableView.reloadData()
-                self.saveCompletedNames()
+//                self.saveCompletedNames()
             }
         }
         
@@ -1324,7 +1331,7 @@ extension GoalsViewController: UITableViewDataSource, UITableViewDelegate {
                         cell.completeButton.tintColor = .white
                         cell.completeButton.layer.borderWidth = 0
                         
-                        self.saveCompletedNames()
+//                        self.saveCompletedNames()
                         
                     } else {
                         print("Document does not exist")

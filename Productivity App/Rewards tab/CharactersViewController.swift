@@ -35,18 +35,32 @@ class CharactersViewController: UIViewController, UITextViewDelegate {
         characterNameTextView.isScrollEnabled = false
         characterNameTextView.textContainer.maximumNumberOfLines = 1
         
-        if editMode ?? false {
-            characterNameTextView.becomeFirstResponder()
-        }
+//        if editMode ?? false {
+//            print("EDITING NOW")
+//            characterNameTextView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedTextView)))
+//        }
+       
+//        if editMode ?? false {
+//            characterNameTextView.becomeFirstResponder()
+//        }
         
         editBtn.tag = index ?? -1
 
         setUpButton(editBtn)
     }
     
-    override func viewDidLayoutSubviews() {
-        characterNameTextView.clipsToBounds = true
-    }
+//    override func viewDidLayoutSubviews() {
+//        characterNameTextView.textInputView.clipsToBounds = true
+//    }
+    
+//    @objc func tappedTextView(gr: UIGestureRecognizer) {
+//        self.characterNameTextView.isEditable = true
+//        self.characterNameTextView.becomeFirstResponder()
+//    }
+//    
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        self.characterNameTextView.isEditable = false
+//    }
     
     func setUpButton(_ button: UIButton) {
         button.layer.cornerRadius = (15/414)*view.frame.width

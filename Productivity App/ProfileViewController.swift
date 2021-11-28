@@ -19,11 +19,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     
-    @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var topView: UIView!
-    
-    @IBOutlet weak var eyeButton: UIButton!
     
     @IBOutlet weak var editButton: UIButton!
     
@@ -42,7 +38,6 @@ class ProfileViewController: UIViewController {
     
     var previousName = ""
     
-    var secure = true
     var notEditing = true
     
     override func viewDidLoad() {
@@ -56,6 +51,27 @@ class ProfileViewController: UIViewController {
         getProfileData()
         
         checkMode()
+        
+        emailTextField.addTarget(self, action: #selector(myTargetFunction), for: .touchDown)
+        
+    }
+    
+    @objc func myTargetFunction(textField: UITextField) {
+        let alert = UIAlertController(title: "Alert", message: "Sorry, email editing is not available.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+                case .default:
+                print("default")
+                
+                case .cancel:
+                print("cancel")
+                
+                case .destructive:
+                print("destructive")
+                
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,7 +98,6 @@ class ProfileViewController: UIViewController {
         usernameTextField.isUserInteractionEnabled = !notEditing
         phoneNumberTextField.isUserInteractionEnabled = !notEditing
         emailTextField.isUserInteractionEnabled = !notEditing
-        passwordTextField.isUserInteractionEnabled = !notEditing
     }
     
     func disableEditing() {
@@ -90,7 +105,6 @@ class ProfileViewController: UIViewController {
         usernameTextField.isUserInteractionEnabled = false
         phoneNumberTextField.isUserInteractionEnabled = false
         emailTextField.isUserInteractionEnabled = false
-        passwordTextField.isUserInteractionEnabled = false
     }
     
     func enableEditing() {
@@ -98,7 +112,6 @@ class ProfileViewController: UIViewController {
         usernameTextField.isUserInteractionEnabled = true
         phoneNumberTextField.isUserInteractionEnabled = true
         emailTextField.isUserInteractionEnabled = true
-        passwordTextField.isUserInteractionEnabled = true
     }
     
     func setGradientColor(_ view: UIView) {
@@ -126,25 +139,21 @@ class ProfileViewController: UIViewController {
     
     func getProfileData() {
         
-        let userID = Firebase.Auth.auth().currentUser!.uid
-        print("USER ID IS RIGHT HERE \(userID)")
-        
         let db = Firestore.firestore()
-        let ref = db.collection("\(userID)").document("User Data")
-        
-        ref.getDocument { document, error in
-            if let document = document, document.exists {
-                let dataDesc = document.data() ?? ["error" : "error"]
-                
-                self.nameTextField.text = dataDesc["name"] as? String
-                self.usernameTextField.text = dataDesc["username"] as? String
-                self.phoneNumberTextField.text = dataDesc["phone number"] as? String
-                self.emailTextField.text = dataDesc["email"] as? String
-                self.passwordTextField.text = dataDesc["password"] as? String
-                
+        print("user is \(Firebase.Auth.auth().currentUser?.uid)")
+        if let userID = Firebase.Auth.auth().currentUser?.uid {
+            db.collection("\(userID)").document("User Data").getDocument { document, error in
+                if let document = document, document.exists {
+                    let dataDesc = document.data() ?? ["error" : "error"]
+                    
+                    self.nameTextField.text = dataDesc["name"] as? String
+                    self.usernameTextField.text = dataDesc["username"] as? String
+                    self.phoneNumberTextField.text = dataDesc["phone number"] as? String
+                    self.emailTextField.text = dataDesc["email"] as? String
+                    
+                }
             }
         }
-        
     }
     
     func saveProfileData() {
@@ -155,9 +164,8 @@ class ProfileViewController: UIViewController {
                 "name" : self.nameTextField.text ?? "",
                 "username" : self.usernameTextField.text ?? "",
                 "phone number" : self.phoneNumberTextField.text ?? "",
-                "email" : self.emailTextField.text ?? "",
-                "password" : self.passwordTextField.text ?? ""
-            ], mergeFields: ["name", "username", "phone number", "email", "password"])
+                "email" : self.emailTextField.text ?? ""
+            ], mergeFields: ["name", "username", "phone number", "email"])
         }
         
         db.collection("Leaderboards").document("\(previousName)").getDocument { document, error in
@@ -175,59 +183,44 @@ class ProfileViewController: UIViewController {
                 self.previousName = ""
             }
         }
-        
-        Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text ?? "", completion: { (error) in
-            print("Error updating email: \(String(describing: error))")
-        })
-        
-        Auth.auth().currentUser?.updatePassword(to: self.passwordTextField.text ?? "", completion: { (error) in
-            print("Error updating password: \(String(describing: error))")
-        })
-    }
-    
-    @IBAction func eyePressed(_ sender: UIButton) {
-        
-        secure = !secure
-        passwordTextField.isSecureTextEntry = secure
-        
     }
     
     @IBAction func editPressed(_ sender: UIButton) {
         
-        previousName = usernameTextField.text ?? ""
-        
-        let user = Auth.auth().currentUser
-        var credential: AuthCredential
-
-        print("email: \(self.emailTextField.text ?? "") password: \(self.passwordTextField.text ?? "")")
-        credential = EmailAuthProvider.credential(withEmail: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "")
-        print("Credentials for email: \(credential)")
-
-        user?.reauthenticate(with: credential) { result, error  in
-            if result != nil {
-            
-            print("Successfully reauthenticated")
-            
-          } else {
-            
-            print("error reauthenticating with email will try with google now")
-            
-            if let googleUser = GIDSignIn.sharedInstance().currentUser {
-                
-                credential = GoogleAuthProvider.credential(withIDToken: googleUser.authentication.idToken, accessToken: GIDSignIn.sharedInstance().currentUser.authentication.accessToken)
-                
-                user?.reauthenticate(with: credential) { result2, error2  in
-                    if result2 != nil {
-                        print("Successfully reauthenticated")
-                    } else {
-                        print("error reauthenticating")
-                    }
-                }
-            }
-            
-          }
-        }
-        
+//        previousName = usernameTextField.text ?? ""
+//
+//        let user = Auth.auth().currentUser
+//        var credential: AuthCredential
+//
+//        print("email: \(self.emailTextField.text ?? "") password: \(self.passwordTextField.text ?? "")")
+//        credential = EmailAuthProvider.credential(withEmail: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "")
+//        print("Credentials for email: \(credential)")
+//
+//        user?.reauthenticate(with: credential) { result, error  in
+//            if result != nil {
+//
+//            print("Successfully reauthenticated")
+//
+//          } else {
+//
+//            print("error reauthenticating with email will try with google now")
+//
+//            if let googleUser = GIDSignIn.sharedInstance().currentUser {
+//
+//                credential = GoogleAuthProvider.credential(withIDToken: googleUser.authentication.idToken, accessToken: GIDSignIn.sharedInstance().currentUser.authentication.accessToken)
+//
+//                user?.reauthenticate(with: credential) { result2, error2  in
+//                    if result2 != nil {
+//                        print("Successfully reauthenticated")
+//                    } else {
+//                        print("error reauthenticating")
+//                    }
+//                }
+//            }
+//
+//          }
+//        }
+//
         notEditing = false
         checkMode()
     }
@@ -277,6 +270,9 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
+        
+        notEditing = true
+        checkMode()
         
     }
     

@@ -159,8 +159,7 @@ class SignUpViewController: UIViewController {
                                 "name" : name,
                                 "username" : self.usernameTextField.text ?? "",
                                 "phone number" : self.phoneNumberTextField.text ?? "",
-                                "email" : self.emailAddressTextField.text ?? "",
-                                "password" : self.passwordTextField.text ?? ""
+                                "email" : self.emailAddressTextField.text ?? ""
                             ])
                         }
                         
