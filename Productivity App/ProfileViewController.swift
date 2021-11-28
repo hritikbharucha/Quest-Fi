@@ -187,7 +187,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func editPressed(_ sender: UIButton) {
         
-//        previousName = usernameTextField.text ?? ""
+        previousName = usernameTextField.text ?? ""
 //
 //        let user = Auth.auth().currentUser
 //        var credential: AuthCredential
@@ -235,45 +235,45 @@ class ProfileViewController: UIViewController {
     @IBAction func savePressed(_ sender: UIButton) {
         let db = Firestore.firestore()
         
-        db.collection("Leaderboards").getDocuments { querySnapshot, err in
-            
-            if err != nil {
-                print("error")
-            } else {
-                var count = querySnapshot!.count
+        if previousName != usernameTextField.text {
+            db.collection("Leaderboards").getDocuments { querySnapshot, err in
                 
-                for document in querySnapshot!.documents {
-                    if self.usernameTextField.text ?? "" == document.documentID {
-                        let alert = UIAlertController(title: "Username not available", message: "Please choose a different username.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                            switch action.style{
-                                case .default:
-                                    print("default")
+                if err != nil {
+                    print("error")
+                } else {
+                    var count = querySnapshot!.count
+                    
+                    for document in querySnapshot!.documents {
+                        if self.usernameTextField.text ?? "" == document.documentID {
+                            let alert = UIAlertController(title: "Username not available", message: "Please choose a different username.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                                switch action.style{
+                                    case .default:
+                                        print("default")
+                                        
+                                    case .cancel:
+                                        print("cancel")
                                     
-                                case .cancel:
-                                    print("cancel")
-                                
-                                case .destructive:
-                                    print("destructive")
-                                
-                            @unknown default:
-                                fatalError()
-                            }
-                        }))
-                        self.present(alert, animated: true, completion: nil)
+                                    case .destructive:
+                                        print("destructive")
+                                    
+                                @unknown default:
+                                    fatalError()
+                                }
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        count -= 1
                     }
-                    count -= 1
-                }
-                
-                if count == 0 {
-                    self.saveProfileConfirmation()
+                    
+                    if count == 0 {
+                        self.saveProfileConfirmation()
+                    }
                 }
             }
+        } else {
+            self.saveProfileConfirmation()
         }
-        
-        notEditing = true
-        checkMode()
-        
     }
     
     func saveProfileConfirmation() {

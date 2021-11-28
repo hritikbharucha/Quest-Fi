@@ -2440,10 +2440,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JF6-x9-Sf0">
-                                <rect key="frame" x="43.5" y="-911" width="1678" height="1678"/>
+                                <rect key="frame" x="43.5" y="687" width="80" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GlY-aM-Hzs">
-                                        <rect key="frame" x="8" y="9" width="1663" height="1663"/>
+                                        <rect key="frame" x="8" y="9" width="65" height="65"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="GlY-aM-Hzs" secondAttribute="height" multiplier="1:1" id="ITj-Hm-0QG"/>
                                         </constraints>
@@ -2477,10 +2477,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyA-zu-Xco">
-                                <rect key="frame" x="3503" y="-911" width="1678" height="1678"/>
+                                <rect key="frame" x="167" y="687" width="80" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJy-86-Uv4">
-                                        <rect key="frame" x="0.0" y="0.0" width="1678" height="1678"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="50"/>
                                         <state key="normal" backgroundImage="rare">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2510,10 +2510,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDA-bS-IlE">
-                                <rect key="frame" x="6962" y="-911" width="1678" height="1678"/>
+                                <rect key="frame" x="290.5" y="687" width="80" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jch-mJ-7Da">
-                                        <rect key="frame" x="0.0" y="0.0" width="1678" height="1678"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="50"/>
                                         <state key="normal" backgroundImage="magical">
@@ -3410,34 +3410,34 @@
     </scenes>
     <designables>
         <designable name="0Yd-fB-FC7">
-            <size key="intrinsicContentSize" width="98.5" height="34"/>
+            <size key="intrinsicContentSize" width="128.5" height="34"/>
         </designable>
         <designable name="4DG-x5-0fu">
-            <size key="intrinsicContentSize" width="104" height="34"/>
+            <size key="intrinsicContentSize" width="134" height="34"/>
         </designable>
         <designable name="CzR-eV-46i">
-            <size key="intrinsicContentSize" width="134.5" height="34"/>
+            <size key="intrinsicContentSize" width="164.5" height="34"/>
         </designable>
         <designable name="K7d-fa-0yj">
-            <size key="intrinsicContentSize" width="102.5" height="34"/>
+            <size key="intrinsicContentSize" width="132.5" height="34"/>
         </designable>
         <designable name="KSJ-eh-dK5">
-            <size key="intrinsicContentSize" width="105.5" height="34"/>
+            <size key="intrinsicContentSize" width="135.5" height="34"/>
         </designable>
         <designable name="WJ8-Og-TVj">
-            <size key="intrinsicContentSize" width="159" height="34"/>
+            <size key="intrinsicContentSize" width="189" height="34"/>
         </designable>
         <designable name="X2K-Ov-GHu">
-            <size key="intrinsicContentSize" width="134" height="34"/>
+            <size key="intrinsicContentSize" width="164" height="34"/>
         </designable>
         <designable name="XB6-1u-08N">
-            <size key="intrinsicContentSize" width="101.5" height="34"/>
+            <size key="intrinsicContentSize" width="131.5" height="34"/>
         </designable>
         <designable name="tfj-Vr-GKk">
-            <size key="intrinsicContentSize" width="130.5" height="34"/>
+            <size key="intrinsicContentSize" width="160.5" height="34"/>
         </designable>
         <designable name="v2r-33-3u3">
-            <size key="intrinsicContentSize" width="134" height="34"/>
+            <size key="intrinsicContentSize" width="164" height="34"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
