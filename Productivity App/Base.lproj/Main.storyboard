@@ -541,6 +541,7 @@
                         <outlet property="levelLabel" destination="RDH-bD-BLM" id="ubf-Nx-0Hh"/>
                         <outlet property="noActiveLabel" destination="klw-rh-IYN" id="rUF-CW-sac"/>
                         <outlet property="seeAllBtn" destination="azd-6i-cto" id="Bdk-4C-5Px"/>
+                        <outlet property="todayTaskLabel" destination="nht-9T-K8L" id="mIB-BX-oMV"/>
                         <outlet property="todayTaskTableView" destination="qhD-yP-F3f" id="poU-CC-Gff"/>
                         <outlet property="weekdayLabel" destination="y5i-aB-Vd5" id="vEJ-vf-sIy"/>
                         <segue destination="Hn8-Uy-txH" kind="show" identifier="homeToCalendar" id="iUg-2k-EVY"/>
@@ -671,8 +672,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logInIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gMK-Tu-z5Q">
+                                <rect key="frame" x="117" y="49" width="180" height="89"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gMK-Tu-z5Q" secondAttribute="height" multiplier="180:89" id="Rfs-lO-Oed"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dt-yZ-chn">
-                                <rect key="frame" x="123.5" y="648" width="167" height="18"/>
+                                <rect key="frame" x="123" y="646" width="167" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1dt-yZ-chn" secondAttribute="height" multiplier="167:18" id="ox3-6G-OWc"/>
                                 </constraints>
@@ -681,7 +688,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlC-mw-5YB">
-                                <rect key="frame" x="59" y="398" width="296" height="46"/>
+                                <rect key="frame" x="59" y="328" width="296" height="46"/>
                                 <color key="backgroundColor" red="0.0" green="0.5434449911" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PlC-mw-5YB" secondAttribute="height" multiplier="148:23" id="b4x-TZ-CFa"/>
@@ -696,7 +703,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X2K-Ov-GHu" customClass="DesignableUITextField" customModule="Productivity_App" customModuleProvider="target">
-                                <rect key="frame" x="59" y="275" width="296" height="34"/>
+                                <rect key="frame" x="59" y="205" width="296" height="34"/>
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94901960780000005" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X2K-Ov-GHu" secondAttribute="height" multiplier="148:17" id="io0-iG-753"/>
@@ -711,7 +718,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XB6-1u-08N" customClass="DesignableUITextField" customModule="Productivity_App" customModuleProvider="target">
-                                <rect key="frame" x="59" y="324" width="296" height="34"/>
+                                <rect key="frame" x="59" y="254" width="296" height="34"/>
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94901960780000005" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="XB6-1u-08N" secondAttribute="height" multiplier="148:17" id="nmo-kM-Lq7"/>
@@ -726,14 +733,14 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8CN-PR-jrC">
-                                <rect key="frame" x="52" y="462" width="310" height="2"/>
+                                <rect key="frame" x="52" y="460" width="310" height="2"/>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8CN-PR-jrC" secondAttribute="height" multiplier="155:1" id="wcE-2M-3TJ"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOo-Zl-NG0" userLabel="Sign up with Google">
-                                <rect key="frame" x="59" y="481" width="296" height="65"/>
+                                <rect key="frame" x="59" y="479" width="296" height="65"/>
                                 <color key="backgroundColor" red="0.25882352941176467" green="0.52156862745098043" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EOo-Zl-NG0" secondAttribute="height" multiplier="296:65" id="KAl-RV-IMR"/>
@@ -746,20 +753,14 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google-favicon" translatesAutoresizingMaskIntoConstraints="NO" id="ki2-hG-ko8">
-                                <rect key="frame" x="71" y="490.5" width="51" height="46"/>
+                                <rect key="frame" x="71" y="488" width="51" height="46"/>
                                 <color key="backgroundColor" red="0.94513386489999995" green="0.9490782619" blue="0.95304375890000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ki2-hG-ko8" secondAttribute="height" multiplier="51:46" id="wMq-O1-ebu"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logInIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gMK-Tu-z5Q">
-                                <rect key="frame" x="117" y="35" width="180" height="173"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gMK-Tu-z5Q" secondAttribute="height" multiplier="180:173" id="x4F-b5-OhQ"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e6-gv-uVG">
-                                <rect key="frame" x="290.5" y="643.5" width="65" height="27"/>
+                                <rect key="frame" x="290" y="641" width="65" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5e6-gv-uVG" secondAttribute="height" multiplier="65:27" id="4UI-2j-Inw"/>
                                 </constraints>
@@ -769,7 +770,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRE-sN-tQR">
-                                <rect key="frame" x="59" y="365" width="296" height="18"/>
+                                <rect key="frame" x="59" y="295" width="296" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="rRE-sN-tQR" secondAttribute="height" multiplier="296:18" id="SL3-DS-NoI"/>
                                 </constraints>
@@ -782,7 +783,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcp-rc-yhZ">
-                                <rect key="frame" x="81" y="208" width="252" height="27"/>
+                                <rect key="frame" x="81" y="138" width="252" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Vcp-rc-yhZ" secondAttribute="height" multiplier="28:3" id="eWs-wE-c25"/>
                                 </constraints>
@@ -791,7 +792,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in to Quest-fi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITa-7K-od7">
-                                <rect key="frame" x="101" y="243" width="212" height="24"/>
+                                <rect key="frame" x="101" y="173" width="212" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ITa-7K-od7" secondAttribute="height" multiplier="53:6" id="CpO-BC-LdA"/>
                                 </constraints>
@@ -800,23 +801,42 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ziv-AW-lZG">
-                                <rect key="frame" x="59" y="565" width="296" height="65"/>
+                                <rect key="frame" x="59" y="563" width="296" height="65"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ziv-AW-lZG" secondAttribute="height" multiplier="296:65" id="hkF-Ai-QVY"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyI-8t-S8M">
+                                <rect key="frame" x="59" y="394" width="296" height="46"/>
+                                <color key="backgroundColor" red="0.96077531579999997" green="0.96077817679999999" blue="0.96078461410000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fyI-8t-S8M" secondAttribute="height" multiplier="148:23" id="1wB-Fe-bza"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="21"/>
+                                <color key="tintColor" systemColor="darkTextColor"/>
+                                <state key="normal" title="Continue as Guest">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="guestPressed:" destination="jdJ-3K-ULn" eventType="touchUpInside" id="4u8-l0-kQT"/>
+                                    <action selector="logInPressed:" destination="jdJ-3K-ULn" eventType="touchUpInside" id="ASc-65-Lbk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YcE-y5-5kd"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8CN-PR-jrC" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.748792" id="2CZ-aH-HbT"/>
+                            <constraint firstItem="8CN-PR-jrC" firstAttribute="top" secondItem="fyI-8t-S8M" secondAttribute="bottom" constant="20" id="2zo-7M-v91"/>
                             <constraint firstItem="1dt-yZ-chn" firstAttribute="top" secondItem="Ziv-AW-lZG" secondAttribute="bottom" constant="18" id="5Vx-va-HD3"/>
                             <constraint firstItem="8CN-PR-jrC" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="6F0-G8-PDk"/>
                             <constraint firstItem="Ziv-AW-lZG" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.714976" id="9fN-EQ-qkC"/>
+                            <constraint firstItem="fyI-8t-S8M" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.714976" id="AqV-Ww-RoI"/>
+                            <constraint firstItem="fyI-8t-S8M" firstAttribute="top" secondItem="PlC-mw-5YB" secondAttribute="bottom" constant="20" id="B5h-6l-ZqX"/>
                             <constraint firstItem="PlC-mw-5YB" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="BnP-w1-zYc"/>
                             <constraint firstItem="Vcp-rc-yhZ" firstAttribute="top" secondItem="gMK-Tu-z5Q" secondAttribute="bottom" id="CuK-1L-tJC"/>
-                            <constraint firstItem="8CN-PR-jrC" firstAttribute="top" secondItem="PlC-mw-5YB" secondAttribute="bottom" constant="18" id="DZx-Rc-MGc"/>
+                            <constraint firstItem="gMK-Tu-z5Q" firstAttribute="top" secondItem="Yxz-rf-XE2" secondAttribute="top" constant="49" id="FJP-US-5tt"/>
                             <constraint firstItem="rRE-sN-tQR" firstAttribute="trailing" secondItem="XB6-1u-08N" secondAttribute="trailing" id="GcC-TW-L0Y"/>
                             <constraint firstItem="1dt-yZ-chn" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="IAz-AQ-l7h"/>
                             <constraint firstItem="XB6-1u-08N" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="LsB-5n-Y4r"/>
@@ -824,10 +844,11 @@
                             <constraint firstItem="EOo-Zl-NG0" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.714976" id="OIQ-d8-vOP"/>
                             <constraint firstItem="EOo-Zl-NG0" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="OZH-q5-hLu"/>
                             <constraint firstItem="rRE-sN-tQR" firstAttribute="top" secondItem="XB6-1u-08N" secondAttribute="bottom" constant="7" id="QwV-Bi-Jma"/>
-                            <constraint firstItem="gMK-Tu-z5Q" firstAttribute="width" relation="lessThanOrEqual" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.434783" id="Rjl-Tl-kHb"/>
+                            <constraint firstItem="gMK-Tu-z5Q" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.434783" id="Rjl-Tl-kHb"/>
                             <constraint firstItem="5e6-gv-uVG" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.157005" id="SaW-p5-HYC"/>
                             <constraint firstItem="Ziv-AW-lZG" firstAttribute="top" secondItem="EOo-Zl-NG0" secondAttribute="bottom" constant="19" id="THk-xo-Vwh"/>
                             <constraint firstItem="PlC-mw-5YB" firstAttribute="top" secondItem="XB6-1u-08N" secondAttribute="bottom" constant="40" id="Tuf-EN-SrS"/>
+                            <constraint firstItem="fyI-8t-S8M" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="UhR-hA-OYO"/>
                             <constraint firstItem="ki2-hG-ko8" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.123188" id="WQr-88-1zo"/>
                             <constraint firstItem="ITa-7K-od7" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.512077" id="WTG-wt-iDg"/>
                             <constraint firstItem="XB6-1u-08N" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.714976" id="Wo7-zE-rSn"/>
@@ -846,7 +867,6 @@
                             <constraint firstItem="EOo-Zl-NG0" firstAttribute="top" secondItem="8CN-PR-jrC" secondAttribute="bottom" constant="17" id="plP-HM-B40"/>
                             <constraint firstItem="Ziv-AW-lZG" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="pyx-k4-9k4"/>
                             <constraint firstItem="5e6-gv-uVG" firstAttribute="centerY" secondItem="1dt-yZ-chn" secondAttribute="centerY" id="qT2-2l-4K8"/>
-                            <constraint firstItem="gMK-Tu-z5Q" firstAttribute="top" secondItem="Yxz-rf-XE2" secondAttribute="top" constant="35" id="sJ2-dr-os3"/>
                             <constraint firstItem="PlC-mw-5YB" firstAttribute="width" secondItem="Yxz-rf-XE2" secondAttribute="width" multiplier="0.714976" id="skE-JC-3ye"/>
                             <constraint firstItem="YcE-y5-5kd" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5e6-gv-uVG" secondAttribute="trailing" symbolic="YES" id="uUJ-NN-IaI"/>
                             <constraint firstItem="gMK-Tu-z5Q" firstAttribute="centerX" secondItem="YcE-y5-5kd" secondAttribute="centerX" id="vhc-dO-AAf"/>
@@ -858,6 +878,7 @@
                         <outlet property="appleSignInView" destination="Ziv-AW-lZG" id="r7m-Jd-sk0"/>
                         <outlet property="emailOrNameTextField" destination="X2K-Ov-GHu" id="ldR-D9-Caf"/>
                         <outlet property="googleSignUpButton" destination="EOo-Zl-NG0" id="BZc-u4-A2W"/>
+                        <outlet property="guestButton" destination="fyI-8t-S8M" id="Eb9-QJ-gDS"/>
                         <outlet property="loginButton" destination="PlC-mw-5YB" id="0TS-DB-Oaq"/>
                         <outlet property="passwordTextField" destination="XB6-1u-08N" id="wrP-4O-fa9"/>
                         <outlet property="signUpButton" destination="5e6-gv-uVG" id="I9h-ii-YT2"/>
@@ -1214,14 +1235,106 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="ihf-8k-ZTf"/>
                     <connections>
+                        <outlet property="settingsTableView" destination="OnA-6z-rGv" id="T8K-33-c5W"/>
                         <segue destination="xLY-Es-h21" kind="show" identifier="settingsToProfile" id="nSn-S8-1yU"/>
                         <segue destination="guH-id-3wA" kind="show" identifier="settingsToHelp" id="kW1-iw-FLP"/>
                         <segue destination="9qB-Hn-AnZ" kind="show" identifier="settingsToAttributes" id="Qbv-0h-gGO"/>
+                        <segue destination="jec-8i-Sm9" kind="show" identifier="settingsToPrivacy" id="ytp-ER-A8I"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8am-oK-pGs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-761" y="88"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Odi-Wu-OOx">
+            <objects>
+                <viewController id="jec-8i-Sm9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cEg-Qs-GxM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OdI-nK-7LB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Privacy Policy
+Last updated: November 30, 2021
+This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
+We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the Privacy Policy Generator.
+Interpretation and Definitions
+Interpretation
+The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
+Definitions
+For the purposes of this Privacy Policy:
+Account means a unique account created for You to access our Service or parts of our Service.
+Application means the software program provided by the Company downloaded by You on any electronic device, named Quest-Fi
+Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Quest-Fi.
+Country refers to: California, United States
+Device means any device that can access the Service such as a computer, a cellphone or a digital tablet.
+Personal Data is any information that relates to an identified or identifiable individual.
+Service refers to the Application.
+Service Provider means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.
+Usage Data refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).
+You means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
+Collecting and Using Your Personal Data
+Types of Data Collected
+Personal Data
+While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
+Email address
+First name and last name
+Phone number
+Use of Your Personal Data
+The Company may use Personal Data for the following purposes:
+To provide and maintain our Service, including to monitor the usage of our Service.
+To manage Your Account: to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.
+To manage Your requests: To attend and manage Your requests to Us.
+We may share Your personal information in the following situations:
+With Service Providers: We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You.
+Retention of Your Personal Data
+The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
+The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of Our Service, or We are legally obligated to retain this data for longer time periods.
+Transfer of Your Personal Data
+Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from Your jurisdiction.
+Your consent to this Privacy Policy followed by Your submission of such information represents Your agreement to that transfer.
+The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.
+Disclosure of Your Personal Data
+Law enforcement
+Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).
+Other legal requirements
+The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:
+Comply with a legal obligation
+Protect and defend the rights or property of the Company
+Prevent or investigate possible wrongdoing in connection with the Service
+Protect the personal safety of Users of the Service or the public
+Protect against legal liability
+Security of Your Personal Data
+The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.
+Changes to this Privacy Policy
+We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.
+We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.
+You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+Contact Us
+If you have any questions about this Privacy Policy, You can contact us:
+By email: productivity-rewards@gmail.com</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ug9-vU-WE7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OdI-nK-7LB" firstAttribute="trailing" secondItem="Ug9-vU-WE7" secondAttribute="trailing" id="H6d-v8-c9e"/>
+                            <constraint firstAttribute="bottom" secondItem="OdI-nK-7LB" secondAttribute="bottom" id="LZN-Xb-Fik"/>
+                            <constraint firstItem="OdI-nK-7LB" firstAttribute="leading" secondItem="Ug9-vU-WE7" secondAttribute="leading" id="d7w-l3-hMi"/>
+                            <constraint firstItem="OdI-nK-7LB" firstAttribute="top" secondItem="Ug9-vU-WE7" secondAttribute="top" id="lMh-Oj-dNB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RPM-8T-T2f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xyP-z8-REi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-484.05797101449281" y="-538.39285714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nOa-Iv-1Ef">
@@ -1334,7 +1447,6 @@
                                             <color key="titleColor" systemColor="systemGray5Color"/>
                                         </state>
                                         <connections>
-                                            <action selector="addPressed:" destination="NZ6-wT-XoT" eventType="touchUpInside" id="Gyd-Jy-l5A"/>
                                             <action selector="selectPressed:" destination="NZ6-wT-XoT" eventType="touchUpInside" id="CNa-Qu-3kw"/>
                                         </connections>
                                     </button>
@@ -1359,7 +1471,6 @@
                                             <color key="titleColor" systemColor="systemGray5Color"/>
                                         </state>
                                         <connections>
-                                            <action selector="addPressed:" destination="NZ6-wT-XoT" eventType="touchUpInside" id="GgQ-aX-7ma"/>
                                             <action selector="donePressed:" destination="NZ6-wT-XoT" eventType="touchUpInside" id="fs5-dr-v8o"/>
                                         </connections>
                                     </button>

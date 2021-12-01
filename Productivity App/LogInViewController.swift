@@ -19,6 +19,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var emailOrNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var appleSignInView: UIView!
+    @IBOutlet weak var guestButton: UIButton!
     
     let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
     
@@ -114,6 +115,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
         
         //        passwordTextField.textContentType = .oneTimeCode
         
+        guestButton.layer.cornerRadius = (10/414)*view.frame.width
         loginButton.layer.cornerRadius = (10/414)*view.frame.width
         emailOrNameTextField.layer.cornerRadius = (10/414)*view.frame.width
         passwordTextField.layer.cornerRadius = (10/414)*view.frame.width
@@ -124,6 +126,21 @@ class LogInViewController: UIViewController, GIDSignInDelegate {
         googleSignUpButton.layer.cornerRadius = (10/414)*view.frame.width
         
         setupAppleButton()
+    }
+    
+    @IBAction func guestPressed(_ sender: UIButton) {
+        
+        let username = "User\(Int.random(in: 1...1000000))"
+        
+        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+        UserDefaults.standard.set(true, forKey: "isGuest")
+        UserDefaults.standard.set(username, forKey: "username")
+        UserDefaults.standard.set("Guest User", forKey: "name")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
+        
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainNavigationController)
     }
     
     @IBAction func googleSignInPressed(_ sender: UIButton) {

@@ -55,8 +55,12 @@ class ShopViewController: UIViewController {
     var viewHeight : CGFloat = 896
     var viewWidth : CGFloat = 414
     
+    var isGuest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         viewHeight = view.frame.height
         viewWidth = view.frame.width
@@ -85,7 +89,10 @@ class ShopViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadGP()
+        if !isGuest {
+            loadGP()
+        }
+        
     }
     
     func loadGP() {
@@ -242,8 +249,61 @@ class ShopViewController: UIViewController {
     
     @IBAction func commonPressed(_ sender: UIButton) {
         
-        if points < 10 {
-            let alert = UIAlertController(title: "Insufficent Funds", message: "You do not have enough goal points to purchase a common chest.", preferredStyle: .alert)
+        if !isGuest {
+            if points < 10 {
+                let alert = UIAlertController(title: "Insufficent Funds", message: "You do not have enough goal points to purchase a common chest.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    switch action.style{
+                        case .default:
+                        print("default")
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Purchase Confirmation", message: "Are you sure you want to purchase common chest for 10 goal points?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    switch action.style{
+                        case .default:
+                            self.purchaseCommonChest()
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                    switch action.style{
+                        case .default:
+                        print("default")
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to purchase chests.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                 switch action.style{
                     case .default:
@@ -260,24 +320,68 @@ class ShopViewController: UIViewController {
                 }
             }))
             self.present(alert, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+    @IBAction func rarePressed(_ sender: UIButton) {
+        if !isGuest {
+            if points < 25 {
+                let alert = UIAlertController(title: "Insufficent Funds", message: "You do not have enough goal points to purchase a rare chest.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    switch action.style{
+                        case .default:
+                        print("default")
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Purchase Confirmation", message: "Are you sure you want to purchase rare chest for 25 goal points?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    switch action.style{
+                        case .default:
+                            self.purchaseRareChest()
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                    switch action.style{
+                        case .default:
+                        print("default")
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         } else {
-            let alert = UIAlertController(title: "Purchase Confirmation", message: "Are you sure you want to purchase common chest for 10 goal points?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                switch action.style{
-                    case .default:
-                        self.purchaseCommonChest()
-                    
-                    case .cancel:
-                    print("cancel")
-                    
-                    case .destructive:
-                    print("destructive")
-                    
-                @unknown default:
-                    print("NEW STUFF ADDED")
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to purchase chests.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                 switch action.style{
                     case .default:
                     print("default")
@@ -297,64 +401,62 @@ class ShopViewController: UIViewController {
         
     }
     
-    @IBAction func rarePressed(_ sender: UIButton) {
-        if points < 25 {
-            let alert = UIAlertController(title: "Insufficent Funds", message: "You do not have enough goal points to purchase a rare chest.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                switch action.style{
-                    case .default:
-                    print("default")
-                    
-                    case .cancel:
-                    print("cancel")
-                    
-                    case .destructive:
-                    print("destructive")
-                    
-                @unknown default:
-                    print("NEW STUFF ADDED")
-                }
-            }))
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Purchase Confirmation", message: "Are you sure you want to purchase rare chest for 25 goal points?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                switch action.style{
-                    case .default:
-                        self.purchaseRareChest()
-                    
-                    case .cancel:
-                    print("cancel")
-                    
-                    case .destructive:
-                    print("destructive")
-                    
-                @unknown default:
-                    print("NEW STUFF ADDED")
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                switch action.style{
-                    case .default:
-                    print("default")
-                    
-                    case .cancel:
-                    print("cancel")
-                    
-                    case .destructive:
-                    print("destructive")
-                    
-                @unknown default:
-                    print("NEW STUFF ADDED")
-                }
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
     @IBAction func magicalPressed(_ sender: UIButton) {
-        if points < 100 {
-            let alert = UIAlertController(title: "Insufficent Funds", message: "You do not have enough goal points to purchase a magical chest.", preferredStyle: .alert)
+        if !isGuest {
+            if points < 100 {
+                let alert = UIAlertController(title: "Insufficent Funds", message: "You do not have enough goal points to purchase a magical chest.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    switch action.style{
+                        case .default:
+                        print("default")
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Purchase Confirmation", message: "Are you sure you want to purchase magical chest for 100 goal points?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    switch action.style{
+                        case .default:
+                            self.purchaseMagicalChest()
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                    switch action.style{
+                        case .default:
+                        print("default")
+                        
+                        case .cancel:
+                        print("cancel")
+                        
+                        case .destructive:
+                        print("destructive")
+                        
+                    @unknown default:
+                        print("NEW STUFF ADDED")
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to purchase chests.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                 switch action.style{
                     case .default:
@@ -371,40 +473,8 @@ class ShopViewController: UIViewController {
                 }
             }))
             self.present(alert, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Purchase Confirmation", message: "Are you sure you want to purchase magical chest for 100 goal points?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                switch action.style{
-                    case .default:
-                        self.purchaseMagicalChest()
-                    
-                    case .cancel:
-                    print("cancel")
-                    
-                    case .destructive:
-                    print("destructive")
-                    
-                @unknown default:
-                    print("NEW STUFF ADDED")
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                switch action.style{
-                    case .default:
-                    print("default")
-                    
-                    case .cancel:
-                    print("cancel")
-                    
-                    case .destructive:
-                    print("destructive")
-                    
-                @unknown default:
-                    print("NEW STUFF ADDED")
-                }
-            }))
-            self.present(alert, animated: true, completion: nil)
         }
+        
     }
     
 }

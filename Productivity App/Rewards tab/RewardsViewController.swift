@@ -29,8 +29,12 @@ class RewardsViewController: UIViewController {
     var names = ["Character 1", "Character 2", "Character 3"]
     var models = ["hair1bluecrfalsechfalse", "hair1bluecrfalsechfalse", "hair1bluecrfalsechfalse"]
     
+    var isGuest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         viewHeight = view.frame.height
         viewWidth = view.frame.width
@@ -38,12 +42,17 @@ class RewardsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadChestCount()
-        
-        currentIndex = EditCharacterViewController.index
-        loadCharacters {
-            self.setUpPageController()
+        if !isGuest {
+            loadChestCount()
+            
+            currentIndex = EditCharacterViewController.index
+            loadCharacters {
+                self.setUpPageController()
+            }
+        } else {
+            self.chestCount.isHidden = true
         }
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,6 +92,9 @@ class RewardsViewController: UIViewController {
                         self.chestCount.font = .boldSystemFont(ofSize: (15/896)*self.viewHeight)
                     }
                     
+                } else {
+                    print("Chest doc does not exist")
+                    self.chestCount.isHidden = true
                 }
             }
         }
@@ -144,7 +156,26 @@ class RewardsViewController: UIViewController {
     }
     
     @IBAction func chestPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "rewardsToChests", sender: self)
+        if !isGuest {
+            self.performSegue(withIdentifier: "rewardsToChests", sender: self)
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to open chests.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                switch action.style{
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
     func setImageTap(image: UIImageView) {

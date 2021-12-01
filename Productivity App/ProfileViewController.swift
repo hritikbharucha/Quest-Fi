@@ -40,19 +40,37 @@ class ProfileViewController: UIViewController {
     
     var notEditing = true
     
+    var isGuest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         viewHeight = view.frame.height
         viewWidth = view.frame.width
         
         hideKeyboardWhenTappedAround()
-
-        getProfileData()
         
         checkMode()
-        
-        emailTextField.addTarget(self, action: #selector(myTargetFunction), for: .touchDown)
+
+        if isGuest {
+            editView.isHidden = true
+            editButton.isHidden = true
+            saveView.isHidden = true
+            saveButton.isHidden = true
+            cancelView.isHidden = true
+            cancelButton.isHidden = true
+            
+            let name = UserDefaults.standard.string(forKey: "name") ?? "Guest User"
+            nameTextField.text = name
+            
+            let username = UserDefaults.standard.string(forKey: "username")
+            usernameTextField.text = username
+        } else {
+            getProfileData()
+            emailTextField.addTarget(self, action: #selector(myTargetFunction), for: .touchDown)
+        }
         
     }
     

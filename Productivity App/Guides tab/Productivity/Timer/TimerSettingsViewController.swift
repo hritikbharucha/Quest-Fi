@@ -27,15 +27,39 @@ class TimerSettingsViewController: UIViewController {
     
 //    var userID = ""
     
+    var isGuest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         viewHeight = view.frame.height
         viewWidth = view.frame.width
 
-        setup()
-        
-//        userID = Auth.auth().currentUser!.uid
+        if !isGuest {
+            setup()
+        } else {
+            var length = UserDefaults.standard.integer(forKey: "length")
+            
+            if length == 0 {
+                length = 1
+            }
+            
+            if length == 1 {
+                self.button1.backgroundColor = UIColor.systemTeal
+                self.button2.backgroundColor = UIColor.lightGray
+                self.button3.backgroundColor = UIColor.lightGray
+            } else if length == 2 {
+                self.button1.backgroundColor = UIColor.lightGray
+                self.button2.backgroundColor = UIColor.systemTeal
+                self.button3.backgroundColor = UIColor.lightGray
+            } else if length == 3 {
+                self.button1.backgroundColor = UIColor.lightGray
+                self.button2.backgroundColor = UIColor.lightGray
+                self.button3.backgroundColor = UIColor.systemTeal
+            }
+        }
         
     }
     
@@ -117,11 +141,16 @@ class TimerSettingsViewController: UIViewController {
     func saveTimer(_ length: Int) {
         let db = Firestore.firestore()
         
-        if let userID = Auth.auth().currentUser?.uid {
-            db.collection("\(userID)").document("Timer").setData([
-                "Length" : length
-            ])
+        if !isGuest {
+            if let userID = Auth.auth().currentUser?.uid {
+                db.collection("\(userID)").document("Timer").setData([
+                    "Length" : length
+                ])
+            }
+        } else {
+            UserDefaults.standard.set(length, forKey: "length")
         }
+        
         
     }
     

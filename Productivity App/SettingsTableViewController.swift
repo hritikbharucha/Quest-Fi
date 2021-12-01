@@ -9,12 +9,22 @@ import UIKit
 import Firebase
 
 class SettingsTableViewController: UITableViewController {
-
-    let settings = ["Account", "Help", "About", "Log out"]
+    
+    @IBOutlet weak var settingsTableView: UITableView!
+    
+    var settings = ["Privacy Policy", "Account", "Help", "About", "Log out"]
+    
+    var isGuest = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
+        
+        if !isGuest {
+            settings.append("Delete Account")
+            settingsTableView.reloadData()
+        }
     }
     
     func dismissViewControllers() {
@@ -36,7 +46,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath)
 
-        if (settings[indexPath.row] == "Log out") {
+        if (settings[indexPath.row] == "Log out") || (settings[indexPath.row] == "Delete Account") {
             cell.textLabel?.textColor = UIColor.red
         } else {
             cell.textLabel?.textColor = UIColor.black
@@ -53,27 +63,101 @@ class SettingsTableViewController: UITableViewController {
         if (settings[indexPath.row] == "Account") {
             self.performSegue(withIdentifier: "settingsToProfile", sender: self)
         } else if (settings[indexPath.row] == "Log out") {
-            do {
-                try Auth.auth().signOut()
-                print("Signed out")
-                
-//                self.navigationController?.popToRootViewController(animated: true)
-                
+            if !isGuest {
+                do {
+                    try Auth.auth().signOut()
+                    print("Signed out")
+                    
+    //                self.navigationController?.popToRootViewController(animated: true)
+                    
+                    UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+                    UserDefaults.standard.synchronize()
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+                    
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
+
+                } catch let signOutError as NSError {
+                  print ("Error signing out: %@", signOutError)
+                }
+            } else {
                 UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
-                UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(false, forKey: "isGuest")
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
                 
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
-
-            } catch let signOutError as NSError {
-              print ("Error signing out: %@", signOutError)
             }
+            
         } else if (settings[indexPath.row] == "Help") {
             self.performSegue(withIdentifier: "settingsToHelp", sender: self)
         } else if (settings[indexPath.row] == "About") {
             self.performSegue(withIdentifier: "settingsToAttributes", sender: self)
+        } else if (settings[indexPath.row] == "Privacy Policy") {
+            self.performSegue(withIdentifier: "settingsToPrivacy", sender: self)
+        } else if (settings[indexPath.row] == "Delete Account") {
+            
+            let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete your account? You will lose all data on this account.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                switch action.style{
+                    case .default:
+                    print("default")
+                    Auth.auth().currentUser?.delete(completion: { error in
+                        if let error = error {
+                            print("error deleting account: \(error)")
+                            let alert = UIAlertController(title: "Error", message: "Error deleting account, please try again later.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                switch action.style{
+                                    case .default:
+                                    print("default")
+                                    
+                                    case .cancel:
+                                    print("cancel")
+                                    
+                                    case .destructive:
+                                    print("destructive")
+                                    
+                                }
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        } else {
+                            print("account deleted")
+                            
+                            UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+                            
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+                            
+                            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
+                        }
+                    })
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                switch action.style{
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            
         }
     }
 
