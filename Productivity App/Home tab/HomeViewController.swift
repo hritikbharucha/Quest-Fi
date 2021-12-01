@@ -35,6 +35,8 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var weekdayLabel: UILabel!
     
+    @IBOutlet weak var todayTaskLabel: UILabel!
+    
     static var todayNameArray = [[String : String]]()
     
     var viewWidth : CGFloat = 414
@@ -42,9 +44,13 @@ class HomeViewController: UIViewController {
     
     var progress = 0
     var total = 1
+    
+    var isGuest = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         viewHeight = view.frame.height
         viewWidth = view.frame.width
@@ -55,7 +61,15 @@ class HomeViewController: UIViewController {
         
         setUpTableViews(todayTaskTableView)
         
-        getTodayGoal()
+        if !isGuest {
+            getTodayGoal()
+        } else {
+            todayTaskLabel.isHidden = true
+            todayTaskTableView.isHidden = true
+            noActiveLabel.isHidden = true
+            seeAllBtn.isHidden = true
+        }
+        
     }
     
     func setUpTableViews(_ tableView: UITableView) {
@@ -98,10 +112,13 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        getData()
-        refreshTodayGoal()
-//        getGoalData()
-        getName()
+        if !isGuest {
+            getData()
+            refreshTodayGoal()
+    //        getGoalData()
+            getName()
+        }
+        
         loadCalendar()
         
 //        setUpCalendar()
@@ -210,7 +227,26 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func calendarPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "homeToCalendar", sender: self)
+        if !isGuest {
+            self.performSegue(withIdentifier: "homeToCalendar", sender: self)
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to see streaks and previous task dates.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                switch action.style{
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
     func makeButtonGood(_ button: UIButton, _ containerView: UIView) {
@@ -245,7 +281,9 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if Self.todayNameArray.isEmpty {
-            noActiveLabel.isHidden = false
+            if !isGuest {
+                noActiveLabel.isHidden = false
+            }
             todayTaskTableView.isHidden = true
             return 0
         } else {

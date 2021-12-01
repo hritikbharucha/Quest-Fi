@@ -27,8 +27,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let userLoginStatus = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        let guestStatus = UserDefaults.standard.bool(forKey: "isGuest")
 
         if userLoginStatus && Firebase.Auth.auth().currentUser?.uid != nil {
+            let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
+            window?.rootViewController = mainNavigationController
+        } else if userLoginStatus && guestStatus {
             let mainNavigationController = storyboard.instantiateViewController(identifier: "MainNavigationController")
             window?.rootViewController = mainNavigationController
         } else {

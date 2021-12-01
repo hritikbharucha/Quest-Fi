@@ -21,9 +21,13 @@ class CharactersViewController: UIViewController, UITextViewDelegate {
     var editHidden: Bool?
     var editMode: Bool?
     
+    var isGuest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         characterNameTextView.text = nameText
         characterNameTextView.delegate = self
@@ -67,9 +71,28 @@ class CharactersViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func editPressed(_ sender: UIButton) {
-        print("NOW EDITING CHARACTER \(editBtn.tag+1)")
+        if !isGuest {
+            print("NOW EDITING CHARACTER \(editBtn.tag+1)")
+            
+            self.performSegue(withIdentifier: "rewardsToEdit", sender: self)
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to edit character.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                switch action.style{
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
         
-        self.performSegue(withIdentifier: "rewardsToEdit", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

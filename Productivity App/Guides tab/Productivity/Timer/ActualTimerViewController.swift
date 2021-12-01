@@ -56,8 +56,12 @@ class ActualTimerViewController: UIViewController {
     var viewWidth : CGFloat = 414
     var viewHeight : CGFloat = 896
     
+    var isGuest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         viewHeight = view.frame.height
         viewWidth = view.frame.width
@@ -66,31 +70,53 @@ class ActualTimerViewController: UIViewController {
         
         let db = Firestore.firestore()
         
-        if let userID = Auth.auth().currentUser?.uid {
-            db.collection("\(userID)").document("Timer").getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let dataDescription = document.data() ?? ["Error" : "Error"]
-                    
-                    let length = dataDescription["Length"] as! Int
-                    
-                    self.totalSeconds = length * 3600
-                    
-                    self.totalTimerLabel.text = "Time left: \(length):00:00"
-                    
-                    if length == 1 {
-                        self.sections = 4
-                    } else if length == 2 {
-                        self.sections = 8
-                    } else if length == 3 {
-                        self.sections = 11
-                        self.willHaveLongBreak = true
+        if !isGuest {
+            if let userID = Auth.auth().currentUser?.uid {
+                db.collection("\(userID)").document("Timer").getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        let dataDescription = document.data() ?? ["Error" : "Error"]
+                        
+                        let length = dataDescription["Length"] as! Int
+                        
+                        self.totalSeconds = length * 3600
+                        
+                        self.totalTimerLabel.text = "Time left: \(length):00:00"
+                        
+                        if length == 1 {
+                            self.sections = 4
+                        } else if length == 2 {
+                            self.sections = 8
+                        } else if length == 3 {
+                            self.sections = 11
+                            self.willHaveLongBreak = true
+                        }
+                    } else {
+                        print("doc does not exist")
+                        self.totalSeconds = 3600
                     }
-                } else {
-                    print("doc does not exist")
-                    self.totalSeconds = 3600
                 }
             }
+        } else {
+            var length = UserDefaults.standard.integer(forKey: "length")
+            
+            if length == 0 {
+                length = 1
+            }
+            
+            self.totalSeconds = length * 3600
+            
+            self.totalTimerLabel.text = "Time left: \(length):00:00"
+            
+            if length == 1 {
+                self.sections = 4
+            } else if length == 2 {
+                self.sections = 8
+            } else if length == 3 {
+                self.sections = 11
+                self.willHaveLongBreak = true
+            }
         }
+        
 
         goStopButton.backgroundColor = UIColor.green
         

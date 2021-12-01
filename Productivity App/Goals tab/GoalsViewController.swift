@@ -76,8 +76,12 @@ class GoalsViewController: UIViewController {
     let reuseIdentifier = "cell"
     var items = ["Today", "Unscheduled", "All"]
     
+    var isGuest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isGuest = UserDefaults.standard.bool(forKey: "isGuest")
         
         Self.taskNameArray = [[String : String]]()
         Self.todayNameArray = [[String : String]]()
@@ -115,36 +119,39 @@ class GoalsViewController: UIViewController {
         doneButton.isHidden = true
         deleteLabel.isHidden = true
         
-        getGoalData()
-        createGoalPointsString()
-        
-        self.makeTaskNameArray {
-            self.toDoTableView.reloadData()
+        if !isGuest {
+            getGoalData()
+            createGoalPointsString()
             
-            self.addRepeatedTasks {
-                self.readyToSave = false
+            self.makeTaskNameArray {
                 self.toDoTableView.reloadData()
-                self.completedTableView.reloadData()
-                self.makeTodayNameArray {
-                    self.loadingAnimation.stopAnimating()
-                    self.todayTableView.reloadData()
-                    print("today array \(Self.todayNameArray)")
-                    self.readyToSave = true
-                }
                 
-                self.makeUnscheduledArray {
-                    self.unscheduledTableView.reloadData()
-                    print("unscheduled array \(Self.unscheduledNameArray)")
+                self.addRepeatedTasks {
+                    self.readyToSave = false
+                    self.toDoTableView.reloadData()
+                    self.completedTableView.reloadData()
+                    self.makeTodayNameArray {
+                        self.loadingAnimation.stopAnimating()
+                        self.todayTableView.reloadData()
+                        print("today array \(Self.todayNameArray)")
+                        self.readyToSave = true
+                    }
+                    
+                    self.makeUnscheduledArray {
+                        self.unscheduledTableView.reloadData()
+                        print("unscheduled array \(Self.unscheduledNameArray)")
+                    }
                 }
             }
-        }
-        
-        self.makeCompletedNameArray {
-            self.completedTableView.reloadData()
-//            self.saveCompletedNames()
-            self.removeYesterdayCompletedTasks {
-                self.completedTableView.reloadData()
-//                self.saveCompletedNames()
+            
+            self.makeCompletedNameArray {
+//                self.completedTableView.reloadData()
+    //            self.saveCompletedNames()
+                self.removeYesterdayCompletedTasks {
+                    print("completed name array: \(Self.completedNameArray)")
+                    self.completedTableView.reloadData()
+    //                self.saveCompletedNames()
+                }
             }
         }
         
@@ -176,16 +183,19 @@ class GoalsViewController: UIViewController {
         
 //        readyToSave = false
         
-        self.toDoTableView.reloadData()
-        self.completedTableView.reloadData()
-        self.todayTableView.reloadData()
-        self.unscheduledTableView.reloadData()
+        if !isGuest {
+            self.toDoTableView.reloadData()
+            self.completedTableView.reloadData()
+            self.todayTableView.reloadData()
+            self.unscheduledTableView.reloadData()
+            
+            createGoalPointsString()
+        }
         
-        createGoalPointsString()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if readyToSave {
+        if readyToSave && !isGuest {
             self.saveTaskNames()
             self.saveCompletedNames()
             self.saveRepeatedTasks()
@@ -445,28 +455,65 @@ class GoalsViewController: UIViewController {
     
     @IBAction func addPressed(_ sender: UIButton) {
         
-        if sender.title(for: .normal) == "Add" {
-            self.performSegue(withIdentifier: "goalsToAddGoals", sender: self)
+        if !isGuest {
+            if sender.title(for: .normal) == "Add" {
+                self.performSegue(withIdentifier: "goalsToAddGoals", sender: self)
+            }
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to create tasks.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                switch action.style{
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         
     }
     
     @IBAction func selectPressed(_ sender: UIButton) {
         
-        doneView.isHidden = false
-        doneButton.isHidden = false
+        if !isGuest {
+            doneView.isHidden = false
+            doneButton.isHidden = false
+            
+            deleteLabel.text = "Tap to delete"
+            
+            addView.isHidden = true
+            addButton.isHidden = true
+            
+            selectView.isHidden = true
+            selectButton.isHidden = true
+            
+            toDoTableView.allowsSelection = true
+            todayTableView.allowsSelection = true
+            unscheduledTableView.allowsSelection = true
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Please make an account to delete tasks.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                switch action.style{
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
         
-        deleteLabel.text = "Tap to delete"
-        
-        addView.isHidden = true
-        addButton.isHidden = true
-        
-        selectView.isHidden = true
-        selectButton.isHidden = true
-        
-        toDoTableView.allowsSelection = true
-        todayTableView.allowsSelection = true
-        unscheduledTableView.allowsSelection = true
     }
     
     @IBAction func donePressed(_ sender: UIButton) {
